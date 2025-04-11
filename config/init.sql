@@ -1,4 +1,4 @@
-CREATE DATABASE vitalis_app_production;
-CREATE DATABASE vitalis_app_production_cache;
-CREATE DATABASE vitalis_app_production_queue;
-CREATE DATABASE vitalis_app_production_cable;
+CREATE DATABASE hiperion_serras_production;
+CREATE DATABASE hiperion_serras_production_cache;
+CREATE DATABASE hiperion_serras_production_queue;
+CREATE DATABASE hiperion_serras_production_cable;

@@ -7,7 +7,7 @@
 //= link controllers/hello_controller.js
 //= link controllers/index.js
 //= link application.css
-//= link controllers/pet_selector_controller.js
+//= link controllers/active_controller.js
 //= link popper.js
 //= link bootstrap.min.js
 //= link_tree ../../javascript .js
