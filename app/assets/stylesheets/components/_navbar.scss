@@ -1,17 +1,63 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: #0179a1;
+$bg-color: #FAF7F0;
+$border-color: #F5F0DB;
+$icon-color: #A67918;
+$text-color: #000;
+$font-size: 14px;
+
+.mobile-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: $bg-color;
+  border-top: 1px solid $border-color;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 !important;
+  margin: 0 !important;
+
+  .navbar-item {
+    color: $icon-color;
+    list-style-type: none;
+
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    i {
+      font-size: 24px;
+      margin-bottom: 4px;
+      color: $icon-color;
+    }
+
+    span {
+      display: block;
+      color: $icon-color;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+
+    &.active {
+      span {
+        color: $text-color;
+      }
+
+      i {
+        filter: none;
+        color: $text-color;
+      }
+    }
+  }
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
-  width: 100px;
-}
-
-.color-font {
-  color: #fdbb63;
-  font-weight: bold;
+@media (min-width: 768px) {
+  .mobile-navbar {
+    top: 0;
+    bottom: auto;
+    border-top: none;
+    border-bottom: 1px solid $border-color;
+    justify-content: space-evenly;
+  }
 }
