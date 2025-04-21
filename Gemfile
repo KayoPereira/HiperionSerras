@@ -34,7 +34,7 @@ gem "solid_cable"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-gem "bootstrap", "~> 5.2"
+gem "bootstrap", "~> 5.3"
 gem "devise"
 gem "cloudinary"
 
