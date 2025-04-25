@@ -1,0 +1,76 @@
+<div class="position-relative overflow-hidden" style="height: 768px">
+  <%= image_tag "image-home.png", class: "w-100 h-100 object-fit-cover", style: "object-position: center;" %>
+
+  <div class="position-absolute top-50 start-50 translate-middle text-white d-flex flex-column align-items-center text-center">
+    <div class="w-100" style="max-width: 698px; height: 247px;">
+      <span class="d-block fw-bold" style="font-size: 64px; font-family: 'Plus Jakarta Sans'; line-height: 0.9; margin-bottom: 20px;">
+        Ferramentas de corte e precisão
+      </span>
+      <span class="d-block mb-5" style="font-size: 32px;">
+        Serras de alta qualidade
+      </span>
+    </div>
+    <button class="btn text-dark fw-semibold" style="background-color: #F7C21A; width: 300px; height: 60px; font-size: 20px; border-radius: 20px;">
+      Conheça nossos produtos
+    </button>
+  </div>
+</div>
+
+
+<div style="display: flex; align-items: center; justify-content: center; margin-top: 100px; gap: 10px; overflow: hidden; max-width: 100%;">
+
+  <button onclick="scrollCarousel(-1)" style="background: transparent; border: none; cursor: pointer;">
+    <%= image_tag "arrow-carrousel-inverted.png", style: "width: 20px; height: auto;" %>
+  </button>
+
+  <div id="carouselContent" style="display: flex; overflow-x: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; gap: 10px; padding: 20px; max-width: 100%; scroll-snap-type: x mandatory; overflow: hidden;">
+    <% imagens = ["produto1.png", "produto2.jpg", "produto.png"] %>
+    <% 5.times do %> <!-- Repetir o array 5 vezes -->
+      <% imagens.each do |img| %>
+        <div style="flex: 0 0 auto; scroll-snap-align: start; width: 80vw; max-width: 300px;">
+          <%= image_tag img, style: "
+            width: 100%;
+            height: auto;
+            aspect-ratio: 359 / 371;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+          " %>
+          <div style="margin-top: 8px; font-family: 'Plus Jakarta Sans';">
+            <span style="font-size: 1.1rem;">Nome do produto</span><br>
+            <span style="font-size: 1rem; color: #B09130;">R$ 100,00</span>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <button onclick="scrollCarousel(1)" style="background: transparent; border: none; cursor: pointer;">
+    <%= image_tag "arrow-carrousel.png", style: "width: 20px; height: auto;" %>
+  </button>
+
+</div>
+
+<script>
+  const container = document.getElementById("carouselContent");
+
+  function scrollCarousel(direction) {
+    const itemWidth = container.children[0].getBoundingClientRect().width + 10;
+
+    container.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+
+    setTimeout(() => {
+      if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+        container.scrollLeft = 0;
+      }
+      else if (container.scrollLeft <= 0) {
+        container.scrollLeft = container.scrollWidth - container.clientWidth;
+      }
+    }, 300);
+  }
+</script>
+
+
+
+
+<div class="margin-top: 300px;">teste</div>
