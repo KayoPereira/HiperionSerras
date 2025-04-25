@@ -59,7 +59,6 @@
 
     container.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
 
-    // Verifica quando o carrossel atingir o final e reposiciona sem redirecionar o início
     setTimeout(() => {
       if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
         container.scrollLeft = 0;
