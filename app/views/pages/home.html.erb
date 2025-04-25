@@ -19,12 +19,10 @@
 
 <div style="display: flex; align-items: center; justify-content: center; margin-top: 100px; gap: 10px; overflow: hidden; max-width: 100%;">
 
-  <!-- Botão Esquerdo -->
   <button onclick="scrollCarousel(-1)" style="background: transparent; border: none; cursor: pointer;">
     <%= image_tag "arrow-carrousel-inverted.png", style: "width: 20px; height: auto;" %>
   </button>
 
-  <!-- Carrossel -->
   <div id="carouselContent" style="display: flex; overflow-x: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; gap: 10px; padding: 20px; max-width: 100%; scroll-snap-type: x mandatory; overflow: hidden;">
     <% imagens = ["produto1.png", "produto2.jpg", "produto.png"] %>
     <% 5.times do %> <!-- Repetir o array 5 vezes -->
@@ -47,7 +45,6 @@
     <% end %>
   </div>
 
-  <!-- Botão Direito -->
   <button onclick="scrollCarousel(1)" style="background: transparent; border: none; cursor: pointer;">
     <%= image_tag "arrow-carrousel.png", style: "width: 20px; height: auto;" %>
   </button>
@@ -60,17 +57,14 @@
   function scrollCarousel(direction) {
     const itemWidth = container.children[0].getBoundingClientRect().width + 10;
 
-    // Rolagem normal
     container.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
 
     // Verifica quando o carrossel atingir o final e reposiciona sem redirecionar o início
     setTimeout(() => {
       if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
-        // Aqui, movemos o scroll de volta para o início sem resetar o DOM
         container.scrollLeft = 0;
       }
       else if (container.scrollLeft <= 0) {
-        // E no caso de atingir o início, vamos posicionar no final sem resetar
         container.scrollLeft = container.scrollWidth - container.clientWidth;
       }
     }, 300);
