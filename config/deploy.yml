@@ -13,7 +13,7 @@ servers:
     cmd: bundle exec rails solid_queue:start
 
 proxy:
-  ssl: true
+  ssl: false
   hosts:
     - hiperionserras.com.br
     - www.hiperionserras.com.br
