@@ -33,7 +33,7 @@ production:
     database: hiperion_serras_production
     username: postgres
     password: <%= ENV["POSTGRES_PASSWORD"] %>
-    host: <%= ENV.fetch("DATABASE_HOST", "vitalisvet-db") %>
+    host: <%= ENV.fetch("DATABASE_HOST", "hiperionserras-db") %>
     port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
   cache:
     <<: *primary_production
