@@ -10,7 +10,7 @@ servers:
   job:
     hosts:
       - 91.99.51.134
-    cmd: bundle exec good_job start
+    cmd: bundle exec rails solid_queue:start
 
 proxy:
   ssl: true
