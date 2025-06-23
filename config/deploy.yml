@@ -1,22 +1,22 @@
-service: vitalisvet
+service: hiperionserras
 
-image: kayopereira/vitalisvet
+image: kayopereira/hiperionserras
 
 servers:
   web:
     hosts:
-      - 157.90.123.205
+      - 91.99.51.134
 
   job:
     hosts:
-      - 157.90.123.205
+      - 91.99.51.134
     cmd: bundle exec good_job start
 
 proxy:
   ssl: true
   hosts:
-    - vitalisvet.com.br
-    - www.vitalisvet.com.br
+    - hiperionserras.com.br
+    - www.hiperionserras.com.br
   app_port: 3000
 
 registry:
@@ -32,11 +32,11 @@ env:
   clear:
     JOB_CONCURRENCY: 1
     WEB_CONCURRENCY: 1
-    POSTGRES_HOST: vitalisvet-db
+    POSTGRES_HOST: hiperionserras-db
     RAILS_SERVE_STATIC_FILES: true
     POSTGRES_USER: postgres
     POSTGRES_DB: hiperion_serras_production
-    REDIS_URL: "redis://157.90.123.205:6379/0"
+    REDIS_URL: "redis://91.99.51.134:6379/0"
     HOST: 0.0.0.0
 
 aliases:
@@ -46,7 +46,7 @@ aliases:
   dbc: app exec --interactive --reuse "bin/rails dbconsole"
 
 volumes:
-  - "vitalisvet_storage:/rails/storage"
+  - "hiperionserras_storage:/rails/storage"
 
 asset_path: /rails/public/assets
 
@@ -55,12 +55,12 @@ builder:
   cache:
     type: gha
     options: mode=max
-    image: vitalisvet-cache
+    image: hiperionserras-cache
 
 accessories:
   db:
     image: postgres:16
-    host: 157.90.123.205
+    host: 91.99.51.134
     port: 5432
     env: 
       clear:
@@ -76,7 +76,7 @@ accessories:
 
   redis:
     image: redis:7.0
-    host: 157.90.123.205
+    host: 91.99.51.134
     port: 6379
     directories:
       - data:/data
