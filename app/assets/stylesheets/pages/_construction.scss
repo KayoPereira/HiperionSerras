@@ -83,26 +83,26 @@ footer {
     }
   }
 
-  .left-footer {
-    position: absolute;
-    bottom: 25%;
-    left: 15%;
+  // .left-footer {
+  //   position: absolute;
+  //   bottom: 25%;
+  //   left: 15%;
 
-    ul {
-      margin: 0;
-      padding: 0;
-    }
-  }
+  //   ul {
+  //     margin: 0;
+  //     padding: 0;
+  //   }
+  // }
 
-  .right-footer {
-    color: $main-bg-color;
-    font-family: $font-league;
-    font-weight: 500;
-    font-size: 17px;
-    position: absolute;
-    bottom: 25%;
-    right: 15%;
-  }
+  // .right-footer {
+    // color: $main-bg-color;
+    // font-family: $font-league;
+    // font-weight: 500;
+    // font-size: 17px;
+    // position: absolute;
+    // bottom: 25%;
+    // right: 15%;
+  // }
 }
 
 // Responsivo
@@ -130,34 +130,34 @@ footer {
   footer {
     height: 252px;
 
-    .left-footer {
-      .info-contato {
-        font-size: 18px;
-      }
+    // .left-footer {
+    //   .info-contato {
+    //     font-size: 18px;
+    //   }
 
-      hr {
-        width: 245px;
-      }
+    //   hr {
+    //     width: 245px;
+    //   }
 
-      ul {
-        padding-left: 0;
-        margin: 0;
+    //   ul {
+    //     padding-left: 0;
+    //     margin: 0;
 
-        a {
-          font-size: 15px;
-        }
+    //     a {
+    //       font-size: 15px;
+    //     }
 
-        i {
-          font-size: 18px;
-          margin: 5px 0;
-        }
-      }
-    }
+    //     i {
+    //       font-size: 18px;
+    //       margin: 5px 0;
+    //     }
+    //   }
+    // }
 
-    .right-footer {
-      font-size: 15px;
-      bottom: 25%;
-    }
+    // .right-footer {
+    //   font-size: 15px;
+    //   bottom: 25%;
+    // }
   }
 }
 
@@ -192,16 +192,16 @@ footer {
     footer {
         flex-direction: column;
 
-        .left-footer {
-          margin-bottom: 10%;
-          top: 15%;
-        }
+        // .left-footer {
+        //   margin-bottom: 10%;
+        //   top: 15%;
+        // }
 
-        .right-footer {
-          margin-top: 10%;
-          left: 15%;
-          bottom: 35%;
-        }
+        // .right-footer {
+        //   margin-top: 10%;
+        //   left: 15%;
+        //   bottom: 35%;
+        // }
       }
 }
 
@@ -229,16 +229,16 @@ footer {
   footer {
     flex-direction: column;
 
-    .left-footer {
-      margin-bottom: 10%;
-      top: 15%;
-    }
+    // .left-footer {
+    //   margin-bottom: 10%;
+    //   top: 15%;
+    // }
 
-    .right-footer {
-      margin-top: 10%;
-      left: 15%;
-      bottom: 10%;
-    }
+    // .right-footer {
+    //   margin-top: 10%;
+    //   left: 15%;
+    //   bottom: 10%;
+    // }
   }
 }
 
