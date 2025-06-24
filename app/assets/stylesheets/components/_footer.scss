@@ -90,6 +90,24 @@
     }
   }
 
+  // Links de e-mail
+  .footer-email-link {
+    color: #F7C21A;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline: 2px solid #F7C21A;
+      outline-offset: 2px;
+    }
+  }
+
   // Seção direita - Logo e empresa
   .footer-right {
     display: flex;
