@@ -29,8 +29,8 @@
 
   <body>
     <% unless current_page?(root_path) %>
-      <%= render "shared/navbar" %>
     <% end %>
+    <%= render "shared/navbar" %>
     <%= yield %>
     <%= render "shared/footer" %>
   </body>

@@ -115,3 +115,53 @@ $font-size: 14px;
     display: flex !important;
   }
 }
+
+// Avatar styles for navbar
+.avatar-nav {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 2px solid #F7C21A;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #e6b017;
+    transform: scale(1.1);
+  }
+}
+
+.avatar-mobile {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border: 2px solid #F7C21A;
+  margin-bottom: 2px;
+}
+
+// Avatar styles for navbar
+.avatar-nav {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 2px solid #F7C21A;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #e6b017;
+    transform: scale(1.1);
+  }
+}
+
+.avatar-mobile {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border: 2px solid #F7C21A;
+  margin-bottom: 2px;
+}
