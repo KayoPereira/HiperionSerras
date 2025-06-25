@@ -1,1 +1,135 @@
 // Specific CSS for your home-page
+
+// Teste para verificar se o CSS está carregando
+.custom-home-style {
+  color: #F7C21A;
+  font-weight: bold;
+  font-size: 18px;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  border-left: 4px solid #F7C21A;
+}
+
+// Hero Tagline Section - Seção responsiva
+.hero-tagline-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .hero-tagline-container {
+    background-color: #F7C21A;
+    width: 100%;
+    padding: 40px 30px;
+
+    @media (max-width: 768px) {
+      padding: 30px 20px;
+    }
+
+    @media (max-width: 576px) {
+      padding: 25px 15px;
+    }
+  }
+
+  .hero-tagline-text {
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    text-align: center;
+    margin: 0;
+    line-height: 1.3;
+
+    // Desktop (≥1200px)
+    font-size: 28px;
+
+    // Tablet grande (992px - 1199px)
+    @media (max-width: 1199px) {
+      font-size: 26px;
+    }
+
+    // Tablet (768px - 991px)
+    @media (max-width: 991px) {
+      font-size: 24px;
+      line-height: 1.4;
+    }
+
+    // Mobile grande (576px - 767px)
+    @media (max-width: 767px) {
+      font-size: 22px;
+      line-height: 1.4;
+    }
+
+    // Mobile pequeno (≤575px)
+    @media (max-width: 575px) {
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    // Mobile muito pequeno (≤480px)
+    @media (max-width: 480px) {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    // Mobile extra pequeno (≤360px)
+    @media (max-width: 360px) {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Hero Banner Carrossel com Stimulus
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+
+  // Container principal do carrossel
+  .hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  // Container dos slides
+  .hero-slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.8s ease-in-out;
+
+    // Primeiro slide visível por padrão
+    &:first-child {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    &.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    // Fallback para dispositivos que não suportam background-attachment: fixed
+    @media (max-width: 768px) {
+      background-attachment: scroll;
+    }
+  }
+}

@@ -10,22 +10,7 @@
   --width-container: 1200px;
 }
 
-*{
-  border: 0;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html{
-  height: 100%;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-}
-
-body{
-  height: 100%;
-}
+// Removido reset global que pode conflitar com Bootstrap
 
 .hero-section{
   align-items: flex-start;

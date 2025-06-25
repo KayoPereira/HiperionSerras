@@ -1,14 +1,6 @@
 //= link_tree ../images
 //= link_directory ../stylesheets .scss
 //= link application.js
-//= link bootstrap.js
-//= link @popperjs--core.js
-//= link controllers/application.js
-//= link controllers/hello_controller.js
-//= link controllers/index.js
 //= link application.css
-//= link controllers/active_controller.js
-//= link popper.js
-//= link bootstrap.min.js
 //= link_tree ../../javascript .js
 //= link_tree ../../../vendor/javascript .js
