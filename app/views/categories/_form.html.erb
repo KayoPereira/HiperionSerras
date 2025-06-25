@@ -1,0 +1,60 @@
+<%= simple_form_for(@category, html: { multipart: true, data: { controller: "image-preview" } }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :title, 
+                required: true,
+                autofocus: true,
+                input_html: { class: "form-control" },
+                label: "Título da Categoria" %>
+
+    <div class="mb-3" data-image-preview-original-src="<%= @category.photo.attached? ? @category.photo_url(size: :medium) : '' %>">
+      <%= f.label :photo, "Foto da Categoria", class: "form-label" %>
+
+      <!-- Container para preview da imagem -->
+      <div class="mb-3" data-image-preview-target="container">
+        <% if @category.photo.attached? %>
+          <%= image_tag @category.photo_url(size: :medium),
+                        class: "img-thumbnail",
+                        style: "max-width: 200px; max-height: 200px; object-fit: cover;",
+                        data: { "image-preview-target": "preview" },
+                        alt: "Preview da categoria" %>
+        <% end %>
+
+        <div class="bg-light border rounded d-flex align-items-center justify-content-center <%= 'd-none' if @category.photo.attached? %>"
+             style="width: 200px; height: 200px;"
+             data-image-preview-target="placeholder">
+          <i class="fa-solid fa-image text-muted" style="font-size: 3rem;"></i>
+        </div>
+      </div>
+
+      <%= f.file_field :photo,
+                       class: "form-control",
+                       accept: "image/*",
+                       data: {
+                         "image-preview-target": "input",
+                         max_size: 5.megabytes
+                       } %>
+
+      <% if @category.photo.attached? %>
+        <div class="mt-2">
+          <button type="button"
+                  class="btn btn-outline-danger btn-sm"
+                  data-action="click->image-preview#removeImage">
+            <i class="fa-solid fa-trash"></i> Remover Imagem
+          </button>
+        </div>
+      <% end %>
+
+      <div class="form-text">
+        Formatos aceitos: JPEG, PNG, GIF. Tamanho máximo: 5MB.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <%= link_to "Cancelar", categories_path, class: "btn btn-secondary ms-2" %>
+  </div>
+<% end %>

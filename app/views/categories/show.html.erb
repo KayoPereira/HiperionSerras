@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <% if @category.photo.attached? %>
+          <%= image_tag @category.photo_url(size: :large), 
+                        class: "card-img-top", 
+                        style: "height: 400px; object-fit: cover;",
+                        alt: @category.title %>
+        <% else %>
+          <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 400px;">
+            <i class="fa-solid fa-image text-muted" style="font-size: 6rem;"></i>
+          </div>
+        <% end %>
+        
+        <div class="card-body">
+          <h1 class="card-title"><%= @category.title %></h1>
+          
+          <div class="mt-4">
+            <small class="text-muted">
+              Criada em: <%= l(@category.created_at, format: :long) %>
+              <% if @category.updated_at != @category.created_at %>
+                <br>Atualizada em: <%= l(@category.updated_at, format: :long) %>
+              <% end %>
+            </small>
+          </div>
+        </div>
+        
+        <div class="card-footer bg-transparent">
+          <div class="btn-group w-100" role="group">
+            <%= link_to "Voltar", categories_path, class: "btn btn-outline-secondary" %>
+            <%= link_to "Editar", edit_category_path(@category), class: "btn btn-primary" %>
+            <%= link_to "Excluir", category_path(@category), 
+                        method: :delete,
+                        class: "btn btn-danger",
+                        data: { 
+                          confirm: "Tem certeza que deseja excluir esta categoria?",
+                          turbo_method: :delete
+                        } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
