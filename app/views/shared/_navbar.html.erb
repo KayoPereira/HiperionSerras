@@ -40,7 +40,7 @@
   </ul>
 </nav>
 
-<nav class="navbar w-100 d-flex align-items-between" style="position: absolute; background-color: transparent;">
+<nav class="navbar w-100 d-flex align-items-between" style="<% if current_page?(root_path) %>position: absolute; background-color: transparent; <% else %>background-color: #000000; <% end %>">
   <%= image_tag "logo.png", class: "logo-nav ms-5" %>
   <div class="d-flex justify-content-center align-items-center">
     <ul class="btn-circles list-unstyled me-5">

@@ -32,7 +32,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
   </head>
 
-  <body>
+  <body style="<% if current_page?(root_path) %>position: relative;<% end %>">
     <% unless current_page?(root_path) %>
       <%= render "shared/navbar" %>
     <% end %>
