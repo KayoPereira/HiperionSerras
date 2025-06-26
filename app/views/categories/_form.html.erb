@@ -9,20 +9,20 @@
                 input_html: { class: "form-control" },
                 label: "Título da Categoria" %>
 
-    <div class="mb-3" data-image-preview-original-src="<%= @category.photo.attached? ? @category.photo_url(size: :medium) : '' %>">
+    <div class="mb-3" data-image-preview-original-src="">
       <%= f.label :photo, "Foto da Categoria", class: "form-label" %>
 
       <!-- Container para preview da imagem -->
       <div class="mb-3" data-image-preview-target="container">
-        <% if @category.photo.attached? %>
-          <%= image_tag @category.photo_url(size: :medium),
+        <%# if @category.photo.attached? %>
+          <%# image_tag @category.photo,
                         class: "img-thumbnail",
                         style: "max-width: 200px; max-height: 200px; object-fit: cover;",
                         data: { "image-preview-target": "preview" },
                         alt: "Preview da categoria" %>
-        <% end %>
+        <%# end %>
 
-        <div class="bg-light border rounded d-flex align-items-center justify-content-center <%= 'd-none' if @category.photo.attached? %>"
+        <div class="bg-light border rounded d-flex align-items-center justify-content-center <%= 'd-none' if @category.persisted? && @category.photo.attached? %>"
              style="width: 200px; height: 200px;"
              data-image-preview-target="placeholder">
           <i class="fa-solid fa-image text-muted" style="font-size: 3rem;"></i>
@@ -37,7 +37,7 @@
                          max_size: 5.megabytes
                        } %>
 
-      <% if @category.photo.attached? %>
+      <% if @category.persisted? && @category.photo.attached? %>
         <div class="mt-2">
           <button type="button"
                   class="btn btn-outline-danger btn-sm"
@@ -48,7 +48,7 @@
       <% end %>
 
       <div class="form-text">
-        Formatos aceitos: JPEG, PNG, GIF. Tamanho máximo: 5MB.
+        Formatos aceitos: JPEG, JPG, PNG, GIF, WebP. Tamanho máximo: 5MB.
       </div>
     </div>
   </div>

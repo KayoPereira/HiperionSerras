@@ -16,14 +16,9 @@ export default class extends Controller {
   }
 
   initializePreview() {
-    // Armazenar a URL original se existir
-    const originalSrc = this.element.dataset.imagePreviewOriginalSrc
-    if (originalSrc) {
-      this.originalSrc = originalSrc
-    }
-
-    // Se já existe uma imagem preview (caso de edição), esconder o placeholder
+    // Se já existe uma imagem preview (caso de edição), armazenar como original e esconder o placeholder
     if (this.hasPreviewTarget && this.previewTarget.src && this.previewTarget.src !== window.location.href) {
+      this.originalSrc = this.previewTarget.src
       this.showPreview()
     } else {
       this.showPlaceholder()
@@ -40,7 +35,7 @@ export default class extends Controller {
 
     // Validar tipo de arquivo
     if (!this.isValidFileType(file)) {
-      this.showError('Por favor, selecione uma imagem (JPEG, PNG ou GIF)')
+      this.showError('Por favor, selecione uma imagem (JPEG, JPG, PNG, GIF ou WebP)')
       this.clearInput()
       return
     }
@@ -56,7 +51,7 @@ export default class extends Controller {
   }
 
   isValidFileType(file) {
-    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp']
     return validTypes.includes(file.type)
   }
 

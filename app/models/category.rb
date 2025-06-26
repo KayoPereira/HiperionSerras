@@ -29,11 +29,14 @@ class Category < ApplicationRecord
   def photo_format
     return unless photo.attached?
 
-    unless photo.content_type.in?(%w[image/jpeg image/jpg image/png image/gif])
-      errors.add(:photo, 'deve ser uma imagem (JPEG, PNG ou GIF)')
+    # Verificar se o blob foi criado
+    return unless photo.blob.present?
+
+    unless photo.blob.content_type.in?(%w[image/jpeg image/png image/gif image/webp])
+      errors.add(:photo, 'deve ser uma imagem (JPEG, JPG, PNG, GIF ou WebP)')
     end
 
-    if photo.byte_size > 5.megabytes
+    if photo.blob.byte_size > 5.megabytes
       errors.add(:photo, 'deve ter menos de 5MB')
     end
   end
