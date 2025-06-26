@@ -1,30 +1,30 @@
-<nav class="mobile-navbar w-100">
-  <ul class="d-flex justify-content-center m-0 py-4 ps-0 w-100" data-controller="active">
-    <li class="navbar-item mx-3 active" data-action="click->active#activate" data-active-target="link">
+<nav class="mobile-navbar w-100 d-md-none">
+  <ul class="d-flex justify-content-evenly m-0 py-4 ps-0 w-100" data-controller="active">
+    <li class="navbar-item active" data-action="click->active#activate" data-active-target="link">
       <%= link_to "/" do %>
         <i class="fa-solid fa-house"></i>
         <span>Início</span>
       <% end %>
     </li>
-    <li class="navbar-item mx-3" data-action="click->active#activate" data-active-target="link">
+    <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
       <%= link_to "/" do %>
         <i class="fa-solid fa-list"></i>
         <span>Produtos</span>
       <% end %>
     </li>
-    <li class="navbar-item mx-3" data-action="click->active#activate" data-active-target="link">
+    <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
       <%= link_to "/" do %>
         <i class="fa-solid fa-wrench"></i>
         <span>Serviços</span>
       <% end %>
     </li>
-    <li class="navbar-item mx-3" data-action="click->active#activate" data-active-target="link">
+    <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
       <%= link_to "/" do %>
         <i class="fa-solid fa-circle-info"></i>
         <span>Sobre</span>
       <% end %>
     </li>
-    <li class="navbar-item mx-3" data-action="click->active#activate" data-active-target="link">
+    <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
       <%= link_to "/" do %>
         <% if user_signed_in? && current_user.avatar.attached? %>
           <%= image_tag rails_blob_path(current_user.avatar, only_path: true),
@@ -40,7 +40,7 @@
   </ul>
 </nav>
 
-<nav class="navbar w-100 d-flex align-items-between" style="<% if current_page?(root_path) %>position: absolute; background-color: transparent; <% else %>background-color: #000000; <% end %>">
+<nav class="navbar w-100 d-none d-md-flex align-items-between" style="<% if current_page?(root_path) %>position: absolute; background-color: transparent; <% else %>background-color: #000000; <% end %>">
   <%= image_tag "logo.png", class: "logo-nav ms-5" %>
   <div class="d-flex justify-content-center align-items-center">
     <ul class="btn-circles list-unstyled me-5">

@@ -11,14 +11,21 @@ $font-size: 14px;
   width: 100%;
   background-color: $bg-color;
   border-top: 1px solid $border-color;
-  display: flex;
+  display: none; // Escondido por padrão
   justify-content: space-around;
-  padding: 0 !important;
+  align-items: center;
+  padding: 8px 4px !important;
   margin: 0 !important;
+  z-index: 1000;
+  min-height: 60px;
+  box-sizing: border-box;
 
   .navbar-item {
     color: $icon-color;
     list-style-type: none;
+    flex: 1;
+    max-width: 80px;
+    min-width: 50px;
 
     a {
       display: flex;
@@ -26,18 +33,29 @@ $font-size: 14px;
       align-items: center;
       justify-content: center;
       text-decoration: none;
+      padding: 4px 2px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
     }
 
     i {
-      font-size: 24px;
-      margin-bottom: 4px;
+      font-size: 20px;
+      margin-bottom: 2px;
       color: $icon-color;
+      transition: font-size 0.3s ease;
     }
 
     span {
       display: block;
       color: $icon-color;
       font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 10px;
+      text-align: center;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
 
     &.active {
@@ -57,6 +75,7 @@ $font-size: 14px;
 .navbar {
   display: none !important;
   height: 100px;
+  z-index: 1000;
   // background-color: $bg-color;
 
   .avatar-nav, .logo-nav {
@@ -100,15 +119,21 @@ $font-size: 14px;
   }
 }
 
-@media (min-width: 768px) {
+// Mobile navbar: visível apenas em telas ≤ 768px
+@media (max-width: 768px) {
   .mobile-navbar {
-    display: block;
+    display: block !important;
+  }
+
+  .navbar {
+    display: none !important;
   }
 }
 
+// Desktop navbar: visível apenas em telas > 768px
 @media (min-width: 769px) {
   .mobile-navbar {
-    display: none;
+    display: none !important;
   }
 
   .navbar {
@@ -116,6 +141,58 @@ $font-size: 14px;
   }
 }
 
+// Telas muito pequenas (≤ 360px) - ajustes para mobile navbar
+@media (max-width: 360px) {
+  .mobile-navbar {
+    padding: 6px 2px !important;
+    min-height: 55px;
+
+    .navbar-item {
+      min-width: 45px;
+      max-width: 70px;
+
+      a {
+        padding: 2px 1px;
+      }
+
+      i {
+        font-size: 18px;
+        margin-bottom: 1px;
+      }
+
+      span {
+        font-size: 9px;
+      }
+    }
+  }
+}
+
+// Telas extra pequenas (≤ 320px) - ajustes mais agressivos
+@media (max-width: 320px) {
+  .mobile-navbar {
+    padding: 4px 1px !important;
+    min-height: 50px;
+
+    .navbar-item {
+      min-width: 40px;
+      max-width: 60px;
+
+      a {
+        padding: 1px;
+      }
+
+      i {
+        font-size: 16px;
+        margin-bottom: 1px;
+      }
+
+      span {
+        font-size: 8px;
+      }
+    }
+  }
+}
+
 // Avatar styles for navbar
 .avatar-nav {
   border-radius: 50%;
@@ -141,27 +218,3 @@ $font-size: 14px;
   margin-bottom: 2px;
 }
 
-// Avatar styles for navbar
-.avatar-nav {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border: 2px solid #F7C21A;
-  transition: all 0.3s ease;
-  cursor: pointer;
-
-  &:hover {
-    border-color: #e6b017;
-    transform: scale(1.1);
-  }
-}
-
-.avatar-mobile {
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  object-fit: cover;
-  border: 2px solid #F7C21A;
-  margin-bottom: 2px;
-}
