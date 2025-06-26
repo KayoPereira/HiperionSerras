@@ -1,0 +1,59 @@
+<%= image_tag "about-image.png", style: "width: 100%; max-width: 1200px; height: auto; display: block; margin: 0 auto;" %>
+
+<div style="text-align: center; max-width: 800px; margin: 0 auto; padding: 20px;">
+  <span style="display: block; font-size: 24px; font-weight: bold; font-family: 'Plus Jakarta Sans'; margin-bottom: 16px;">
+    Sobre a Hiperion Serras
+  </span>
+
+  <span style="display: block; font-size: 16px; line-height: 1.6; font-family: 'Plus Jakarta Sans'; color: #333; text-align: justify;">
+    A Hiperion Serras é uma empresa brasileira especializada no fornecimento de soluções industriais para corte de metais.
+    Oferecemos serras circulares, serras de fita e serviços de afiação, com foco em atender empresas que buscam eficiência operacional e custo-benefício.
+    Com sede em Mogi Guaçu e Poá (SP), a Hiperion Serras atende a todo o território nacional, destacando-se pela agilidade e suporte técnico especializado. 🧭
+    Cultura da Hiperion Serras: centrada na simplicidade e objetividade. A empresa busca descomplicar processos para seus clientes, oferecendo soluções práticas e eficientes.
+    A equipe técnica é altamente capacitada, com vasta experiência no segmento, e está comprometida em acompanhar cada processo e implementar os produtos em linha, visando sempre o sucesso do cliente. 💡
+  </span>
+
+  <!-- Bloco amarelo -->
+  <div style="width: 100%; background-color: #EAB917; margin-top: 32px;">
+    <div style="padding: 32px; display: flex; flex-direction: column; align-items: center; gap: 64px;">
+      <% infos = [
+        { icon: "confiavel-icon.png", title: "Confiável", text: "Equipe técnica especializada para atender as demandas de sua empresa." },
+        { icon: "confiavel-icon.png", title: "Qualidade", text: "Oferecemos produtos e serviços de alta qualidade utilizando tecnologia de última geração." },
+        { icon: "confiavel-icon.png", title: "Entrega", text: "Entregamos para todo o Brasil." }
+      ] %>
+
+      <% infos.each do |info| %>
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 16px; text-align: center;">
+          <%= image_tag info[:icon] %>
+          <span style="font-size: 27px; font-weight: bold;"><%= info[:title] %></span>
+          <span style="font-size: 16px; color: #132738; max-width: 280px;"><%= info[:text] %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Seção: Por que nos escolher -->
+  <div style="margin-top: 48px;">
+    <span style="display: block; font-size: 24px; font-weight: bold; font-family: 'Plus Jakarta Sans'; margin-bottom: 16px; text-align: center;">
+      Por que nos escolher?
+    </span>
+
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      <% items = [
+        ["verificado-icon.png", "Oferecemos produtos e serviços de alta qualidade utilizando tecnologia de última geração."],
+        ["verificado-icon.png", "Serras desenvolvidas especialmente para seu processo!", true],
+        ["verificado-icon.png", "O melhor custo e benefício do mercado."],
+        ["verificado-icon.png", "Excelentes comentários e muitos clientes fidelizados.", true]
+      ] %>
+
+      <% items.each do |icon, text, reverse| %>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 24px; flex-wrap: wrap; flex-direction: <%= reverse ? 'row-reverse' : 'row' %>;">
+          <%= image_tag icon %>
+          <div style="width: 100%; max-width: 280px; text-align: center;">
+            <span style="font-size: 16px; color: #132738;"><%= text %></span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
