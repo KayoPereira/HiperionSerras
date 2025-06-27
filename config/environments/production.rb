@@ -19,6 +19,9 @@ Rails.application.configure do
   # Reduced cache time for easier development updates
   config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.hour.to_i}" }
 
+  # Disable JS runtime requirement in production since assets are precompiled
+  config.assets.js_compressor = nil
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
