@@ -16,11 +16,15 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Cache assets for far-future expiry since they are all digest stamped.
-  # Reduced cache time for easier development updates
-  config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.hour.to_i}" }
+  # Force asset refresh for immediate updates
+  config.public_file_server.headers = { "cache-control" => "public, max-age=0, must-revalidate" }
 
   # Disable JS runtime requirement in production since assets are precompiled
   config.assets.js_compressor = nil
+
+  # Ensure assets are compiled and served correctly
+  config.assets.compile = false
+  config.assets.digest = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
