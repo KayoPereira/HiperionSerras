@@ -534,7 +534,7 @@ section.services-section[style] {
   padding: 0;
   background-color: #f8f9fa;
 
-  @media (max-width: 991px) {
+  @media (max-width: 768px) {
     text-align: center;
   }
 
@@ -543,16 +543,36 @@ section.services-section[style] {
       max-width: 500px !important;
     }
 
-    @media (max-width: 991px) {
-      display: block !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      margin-bottom: 2rem;
-      order: -1;
+    @media (max-width: 1024px) {
+      max-width: 450px !important;
+    }
+
+    @media (max-width: 945px) {
+      max-width: 400px !important;
+    }
+
+    @media (max-width: 900px) {
+      max-width: 350px !important;
+    }
+
+    @media (max-width: 850px) {
+      max-width: 300px !important;
+    }
+
+    @media (max-width: 800px) {
+      max-width: 250px !important;
     }
 
     @media (max-width: 768px) {
+      max-width: 310px !important;
+    }
+
+    @media (max-width: 767px) {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
       margin-bottom: 1.5rem;
+      order: -1;
     }
 
     @media (max-width: 576px) {
@@ -563,17 +583,13 @@ section.services-section[style] {
   .contact-content {
     padding: 5rem 2rem;
 
-    @media (min-width: 992px) {
+    @media (min-width: 769px) {
       padding-left: 3rem;
-    }
-
-    @media (max-width: 991px) {
-      padding: 2rem 1rem;
-      max-width: 100%;
     }
 
     @media (max-width: 768px) {
       padding: 1.5rem 1rem;
+      max-width: 100%;
     }
 
     @media (max-width: 576px) {
