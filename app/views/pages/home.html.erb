@@ -1,25 +1,27 @@
-<!-- Banner responsivo -->
-<section class="banner-section">
-  <div class="banner-container">
-    <%= image_tag "banner.png", class: "img-fluid w-100", alt: "Banner Hiperion Serras" %>
-  </div>
-</section>
+<!-- Container principal com animações -->
+<div data-controller="scroll-animations">
+  <!-- Banner responsivo -->
+  <section class="banner-section">
+    <div class="banner-container" data-scroll-animations-target="animateElement" data-animation="fadeIn">
+      <%= image_tag "banner.png", class: "img-fluid w-100", alt: "Banner Hiperion Serras" %>
+    </div>
+  </section>
 
-<!-- Seção hero tagline -->
-<section class="hero-tagline-section w-100">
-  <div class="hero-tagline-container text-center">
-    <h2 class="hero-tagline-text">
-      Lâminas de alta tecnologia e precisão que a sua empresa precisa
-    </h2>
-  </div>
-</section>
+  <!-- Seção hero tagline -->
+  <section class="hero-tagline-section w-100">
+    <div class="hero-tagline-container text-center" data-scroll-animations-target="animateElement" data-animation="slideInUp" data-delay="200">
+      <h2 class="hero-tagline-text">
+        Lâminas de alta tecnologia e precisão que a sua empresa precisa
+      </h2>
+    </div>
+  </section>
 
 <!-- Seção de categorias -->
 <section class="categories-section py-4 py-md-5">
   <div class="container">
     <div class="row g-3 g-md-4 justify-content-center">
-      <% @categories.each do |category| %>
-        <div class="col-6 col-md-4 col-lg-3">
+      <% @categories.each_with_index do |category, index| %>
+        <div class="col-6 col-md-4 col-lg-3" data-scroll-animations-target="animateElement" data-animation="fadeInUp" data-delay="<%= index * 100 + 400 %>">
           <%= link_to category_path(category), class: "text-decoration-none" do %>
             <div class="card-category h-100">
               <div class="card-category-image">
@@ -50,7 +52,7 @@
 
 <section class="services-section" style="background-color: black; height: 300px; display: flex; position: relative; justify-content: center;">
   <div class="services-container" style="display: flex; justify-content: center; width: 100%;">
-    <div class="services-content d-flex flex-column justify-content-center align-items-center">
+    <div class="services-content d-flex flex-column justify-content-center align-items-center" data-scroll-animations-target="animateElement" data-animation="fadeInLeft" data-delay="200">
       <h2 class="services-title text-white text-center">
         Serviços que oferecemos
       </h2>
@@ -65,14 +67,14 @@
       </button>
     </div>
   </div>
-  <div class="services-image d-none d-md-block" style="position: absolute; right: 0; top: 0;">
+  <div class="services-image d-none d-md-block" style="position: absolute; right: 0; top: 0;" data-scroll-animations-target="animateElement" data-animation="fadeInRight" data-delay="400">
     <%= image_tag "meia-serra.png", alt: "Serra Hiperion", id: 'saw-image' %>
   </div>
 </section>
 
 <section class="contact-section d-flex justify-content-between align-items-center flex-column flex-md-row">
-  <%= image_tag "service-banner.png", class: "contact-image img-fluid", alt: "Banner Serviços Hiperion Serras", style: "max-width: 600px" %>
-  <div class="contact-content w-100 d-flex flex-column justify-content-center align-items-center">
+  <%= image_tag "service-banner.png", class: "contact-image img-fluid", alt: "Banner Serviços Hiperion Serras", style: "max-width: 600px", "data-scroll-animations-target": "animateElement", "data-animation": "fadeInLeft", "data-delay": "200" %>
+  <div class="contact-content w-100 d-flex flex-column justify-content-center align-items-center" data-scroll-animations-target="animateElement" data-animation="fadeInRight" data-delay="400">
     <h2 class="contact-title text-center" style="color: #211A0A; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: extra-bold;">
       Contato
     </h2>
@@ -90,7 +92,8 @@
   </div>
 </section>
 
-<section class="partners-section d-flex justify-content-evenly align-items-center" style="background-color: #F7C21A; padding: 2rem 0;">
-  <%= image_tag "partners/snapon.png", class: "partner-logo img-fluid", alt: "Snap-on Partner", style: "max-width: 150px;" %>
-  <%= image_tag "partners/eberle.png", class: "partner-logo img-fluid", alt: "Eberle Partner", style: "max-width: 150px;" %>
-</section>
+  <section class="partners-section d-flex justify-content-evenly align-items-center" style="background-color: #F7C21A; padding: 2rem 0;">
+    <%= image_tag "partners/snapon.png", class: "partner-logo img-fluid", alt: "Snap-on Partner", style: "max-width: 150px;", "data-scroll-animations-target": "animateElement", "data-animation": "zoomIn", "data-delay": "200" %>
+    <%= image_tag "partners/eberle.png", class: "partner-logo img-fluid", alt: "Eberle Partner", style: "max-width: 150px;", "data-scroll-animations-target": "animateElement", "data-animation": "zoomIn", "data-delay": "400" %>
+  </section>
+</div> <!-- Fechamento do container de animações -->
