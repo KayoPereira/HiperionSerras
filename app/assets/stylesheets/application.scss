@@ -4,9 +4,13 @@
 @import "config/bootstrap_variables";
 
 // External libraries
-@import "bootstrap";
+// Bootstrap carregado via CDN no layout
 @import "font-awesome";
 
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+.card:before {
+  padding: 0% !important;
+}

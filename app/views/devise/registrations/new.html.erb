@@ -18,23 +18,8 @@
                         placeholder: "Sobrenome" %>
           </div>
           <div class="w-100 d-flex justify-content-between">
-            <%= f.input :cpf,
-                        required: true,
-                        input_html: { autocomplete: "CPF", class: "w-100" },
-                        label: false,
-                        placeholder: "CPF" %>
-            <%= f.input :phone,
-                        required: true,
-                        input_html: { autocomplete: "Telefone", class: "w-100" },
-                        label: false,
-                        placeholder: "Telefone" %>
             <%= f.input :avatar, as: :file, label: false %>
           </div>
-          <%= f.input :address,
-                      required: true,
-                      input_html: { autocomplete: "Endereço" },
-                      label: false,
-                      placeholder: "Endereço" %>
           <%= f.input :email,
                       required: true,
                       input_html: { autocomplete: "Email" },
@@ -60,7 +45,6 @@
         </div>
       <% end %>
     </div>
-    <%= image_tag "dog_and_cats.png", class: "dog-and-cat" %>
   </div>
   <div class="right">
 

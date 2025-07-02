@@ -1,0 +1,71 @@
+<!-- Banner responsivo -->
+<section class="banner-section">
+  <div class="banner-container">
+    <%= image_tag "banner.png", class: "img-fluid w-100", alt: "Banner Hiperion Serras" %>
+  </div>
+</section>
+
+<!-- Seção hero tagline -->
+<section class="hero-tagline-section w-100">
+  <div class="hero-tagline-container text-center">
+    <h2 class="hero-tagline-text">
+      Lâminas de alta tecnologia e precisão que a sua empresa precisa
+    </h2>
+  </div>
+</section>
+
+<!-- Seção de categorias -->
+<section class="categories-section py-4 py-md-5">
+  <div class="container">
+    <div class="row g-3 g-md-4 justify-content-center">
+      <% @categories.each do |category| %>
+        <div class="col-6 col-md-4 col-lg-3">
+          <%= link_to category_path(category), class: "text-decoration-none" do %>
+            <div class="card-category h-100">
+              <div class="card-category-image">
+                <% if category.photo.attached? %>
+                  <%= image_tag rails_blob_path(category.photo, only_path: true),
+                                class: "img-fluid w-100",
+                                alt: category.title,
+                                style: "height: 150px; object-fit: cover;" %>
+                <% else %>
+                  <div class="placeholder-image d-flex align-items-center justify-content-center"
+                       style="height: 150px; background-color: #f8f9fa;">
+                    <i class="fa-solid fa-image text-muted" style="font-size: 2rem;"></i>
+                  </div>
+                <% end %>
+              </div>
+              <div class="card-category-content p-3">
+                <h5 class="card-category-title text-center mb-0">
+                  <%= category.title %>
+                </h5>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="services-section" style="background-color: black; height: 300px; display: flex; position: relative; justify-content: center;">
+  <div class="services-container" style="display: flex; justify-content: center; width: 100%;">
+    <div class="services-content d-flex flex-column justify-content-center align-items-center">
+      <h2 class="services-title text-white text-center">
+        Serviços que oferecemos
+      </h2>
+      <h4 class="services-subtitle text-white text-center">
+        A <span class="brand-highlight" style="color: #F7C21A;">Hiperion Serras</span>
+        oferece os serviços de consultoria de corte<br> e recondicionamento de lâminas de serras.
+      </h4>
+      <button class="services-btn" style="background-color: #F7C21A; padding: 5px 20px; border-radius: 10px; border: none; max-width: 200px;">
+        <span style="color: black; font-weight: bold; font-size: 18px; font-family: 'Plus Jakarta Sans', sans-serif;">
+          Conheça mais
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="services-image d-none d-md-block" style="position: absolute; right: 0; top: 0;">
+    <%= image_tag "meia-serra.png", alt: "Serra Hiperion", id: 'saw-image' %>
+  </div>
+</section>
