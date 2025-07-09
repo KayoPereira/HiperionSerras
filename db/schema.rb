@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_09_185624) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_09_192953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -48,6 +58,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_09_185624) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "title"
+    t.string "line"
+    t.bigint "subcategory_id", null: false
+    t.text "characteristics"
+    t.text "applications"
+    t.text "types_of_coatings"
+    t.text "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
+  end
+
   create_table "subcategories", force: :cascade do |t|
     t.string "title"
     t.bigint "category_id", null: false
@@ -72,5 +95,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_09_185624) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "products", "subcategories"
   add_foreign_key "subcategories", "categories"
 end

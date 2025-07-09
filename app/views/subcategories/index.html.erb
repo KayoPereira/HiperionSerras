@@ -18,25 +18,25 @@
             <% if subcategory.photo.attached? %>
               <%= image_tag rails_blob_path(subcategory.photo, only_path: true),
                             class: "card-img-top",
-                            style: "height: 200px; object-fit: cover;",
+                            style: "height: 200px;",
                             alt: subcategory.title %>
             <% else %>
               <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
                 <i class="fa-solid fa-image text-muted" style="font-size: 3rem;"></i>
               </div>
             <% end %>
-            
+
             <div class="card-body d-flex flex-column">
               <h5 class="card-title"><%= subcategory.title %></h5>
-              
+
               <div class="mt-auto">
                 <div class="btn-group w-100" role="group">
                   <%= link_to "Ver", [@category, subcategory], class: "btn btn-outline-primary btn-sm" %>
                   <%= link_to "Editar", edit_category_subcategory_path(@category, subcategory), class: "btn btn-outline-secondary btn-sm" %>
-                  <%= link_to "Excluir", [@category, subcategory], 
+                  <%= link_to "Excluir", [@category, subcategory],
                               method: :delete,
                               class: "btn btn-outline-danger btn-sm",
-                              data: { 
+                              data: {
                                 confirm: "Tem certeza que deseja excluir esta subcategoria?",
                                 turbo_method: :delete
                               } %>

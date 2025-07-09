@@ -29,6 +29,10 @@
                     <i class="fa-solid fa-layer-group me-1"></i>
                     <%= pluralize(@category.subcategories.count, 'subcategoria') %>
                   </p>
+                  <p class="mb-0 small text-muted">
+                    <i class="fa-solid fa-box me-1"></i>
+                    <%= pluralize(@category.products.count, 'produto') %> no total
+                  </p>
                 </div>
                 <%= link_to "Gerenciar Subcategorias", category_subcategories_path(@category),
                             class: "btn btn-outline-primary btn-sm" %>
@@ -90,9 +94,18 @@
 
                       <div class="mt-auto">
                         <% if user_signed_in? %>
-                          <div class="btn-group w-100" role="group">
-                            <%= link_to "Ver", [@category, subcategory], class: "btn btn-outline-primary btn-sm" %>
-                            <%= link_to "Editar", edit_category_subcategory_path(@category, subcategory), class: "btn btn-outline-secondary btn-sm" %>
+                          <div class="d-grid gap-2">
+                            <div class="btn-group w-100" role="group">
+                              <%= link_to "Ver", [@category, subcategory], class: "btn btn-outline-primary btn-sm" %>
+                              <%= link_to "Editar", edit_category_subcategory_path(@category, subcategory), class: "btn btn-outline-secondary btn-sm" %>
+                              <%= link_to "Excluir", [@category, subcategory],
+                                          method: :delete,
+                                          class: "btn btn-outline-danger btn-sm",
+                                          data: {
+                                            confirm: "Tem certeza que deseja excluir a subcategoria '#{subcategory.title}'? Todos os produtos desta subcategoria também serão excluídos.",
+                                            turbo_method: :delete
+                                          } %>
+                            </div>
                           </div>
                         <% else %>
                           <%= link_to "Ver Detalhes", [@category, subcategory], class: "btn btn-outline-warning btn-sm w-100" %>

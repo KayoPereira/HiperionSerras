@@ -1,0 +1,109 @@
+<%= simple_form_for([@category, @subcategory, @product], html: { multipart: true, data: { controller: "image-preview" } }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.input :title, 
+                    required: true,
+                    autofocus: true,
+                    input_html: { class: "form-control" },
+                    label: "Título do Produto" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :line, 
+                    required: true,
+                    input_html: { class: "form-control" },
+                    label: "Linha do Produto" %>
+      </div>
+    </div>
+
+    <!-- Fotos principais do produto -->
+    <div class="mb-3">
+      <%= f.label :photos, "Fotos do Produto", class: "form-label" %>
+      <%= f.file_field :photos,
+                       multiple: true,
+                       class: "form-control",
+                       accept: "image/*",
+                       data: {
+                         max_size: 5.megabytes
+                       } %>
+      <div class="form-text">
+        Formatos aceitos: JPEG, JPG, PNG, GIF, WebP. Tamanho máximo: 5MB cada. Você pode selecionar múltiplas imagens.
+      </div>
+      
+      <% if @product.persisted? && @product.photos.attached? %>
+        <div class="mt-3">
+          <h6>Fotos atuais:</h6>
+          <div class="row">
+            <% @product.photos.each do |photo| %>
+              <div class="col-md-3 mb-2">
+                <%= image_tag rails_blob_path(photo, only_path: true),
+                              class: "img-thumbnail",
+                              style: "width: 100%; height: 150px; object-fit: cover;" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Rich text fields -->
+    <div class="mb-3">
+      <%= f.label :characteristics, "Características", class: "form-label" %>
+      <%= f.rich_text_area :characteristics, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :applications, "Aplicações", class: "form-label" %>
+      <%= f.rich_text_area :applications, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :types_of_coatings, "Tipos de Revestimentos", class: "form-label" %>
+      <%= f.rich_text_area :types_of_coatings, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :details, "Detalhes", class: "form-label" %>
+      <%= f.rich_text_area :details, class: "form-control" %>
+    </div>
+
+    <!-- Imagens de detalhes -->
+    <div class="mb-3">
+      <%= f.label :details_images, "Imagens de Detalhes", class: "form-label" %>
+      <%= f.file_field :details_images,
+                       multiple: true,
+                       class: "form-control",
+                       accept: "image/*",
+                       data: {
+                         max_size: 5.megabytes
+                       } %>
+      <div class="form-text">
+        Imagens técnicas, diagramas ou detalhes específicos do produto. Formatos aceitos: JPEG, JPG, PNG, GIF, WebP.
+      </div>
+      
+      <% if @product.persisted? && @product.details_images.attached? %>
+        <div class="mt-3">
+          <h6>Imagens de detalhes atuais:</h6>
+          <div class="row">
+            <% @product.details_images.each do |image| %>
+              <div class="col-md-3 mb-2">
+                <%= image_tag rails_blob_path(image, only_path: true),
+                              class: "img-thumbnail",
+                              style: "width: 100%; height: 150px; object-fit: cover;" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <%= link_to "Cancelar", category_subcategory_products_path(@category, @subcategory), 
+                class: "btn btn-secondary ms-2" %>
+  </div>
+<% end %>
