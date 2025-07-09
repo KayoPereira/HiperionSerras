@@ -17,7 +17,7 @@
     <div>
       <% if user_signed_in? %>
         <%= link_to "Novo Produto", new_category_subcategory_product_path(@category, @subcategory),
-                    class: "btn btn-primary" %>
+                    class: "btn btn-warning" %>
       <% end %>
       <%= link_to "Voltar", [@category, @subcategory],
                   class: "btn btn-outline-secondary ms-2" %>
@@ -51,7 +51,7 @@
                 <% if user_signed_in? %>
                   <div class="btn-group w-100" role="group">
                     <%= link_to "Ver", [@category, @subcategory, product],
-                                class: "btn btn-outline-primary btn-sm" %>
+                                class: "btn btn-outline-warning btn-sm" %>
                     <%= link_to "Editar", edit_category_subcategory_product_path(@category, @subcategory, product),
                                 class: "btn btn-outline-secondary btn-sm" %>
                   </div>

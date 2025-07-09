@@ -8,7 +8,7 @@
     <div class="row">
       <% @categories.each do |category| %>
         <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card h-100">
+          <div class="card h-100" style="border-color: #F7C21A;">
             <% if category.photo.attached? %>
               <%= image_tag rails_blob_path(category.photo, only_path: true),
                             class: "card-img-top",

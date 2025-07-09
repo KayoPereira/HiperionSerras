@@ -35,7 +35,7 @@
                   </p>
                 </div>
                 <%= link_to "Gerenciar Produtos", category_subcategory_products_path(@category, @subcategory),
-                            class: "btn btn-outline-primary btn-sm" %>
+                            class: "btn btn-outline-secondary btn-sm" %>
               </div>
             </div>
 
@@ -83,7 +83,7 @@
             <h3 class="mb-0">Produtos</h3>
             <% if user_signed_in? %>
               <%= link_to "Novo Produto", new_category_subcategory_product_path(@category, @subcategory),
-                          class: "btn btn-primary btn-sm" %>
+                          class: "btn btn-warning btn-sm" %>
             <% end %>
           </div>
         </div>
@@ -115,7 +115,7 @@
                       <div class="mt-auto">
                         <% if user_signed_in? %>
                           <div class="btn-group w-100" role="group">
-                            <%= link_to "Ver", [@category, @subcategory, product], class: "btn btn-outline-primary btn-sm" %>
+                            <%= link_to "Ver", [@category, @subcategory, product], class: "btn btn-outline-warning btn-sm" %>
                             <%= link_to "Editar", edit_category_subcategory_product_path(@category, @subcategory, product), class: "btn btn-outline-secondary btn-sm" %>
                           </div>
                         <% else %>

@@ -5,8 +5,8 @@
       <p class="text-muted mb-0">Categoria: <%= @category.title %></p>
     </div>
     <div>
-      <%= link_to "Nova Subcategoria", new_category_subcategory_path(@category), class: "btn btn-primary" %>
-      <%= link_to "Voltar para Categoria", category_path(@category), class: "btn btn-outline-secondary ms-2" %>
+      <%= link_to "Nova Subcategoria", new_category_subcategory_path(@category), class: "btn btn-warning" %>
+      <%= link_to "Voltar", category_path(@category), class: "btn btn-outline-secondary ms-2" %>
     </div>
   </div>
 
@@ -14,7 +14,7 @@
     <div class="row">
       <% @subcategories.each do |subcategory| %>
         <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card h-100">
+          <div class="card h-100" style="border-color: #F7C21A;">
             <% if subcategory.photo.attached? %>
               <%= image_tag rails_blob_path(subcategory.photo, only_path: true),
                             class: "card-img-top",
@@ -31,7 +31,7 @@
 
               <div class="mt-auto">
                 <div class="btn-group w-100" role="group">
-                  <%= link_to "Ver", [@category, subcategory], class: "btn btn-outline-primary btn-sm" %>
+                  <%= link_to "Ver", [@category, subcategory], class: "btn btn-outline-warning btn-sm" %>
                   <%= link_to "Editar", edit_category_subcategory_path(@category, subcategory), class: "btn btn-outline-secondary btn-sm" %>
                   <%= link_to "Excluir", [@category, subcategory],
                               method: :delete,
