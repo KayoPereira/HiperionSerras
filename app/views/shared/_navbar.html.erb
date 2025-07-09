@@ -1,6 +1,6 @@
 <nav class="mobile-navbar w-100 d-md-none">
   <ul class="d-flex justify-content-evenly m-0 ps-0 w-100" data-controller="active" style="padding-top: 0.3rem; padding-bottom: 0.3rem;">
-    <li class="navbar-item active" data-action="click->active#activate" data-active-target="link">
+    <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
       <%= link_to home_path do %>
         <i class="fa-solid fa-house"></i>
         <span>Início</span>
@@ -13,7 +13,8 @@
       <% end %>
     </li>
     <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
-      <%= link_to category_path(Category.find_by(title: "Serviços")) do %>
+      <% servicos_category = Category.find_by(title: "Serviços") %>
+      <%= link_to (servicos_category ? category_path(servicos_category) : "#") do %>
         <i class="fa-solid fa-wrench"></i>
         <span>Serviços</span>
       <% end %>
@@ -47,7 +48,8 @@
   <div class="d-flex justify-content-center align-items-center">
     <ul class="btn-circles list-unstyled me-5">
       <%= link_to "Produtos", categories_path, class: "link-nav" %>
-      <%= link_to "Serviços", category_path(Category.find_by(title: "Serviços")), class: "link-nav mx-4" %>
+      <% servicos_category = Category.find_by(title: "Serviços") %>
+      <%= link_to "Serviços", (servicos_category ? category_path(servicos_category) : "#"), class: "link-nav mx-4" %>
       <%= link_to "Sobre", "/", class: "link-nav" %>
       <%= link_to "/", class: "btn-nav ms-5 me-2" do %>
         <li class="btn-circle-item">
