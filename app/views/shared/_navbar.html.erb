@@ -7,13 +7,13 @@
       <% end %>
     </li>
     <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
-      <%= link_to "/" do %>
+      <%= link_to categories_path do %>
         <i class="fa-solid fa-list"></i>
         <span>Produtos</span>
       <% end %>
     </li>
     <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
-      <%= link_to "/" do %>
+      <%= link_to category_path(Category.find_by(title: "Serviços")) do %>
         <i class="fa-solid fa-wrench"></i>
         <span>Serviços</span>
       <% end %>
@@ -44,8 +44,8 @@
   <%= image_tag "logo.png", class: "logo-nav ms-5" %>
   <div class="d-flex justify-content-center align-items-center">
     <ul class="btn-circles list-unstyled me-5">
-      <%= link_to "Produtos", "/", class: "link-nav" %>
-      <%= link_to "Serviços", "/", class: "link-nav mx-4" %>
+      <%= link_to "Produtos", categories_path, class: "link-nav" %>
+      <%= link_to "Serviços", category_path(Category.find_by(title: "Serviços")), class: "link-nav mx-4" %>
       <%= link_to "Sobre", "/", class: "link-nav" %>
       <%= link_to "/", class: "btn-nav ms-5 me-2" do %>
         <li class="btn-circle-item">
