@@ -1,0 +1,59 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="d-flex justify-content-center align-items-center">
+          <% if @subcategory.photo.attached? %>
+            <%= image_tag rails_blob_path(@subcategory.photo, only_path: true),
+                          class: "card-img-top",
+                          style: "max-height: 400px; max-width: 400px; object-fit: no-repeat;",
+                          alt: @subcategory.title %>
+          <% else %>
+            <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 400px;">
+              <i class="fa-solid fa-image text-muted" style="font-size: 6rem;"></i>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="card-body">
+          <h1 class="card-title h3"><%= @subcategory.title %></h1>
+          <p class="text-muted">
+            <i class="fa-solid fa-folder me-1"></i>
+            Categoria: <%= link_to @category.title, category_path(@category), class: "text-decoration-none" %>
+          </p>
+
+          <div class="row mt-3">
+            <div class="col-sm-6">
+              <small class="text-muted">Criado em:</small>
+              <p><%= @subcategory.created_at.strftime("%d/%m/%Y às %H:%M") %></p>
+            </div>
+            <div class="col-sm-6">
+              <small class="text-muted">Última atualização:</small>
+              <p><%= @subcategory.updated_at.strftime("%d/%m/%Y às %H:%M") %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer bg-transparent">
+          <% if user_signed_in? %>
+            <div class="btn-group w-100" role="group">
+              <%= link_to "Voltar", category_subcategories_path(@category), class: "btn btn-outline-secondary" %>
+              <%= link_to "Editar", edit_category_subcategory_path(@category, @subcategory), class: "btn btn-primary" %>
+              <%= link_to "Excluir", [@category, @subcategory],
+                          method: :delete,
+                          class: "btn btn-danger",
+                          data: {
+                            confirm: "Tem certeza que deseja excluir esta subcategoria?",
+                            turbo_method: :delete
+                          } %>
+            </div>
+          <% else %>
+            <div class="text-center">
+              <%= link_to "Voltar para #{@category.title}", category_path(@category), class: "btn btn-outline-secondary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

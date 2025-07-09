@@ -1,5 +1,5 @@
-class Category < ApplicationRecord
-  has_many :subcategories, dependent: :destroy
+class Subcategory < ApplicationRecord
+  belongs_to :category
   has_one_attached :photo
 
   # Validações

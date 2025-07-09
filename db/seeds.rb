@@ -48,4 +48,52 @@ categories_data.each do |category_data|
   end
 end
 
-puts "✅ Seeds concluídos! #{Category.count} categorias criadas."
+# Criar subcategorias de exemplo
+puts "📁 Criando subcategorias de exemplo..."
+
+subcategories_data = [
+  {
+    category_title: "Lâminas de Serra Fita",
+    subcategories: [
+      "Lâminas 1/2 polegada",
+      "Lâminas 3/4 polegada",
+      "Lâminas 1 polegada",
+      "Lâminas para madeira",
+      "Lâminas para metal"
+    ]
+  },
+  {
+    category_title: "Lâminas de Serra Circular",
+    subcategories: [
+      "Lâminas 7 1/4 polegadas",
+      "Lâminas 10 polegadas",
+      "Lâminas para madeira",
+      "Lâminas para metal",
+      "Lâminas diamantadas"
+    ]
+  },
+  {
+    category_title: "Serviços",
+    subcategories: [
+      "Afiação de lâminas",
+      "Soldagem de lâminas",
+      "Manutenção preventiva",
+      "Consultoria técnica"
+    ]
+  }
+]
+
+subcategories_data.each do |data|
+  category = Category.find_by(title: data[:category_title])
+  next unless category
+
+  puts "  📂 Criando subcategorias para: #{category.title}"
+
+  data[:subcategories].each do |subcategory_title|
+    puts "    ➕ #{subcategory_title}"
+    category.subcategories.create!(title: subcategory_title)
+  end
+end
+
+total_subcategories = Subcategory.count
+puts "✅ Seeds concluídos! #{Category.count} categorias e #{total_subcategories} subcategorias criadas."
