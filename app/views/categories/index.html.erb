@@ -1,7 +1,9 @@
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Categorias</h1>
-    <%= link_to "Nova Categoria", new_category_path, class: "btn btn-warning" %>
+    <% if user_signed_in? %>
+      <%= link_to "Nova Categoria", new_category_path, class: "btn btn-warning" %>
+    <% end %>
   </div>
 
   <% if @categories.any? %>

@@ -1,7 +1,7 @@
 <nav class="mobile-navbar w-100 d-md-none">
   <ul class="d-flex justify-content-evenly m-0 ps-0 w-100" data-controller="active" style="padding-top: 0.3rem; padding-bottom: 0.3rem;">
     <li class="navbar-item active" data-action="click->active#activate" data-active-target="link">
-      <%= link_to "/" do %>
+      <%= link_to home_path do %>
         <i class="fa-solid fa-house"></i>
         <span>Início</span>
       <% end %>
@@ -41,7 +41,9 @@
 </nav>
 
 <nav class="navbar w-100 d-none d-md-flex align-items-between" style="<% if current_page?(root_path) %>position: absolute; background-color: transparent; <% else %>background-color: #000000; <% end %>">
-  <%= image_tag "logo.png", class: "logo-nav ms-5" %>
+  <%= link_to home_path do %>
+    <%= image_tag "logo.png", class: "logo-nav ms-5" %>
+  <% end %>
   <div class="d-flex justify-content-center align-items-center">
     <ul class="btn-circles list-unstyled me-5">
       <%= link_to "Produtos", categories_path, class: "link-nav" %>
