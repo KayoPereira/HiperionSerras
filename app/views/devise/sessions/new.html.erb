@@ -1,27 +1,74 @@
-<div class="d-flex">
-  <div class="left">
-    <div class="container-left">
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="form-inputs">
+<div class="auth-container">
+  <div class="auth-card">
+    <!-- Seção do Formulário -->
+    <div class="auth-form-section">
+      <h1 class="auth-title">Bem-vindo de volta!</h1>
+      <p class="auth-subtitle">Entre na sua conta para continuar</p>
+
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form", data: { controller: "auth", auth_form_target: "form" } }) do |f| %>
+        <div class="form-group">
           <%= f.input :email,
                       required: false,
                       autofocus: true,
-                      input_html: { autocomplete: "email" },
+                      input_html: {
+                        autocomplete: "email",
+                        class: "form-control",
+                        placeholder: "Digite seu email"
+                      },
                       label: false,
-                      placeholder: "Email" %>
+                      wrapper: false %>
+        </div>
+
+        <div class="form-group">
           <%= f.input :password,
                       required: false,
-                      input_html: { autocomplete: "current-password", class: "user_signin_password" },
+                      input_html: {
+                        autocomplete: "current-password",
+                        class: "form-control",
+                        placeholder: "Digite sua senha"
+                      },
                       label: false,
-                      placeholder: "Senha" %>
-          <div class="form-actions d-flex align-items-center mb-3">
-            <%= f.button :submit, "Entrar", class: "btn btn-primary" %>
-            <%= f.input :remember_me, as: :boolean, label: "Lembre-se de mim" if devise_mapping.rememberable? %>
+                      wrapper: false %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="form-check">
+            <%= f.input :remember_me,
+                        as: :boolean,
+                        input_html: { class: "form-check-input" },
+                        label_html: { class: "form-check-label" },
+                        label: "Lembre-se de mim",
+                        wrapper: false %>
           </div>
-          <%= render "devise/shared/links" %>
+        <% end %>
+
+        <%= f.button :submit, "Entrar", class: "auth-btn", data: { auth_submit_button_target: "submitButton" } %>
+
+        <div class="auth-links">
+          <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+            <%= link_to "Criar conta", new_registration_path(resource_name) %>
+            <span class="auth-link-separator">•</span>
+          <% end %>
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+            <%= link_to "Esqueceu a senha?", new_password_path(resource_name) %>
+          <% end %>
         </div>
       <% end %>
     </div>
-    <%# image_tag "dog_and_cats.png", class: "dog-and-cat" %>
+
+    <!-- Seção de Branding -->
+    <div class="auth-brand-section">
+      <div class="brand-content">
+        <div class="auth-logo mb-4">
+          <%= link_to home_path do %>
+            <%= image_tag "logo.png", alt: "Hiperion Serras" %>
+          <% end %>
+        </div>
+        <p class="brand-description">
+          Sua plataforma completa para ferramentas e serviços industriais.
+          Qualidade e eficiência em cada projeto.
+        </p>
+      </div>
+    </div>
   </div>
 </div>

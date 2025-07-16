@@ -33,10 +33,15 @@
   </head>
 
   <body style="<% if current_page?(root_path) %>position: relative;<% end %>">
-    <% unless current_page?(root_path) %>
+    <% auth_pages = [new_user_session_path, new_user_registration_path, new_user_password_path, edit_user_password_path] %>
+    <% unless current_page?(root_path) || auth_pages.include?(request.path) %>
       <%= render "shared/navbar" %>
     <% end %>
+
     <%= yield %>
-    <%= render "shared/footer" %>
+
+    <% unless auth_pages.include?(request.path) %>
+      <%= render "shared/footer" %>
+    <% end %>
   </body>
 </html>

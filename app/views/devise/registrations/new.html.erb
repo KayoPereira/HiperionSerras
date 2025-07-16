@@ -1,52 +1,117 @@
-<div class="d-flex">
-  <div class="left">
-    <div class="container-left">
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <div class="form-inputs">
-          <h2>Cadastre-se</h2>
-          <div class="w-100 d-flex justify-content-between">
-            <%= f.input :first_name,
-                        required: true,
-                        autofocus: true,
-                        input_html: { autocomplete: "Nome", class: "w-100" },
-                        label: false,
-                        placeholder: "Nome" %>
-            <%= f.input :last_name,
-                        required: true,
-                        input_html: { autocomplete: "Nome", class: "w-100" },
-                        label: false,
-                        placeholder: "Sobrenome" %>
-          </div>
-          <div class="w-100 d-flex justify-content-between">
-            <%= f.input :avatar, as: :file, label: false %>
-          </div>
+<div class="auth-container">
+  <div class="auth-card">
+    <!-- Seção do Formulário -->
+    <div class="auth-form-section">
+      <h1 class="auth-title">Crie sua conta</h1>
+      <p class="auth-subtitle">Junte-se à nossa plataforma e tenha acesso completo</p>
+
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "auth-form", multipart: true, data: { controller: "auth", auth_form_target: "form" } }) do |f| %>
+        <div class="form-group form-row">
+          <%= f.input :first_name,
+                      required: true,
+                      autofocus: true,
+                      input_html: {
+                        autocomplete: "given-name",
+                        class: "form-control",
+                        placeholder: "Nome"
+                      },
+                      label: false,
+                      wrapper: false %>
+          <%= f.input :last_name,
+                      required: true,
+                      input_html: {
+                        autocomplete: "family-name",
+                        class: "form-control",
+                        placeholder: "Sobrenome"
+                      },
+                      label: false,
+                      wrapper: false %>
+        </div>
+
+        <div class="form-group">
           <%= f.input :email,
                       required: true,
-                      input_html: { autocomplete: "Email" },
+                      input_html: {
+                        autocomplete: "email",
+                        class: "form-control",
+                        placeholder: "Digite seu email"
+                      },
                       label: false,
-                      placeholder: "Email" %>
-          <div class="w-100 d-flex justify-content-between">
-            <%= f.input :password,
-                        required: true,
-                        input_html: { autocomplete: "current-password", class: "w-100" },
-                        label: false,
-                        placeholder: "Senha" %>
-            <%= f.input :password_confirmation,
-                        required: true,
-                        input_html: { autocomplete: "current-password", class: "w-100" },
-                        label: false,
-                        placeholder: "Confirme sua senha" %>
+                      wrapper: false %>
+        </div>
+
+        <div class="form-group form-row">
+          <%= f.input :password,
+                      required: true,
+                      input_html: {
+                        autocomplete: "new-password",
+                        class: "form-control",
+                        placeholder: "Senha (mín. 6 caracteres)",
+                        data: { auth_password_field_target: "passwordField" }
+                      },
+                      label: false,
+                      wrapper: false %>
+          <%= f.input :password_confirmation,
+                      required: true,
+                      input_html: {
+                        autocomplete: "new-password",
+                        class: "form-control",
+                        placeholder: "Confirme sua senha",
+                        data: { auth_confirm_password_field_target: "confirmPasswordField" }
+                      },
+                      label: false,
+                      wrapper: false %>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" style="color: #666; font-family: 'Work Sans', sans-serif; font-size: 14px; margin-bottom: 8px; display: block;">
+            <i class="fa-solid fa-user-circle" style="margin-right: 8px; color: #F7C21A;"></i>
+            Foto do perfil (opcional)
+          </label>
+          <%= f.input :avatar,
+                      as: :file,
+                      input_html: {
+                        class: "form-control",
+                        accept: "image/*"
+                      },
+                      label: false,
+                      wrapper: false %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="form-check">
+            <%= f.input :remember_me,
+                        as: :boolean,
+                        input_html: { class: "form-check-input" },
+                        label_html: { class: "form-check-label" },
+                        label: "Lembre-se de mim",
+                        wrapper: false %>
           </div>
-          <div class="form-actions d-flex align-items-center mb-3">
-            <%= f.button :submit, "Entrar", class: "btn btn-primary" %>
-            <%= f.input :remember_me, as: :boolean, label: "Lembre-se de mim" if devise_mapping.rememberable? %>
-          </div>
-          <%= render "devise/shared/links" %>
+        <% end %>
+
+        <%= f.button :submit, "Criar Conta", class: "auth-btn", data: { auth_submit_button_target: "submitButton" } %>
+
+        <div class="auth-links">
+          <%- if controller_name != 'sessions' %>
+            <%= link_to "Já tem uma conta? Entre aqui", new_session_path(resource_name) %>
+          <% end %>
         </div>
       <% end %>
     </div>
-  </div>
-  <div class="right">
 
+    <!-- Seção de Branding -->
+    <div class="auth-brand-section">
+      <div class="brand-content">
+        <div class="auth-logo mb-4">
+          <%= link_to home_path do %>
+            <%= image_tag "logo.png", alt: "Hiperion Serras" %>
+          <% end %>
+        </div>
+        <p class="brand-description">
+          Faça parte da nossa comunidade e tenha acesso às melhores
+          ferramentas e serviços do mercado industrial.
+        </p>
+      </div>
+    </div>
   </div>
 </div>
