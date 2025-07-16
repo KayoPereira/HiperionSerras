@@ -9,7 +9,6 @@
             <% if @subcategory.photo.attached? %>
               <%= image_tag rails_blob_path(@subcategory.photo, only_path: true),
                             class: "card-img-top",
-                            style: "max-height: 400px; max-width: 400px; object-fit: no-repeat;",
                             alt: @subcategory.title %>
             <% else %>
               <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 400px;">
@@ -97,7 +96,6 @@
                     <% if product.photos.attached? && product.photos.first.present? %>
                       <%= image_tag rails_blob_path(product.photos.first, only_path: true),
                                     class: "card-img-top",
-                                    style: "height: 150px; object-fit: cover;",
                                     alt: product.title %>
                     <% else %>
                       <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 150px;">

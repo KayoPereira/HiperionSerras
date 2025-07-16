@@ -14,7 +14,6 @@
             <% if category.photo.attached? %>
               <%= image_tag rails_blob_path(category.photo, only_path: true),
                             class: "card-img-top",
-                            style: "height: 200px; object-fit: cover;",
                             alt: category.title %>
             <% else %>
               <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
