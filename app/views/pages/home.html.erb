@@ -1,9 +1,39 @@
 <!-- Banner responsivo -->
+
 <section class="banner-section">
-  <div class="banner-container">
-    <%= image_tag "banner.png", class: "img-fluid w-100", alt: "Banner Hiperion Serras" %>
+  <% banners = ["banner.png", "banner.png", "banner.png"] %> <!-- ou variável vinda do controller, como @banners -->
+  <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <% banners.each_with_index do |banner, index| %>
+        <div class="carousel-item <%= 'active' if index == 0 %>">
+          <%= image_tag banner, class: "d-block w-100 img-fluid", alt: "Banner Hiperion Serras #{index + 1}" %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if banners.size > 1 %>
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+
+      <!-- Indicadores -->
+      <div class="carousel-indicators">
+        <% banners.each_with_index do |_, index| %>
+          <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="<%= index %>"
+                  class="<%= 'active' if index == 0 %>" aria-current="<%= index == 0 %>" aria-label="Slide <%= index + 1 %>">
+          </button>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </section>
+
 
 <!-- Seção hero tagline -->
 <section class="hero-tagline-section w-100">

@@ -1,66 +1,63 @@
-<section class="banner-section">
+<div class="banner-section mb-5">
   <div class="banner-container">
     <%= image_tag "banner.png", class: "img-fluid w-100", alt: "Banner Hiperion Serras" %>
   </div>
-</section>
+</div>
 
 
 <div style="text-align: center; margin: 0 auto;">
   <span style="display: block; font-size: 24px; font-weight: bold; font-family: 'Plus Jakarta Sans'; margin-bottom: 16px;">
     Sobre a Hiperion Serras
-  </span>
+    </span>
 
-  <div class="d-block d-md-none" style="margin: 32px;">
-    <span style="display: block; font-size: 20px; line-height: 1.6; font-family: 'Plus Jakarta Sans'; color: #333; text-align: center;">
+    <div class="d-block d-md-none my-4 d-flex flex-column gap-3" style="padding: 20px;">
+    <span class="fs-5 lh-lg fw-normal text-center text-dark" style="font-family: 'Plus Jakarta Sans';">
       A Hiperion Serras é uma empresa brasileira especializada no fornecimento de soluções industriais para corte de metais.
     </span>
-    <span style="display: block; font-size: 20px; line-height: 1.6; font-family: 'Plus Jakarta Sans'; color: #333; text-align: center;">
-      Oferecemos serras circulares, serras de fita e serviços de afiação, com foco em atender empresas que buscam <span style="color: #F7C21A">eficiência operacional</span> e <span style="color: #F7C21A">custo-benefício</span>.
-      Com sede em Mogi Guaçu e Poá (SP),
-      a Hiperion Serras atende a todo o território nacional, destacando-se pela agilidade e suporte técnico especializado.
+    <span class="fs-5 lh-lg fw-normal text-center text-dark" style="font-family: 'Plus Jakarta Sans';">
+      Oferecemos serras circulares, serras de fita e serviços de afiação, com foco em atender empresas que buscam
+      <span style="color: #F7C21A">eficiência operacional</span> e <span style="color: #F7C21A">custo-benefício</span>.
+      Com sede em Mogi Guaçu e Poá (SP), a Hiperion Serras atende a todo o território nacional, destacando-se pela agilidade e suporte técnico especializado.
     </span>
-    <span style="display: block; font-size: 20px; line-height: 1.6; font-family: 'Plus Jakarta Sans'; color: #333; text-align: center;">
+    <span class="fs-5 lh-lg fw-normal text-center text-dark" style="font-family: 'Plus Jakarta Sans';">
       Cultura da Hiperion Serras centrada na simplicidade e objetividade.
     </span>
-    <span style="display: block; font-size: 20px; line-height: 1.6; font-family: 'Plus Jakarta Sans'; color: #333; text-align: center;">
-      A Hiperion busca <span style="color: #F7C21A">descomplicar processos</span> para seus clientes, oferecendo soluções práticas e eficientes. A equipe técnica é altamente capacitada, com vasta experiência no segmento,
-      e está comprometida em acompanhar cada processo e implementar os produtos em linha, visando sempre o sucesso do cliente.
+    <span class="fs-5 lh-lg fw-normal text-center text-dark" style="font-family: 'Plus Jakarta Sans';">
+      A Hiperion busca <span style="color: #F7C21A">descomplicar processos</span> para seus clientes, oferecendo soluções práticas e eficientes.
+      A equipe técnica é altamente capacitada, com vasta experiência no segmento, e está comprometida em acompanhar cada processo e implementar os produtos em linha, visando sempre o sucesso do cliente.
     </span>
   </div>
 
-  <div class="d-none d-md-flex" style="flex-wrap: wrap; align-items: center; justify-content: center; gap: 24px; padding: 16px;">
-    <!-- Bloco das imagens lado a lado -->
-    <div style="position: relative; max-width: 400px; flex: 1;">
-      <!-- Primeira imagem -->
-      <%= image_tag "imagem1.png", style: "width: 100%; height: auto; border-radius: 8px;" %>
 
-      <!-- Segunda imagem sobreposta, mais abaixo e à direita -->
+  <div class="d-none d-md-flex justify-content-between p-3 mx-5" style="max-width: 100%; margin-bottom: 250px; margin-top: 50px">
+  <!-- Bloco das imagens -->
+    <div class="position-relative" style="width: 50%%;">
+      <%= image_tag "imagem1.png", class: "img-fluid rounded" %>
+
       <%= image_tag "imagem2.png", style: "
-        width: 70%;
+        width: 95%;
         height: auto;
         position: absolute;
         top: 230px;
-        left: 250px;
+        left: 320px;
         border-radius: 8px;
         box-shadow: 0 4px 16px rgba(0,0,0,0.15);
       " %>
     </div>
 
-
-
     <!-- Bloco do texto -->
-    <div style="flex: 2; min-width: 300px; max-width: 700px;">
-      <span style="display: block; font-size: 20px; line-height: 1.6; font-family: 'Plus Jakarta Sans'; color: #333; text-align: left; margin-bottom: 16px;">
+    <div style="width: 50%; margin-left: 200px;">
+      <span class="d-block fs-5 lh-base fw-normal text-start mb-3" style="font-family: 'Plus Jakarta Sans'; color: #333;">
         A Hiperion Serras é uma empresa brasileira especializada no fornecimento de soluções industriais para corte de metais.
       </span>
-      <span style="display: block; font-size: 20px; line-height: 1.6; font-family: 'Plus Jakarta Sans'; color: #333; text-align: left; margin-bottom: 16px;">
+      <span class="d-block fs-5 lh-base fw-normal text-start mb-3" style="font-family: 'Plus Jakarta Sans'; color: #333;">
         Oferecemos serras circulares, serras de fita e serviços de afiação, com foco em atender empresas que buscam
         <span style="color: #F7C21A">eficiência operacional</span> e <span style="color: #F7C21A">custo-benefício</span>. Com sede em Mogi Guaçu e Poá (SP), a Hiperion Serras atende a todo o território nacional, destacando-se pela agilidade e suporte técnico especializado.
       </span>
-      <span style="display: block; font-size: 20px; line-height: 1.6; font-family: 'Plus Jakarta Sans'; color: #333; text-align: left; margin-bottom: 16px;">
+      <span class="d-block fs-5 lh-base fw-normal text-start mb-3" style="font-family: 'Plus Jakarta Sans'; color: #333;">
         Cultura da Hiperion Serras centrada na simplicidade e objetividade.
       </span>
-      <span style="display: block; font-size: 20px; line-height: 1.6; font-family: 'Plus Jakarta Sans'; color: #333; text-align: left;">
+      <span class="d-block fs-5 lh-base fw-normal text-start" style="font-family: 'Plus Jakarta Sans'; color: #333;">
         A Hiperion busca <span style="color: #F7C21A">descomplicar processos</span> para seus clientes, oferecendo soluções práticas e eficientes. A equipe técnica é altamente capacitada, com vasta experiência no segmento,
         e está comprometida em acompanhar cada processo e implementar os produtos em linha, visando sempre o sucesso do cliente.
       </span>
@@ -89,12 +86,14 @@
 
   <!-- Bloco visível apenas no DESKTOP -->
   <div class="w-100 d-none d-md-block" style="background-color: #EAB917; margin-top: 64px;">
-    <div class="d-flex flex-column flex-md-row align-items-center justify-content-center text-center gap-5 py-5 px-3 flex-wrap">
+    <div class="d-flex flex-column flex-md-row align-items-stretch justify-content-center text-center gap-5 py-5 px-3 flex-wrap">
       <% infos.each do |info| %>
-        <div style="max-width: 300px;">
+        <div class="d-flex flex-column align-items-center justify-content-start text-center h-100" style="max-width: 300px;">
           <%= image_tag info[:icon] %>
-          <span style="display: block; font-size: 27px; font-weight: bold; margin-top: 16px;"><%= info[:title] %></span>
-          <span style="font-size: 16px; color: #132738; font-family: 'Montserrat"><%= info[:text] %></span>
+          <span class="d-block fw-bold mt-3" style="font-size: 27px;"><%= info[:title] %></span>
+          <span class="mt-2" style="font-size: 16px; color: #132738; font-family: 'Montserrat';">
+            <%= info[:text] %>
+          </span>
         </div>
       <% end %>
     </div>
@@ -102,12 +101,12 @@
 
 
 
-  <div class="d-block d-md-none mb-5" style="margin-top: 48px;">
-    <span style="display: block; font-size: 24px; font-weight: bold; font-family: 'Plus Jakarta Sans'; margin-bottom: 16px; text-align: center;">
+  <div class="d-block d-md-none mb-5 mt-5">
+    <span class="d-block text-center fw-bold mb-3" style="font-size: 24px; font-family: 'Plus Jakarta Sans';">
       Por que nos escolher?
     </span>
 
-    <div style="display: flex; flex-direction: column; gap: 32px;">
+    <div class="d-flex flex-column gap-4">
       <% items = [
         ["verificado-icon.png", "Oferecemos produtos e serviços de alta qualidade utilizando tecnologia de última geração."],
         ["verificado-icon.png", "Serras desenvolvidas especialmente para seu processo!", true],
@@ -116,67 +115,65 @@
       ] %>
 
       <% items.each do |icon, text, reverse| %>
-        <div style="display: flex; justify-content: center; align-items: center; gap: 24px; flex-wrap: wrap; flex-direction: <%= reverse ? 'row-reverse' : 'row' %>;">
-          <%= image_tag icon %>
-          <div style="width: 100%; max-width: 280px; text-align: center;">
-            <span style="font-size: 16px; color: #132738;"><%= text %></span>
+        <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 <%= reverse ? 'flex-row-reverse' : '' %>">
+          <%= image_tag icon, class: "img-fluid" %>
+          <div class="w-100" style="max-width: 280px; text-align: center;">
+            <span class="text-dark" style="font-size: 16px; color: #132738;"><%= text %></span>
           </div>
         </div>
       <% end %>
     </div>
   </div>
 
-  <div class="d-none d-md-block" style="position: relative; height: 550px;">
-    <div style="display: flex; flex-direction: column; height: 100%;">
-      <div class="d-flex" style="max-width: 1920px; position: relative; height: 100%; padding-right: 300px;">
-        <div style="position: absolute; top: 24px; left: 0; width: 100%; text-align: center; z-index: 2;">
-          <span style="font-size: 36px; font-weight: bold; font-family: 'Plus Jakarta Sans';">
-            Por que nos escolher?
-          </span>
-        </div>
+<div class="d-none d-md-block position-relative" style="height: 400px;">
+  <div class="d-flex flex-column h-100">
+    <div class="d-flex position-relative h-100" style="max-width: 1920px; padding-right: 300px;">
 
-        <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 64px">
-          <div style="display: flex; gap: 12px; margin-bottom: 24px; justify-content: center; align-items: center;">
-            <%= image_tag 'check.png', style: 'width: 100px; height: 100px; object-fit: contain;' %>
-            <div style="width: 460px;">
-              <span style="font-size: 32px; color: #132738; font-family: 'Montserrat'">
-                Oferecemos produtos e serviços de alta qualidade utilizando tecnologia de última geração.
-              </span>
-            </div>
-          </div>
-          <div style="display: flex; gap: 12px; margin-bottom: 24px; justify-content: center; align-items: center;">
-            <%= image_tag 'check.png', style: 'width: 100px; height: 100px; object-fit: contain;' %>
-            <div style="width: 460px;">
-              <span style="font-size: 32px; color: #132738; font-family: 'Montserrat'">
-                Serras desenvolvidas especialmente para seu processo!
-              </span>
-            </div>
-          </div>
-        </div>
+      <!-- Título centralizado -->
+      <div class="position-absolute top-0 start-0 w-100 text-center z-2 pt-3">
+        <span class="fs-1 fw-bold" style="font-family: 'Plus Jakarta Sans';">
+          Por que nos escolher?
+        </span>
+      </div>
 
-        <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 64px; margin-top: 64px">
-          <div style="display: flex; gap: 12px; margin-bottom: 24px; justify-content: center; align-items: center;">
-            <%= image_tag 'check.png', style: 'width: 100px; height: 100px; object-fit: contain;' %>
+      <!-- Coluna da esquerda -->
+      <div class="d-flex flex-column justify-content-center mt-5 flex-fill">
+        <% [
+          "Oferecemos produtos e serviços de alta qualidade utilizando tecnologia de última geração.",
+          "Serras desenvolvidas especialmente para seu processo!"
+        ].each do |text| %>
+          <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
+            <%= image_tag 'check.png', class: 'img-fluid', style: 'width: 80px; height: 80px; object-fit: contain;' %>
             <div style="width: 460px;">
-              <span style="font-size: 32px; color: #132738; font-family: 'Montserrat'">
-                O melhor custo e benefício do mercado.
+              <span class="fs-5" style="font-family: 'Montserrat'; color: #132738;">
+                <%= text %>
               </span>
             </div>
           </div>
-          <div style="display: flex; gap: 12px; margin-bottom: 24px; justify-content: center; align-items: center;">
-            <%= image_tag 'check.png', style: 'width: 100px; height: 100px; object-fit: contain;' %>
-            <div style="width: 460px;">
-              <span style="font-size: 32px; color: #132738; font-family: 'Montserrat'">
-                Excelentes comentários e muitos clientes fidelizados.
-              </span>
-            </div>
-          </div>
-        </div>
+        <% end %>
+      </div>
 
-        <!-- Imagem no canto direito -->
-        <div style="position: absolute; top: 0; right: 0; height: 100%;">
-          <%= image_tag "meia-serra.png", alt: "Serra Hiperion", style: "height: 100%; object-fit: contain;" %>
-        </div>
+      <!-- Coluna da direita -->
+      <div class="d-flex flex-column justify-content-center mt-5 flex-fill gap-5">
+        <% [
+          "O melhor custo e benefício do mercado.",
+          "Excelentes comentários e muitos clientes fidelizados."
+        ].each do |text| %>
+          <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
+            <%= image_tag 'check.png', class: 'img-fluid', style: 'width: 80px; height: 80px; object-fit: contain;' %>
+            <div style="width: 460px;">
+              <span class="fs-5" style="font-family: 'Montserrat'; color: #132738;">
+                <%= text %>
+              </span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Imagem lateral -->
+      <div class="position-absolute top-0 end-0 h-100">
+        <%= image_tag "meia-serra.png", alt: "Serra Hiperion", class: "h-100", style: "object-fit: contain;" %>
       </div>
     </div>
   </div>
+</div>
