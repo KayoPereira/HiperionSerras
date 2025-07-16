@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @categories = Category.first(3)
+    @categories = Category.limit(3).order(:title)
 
     respond_to do |format|
       format.html

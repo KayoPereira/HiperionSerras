@@ -60,11 +60,17 @@
         A <span class="brand-highlight" style="color: #F7C21A;">Hiperion Serras</span>
         oferece os serviços de consultoria de corte<br> e recondicionamento de lâminas de serras.
       </h4>
-      <button class="services-btn" style="background-color: #F7C21A; padding: 5px 20px; border-radius: 10px; border: none; max-width: 200px;">
-        <span style="color: black; font-weight: bold; font-size: 18px; font-family: 'Plus Jakarta Sans', sans-serif;">
-          Conheça mais
-        </span>
-      </button>
+      <% servicos_category = Category.find_by(title: "Serviços") %>
+      <%= link_to (servicos_category ? category_path(servicos_category) : "#"),
+                  class: "services-btn text-decoration-none",
+                  data: {
+                    turbo: true,
+                    controller: "scroll-animations",
+                    action: "click->scroll-animations#smoothScroll"
+                  },
+                  title: "Conheça nossos serviços de consultoria e recondicionamento" do %>
+        Conheça mais
+      <% end %>
     </div>
   </div>
   <div class="services-image d-none d-md-block" style="position: absolute; right: 0; top: 0;" data-scroll-animations-target="animateElement" data-animation="fadeInRight" data-delay="400">
@@ -84,7 +90,7 @@
       contato conosco e leve a tecnologia Hiperion<br>
       para a sua empresa.
     </h4>
-    <a href="https://api.whatsapp.com/send?phone=19997402223" class="contact-btn" style="background-color: #211A0A; padding: 5px 20px; border-radius: 10px; border: none; max-width: 200px;">
+    <a href="https://api.whatsapp.com/send?phone=19997402223" class="contact-btn" style="background-color: #211A0A; padding: 10px 20px; border-radius: 25px; border: none; max-width: 200px;">
       <span style="color: #F7C21A; font-weight: bold; font-size: 18px; font-family: 'Plus Jakarta Sans', sans-serif; text-decoration: none;">
         FALE CONOSCO
       </span>
