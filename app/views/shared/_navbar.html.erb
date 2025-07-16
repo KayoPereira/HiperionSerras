@@ -28,7 +28,7 @@
     <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
       <%= link_to "/" do %>
         <% if user_signed_in? && current_user.avatar.attached? %>
-          <%= image_tag rails_blob_path(current_user.avatar, only_path: true),
+          <%= image_tag current_user.avatar,
                         class: "avatar-mobile",
                         alt: "Avatar de #{current_user.display_name}",
                         style: "border-radius: 50%; width: 24px; height: 24px; object-fit: cover; margin-bottom: 2px;" %>
@@ -63,7 +63,7 @@
       <% end %>
     </ul>
     <% if user_signed_in? && current_user.avatar.attached? %>
-      <%= image_tag rails_blob_path(current_user.avatar, only_path: true),
+      <%= image_tag current_user.avatar,
                     class: "avatar-nav me-5",
                     alt: "Avatar de #{current_user.display_name}",
                     style: "border-radius: 50%; width: 40px; height: 40px; object-fit: cover;" %>

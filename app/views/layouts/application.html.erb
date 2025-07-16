@@ -33,7 +33,7 @@
   </head>
 
   <body style="<% if current_page?(root_path) %>position: relative;<% end %>">
-    <% auth_pages = [new_user_session_path, new_user_registration_path, new_user_password_path, edit_user_password_path] %>
+    <% auth_pages = [new_user_session_path, new_user_registration_path, edit_user_registration_path, new_user_password_path, edit_user_password_path] %>
     <% unless current_page?(root_path) || auth_pages.include?(request.path) %>
       <%= render "shared/navbar" %>
     <% end %>

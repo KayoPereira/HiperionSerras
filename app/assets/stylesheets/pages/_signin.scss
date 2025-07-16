@@ -327,6 +327,25 @@ $auth-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
       flex-direction: column;
       gap: 20px;
     }
+
+    .account-danger-zone {
+      margin-top: 30px !important;
+      padding: 15px !important;
+
+      h3 {
+        font-size: 16px !important;
+      }
+
+      p {
+        font-size: 13px !important;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 14px 20px !important;
+        font-size: 14px !important;
+      }
+    }
   }
 }
 
@@ -504,9 +523,37 @@ $auth-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 // Estilos para temas escuros (se necessário no futuro)
-@media (prefers-color-scheme: dark) {
-  .auth-container {
-    // background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+// @media (prefers-color-scheme: dark) {
+//   .auth-container {
+//     background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+//   }
+// }
+
+// Estilos específicos para página de edição
+.account-danger-zone {
+  .btn:hover {
+    background: linear-gradient(135deg, #ee5a52 0%, #dc3545 100%) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+  }
+}
+
+// Estilos para mensagem de confirmação de email
+.text-warning {
+  background: rgba(255, 193, 7, 0.1);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border-left: 3px solid #ffc107;
+}
+
+// Melhorias para a seção de branding na página de edição
+.auth-brand-section {
+  .auth-logo {
+    img {
+      max-height: 80px;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
   }
 }
 
@@ -521,6 +568,10 @@ $auth-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
     }
 
     .auth-brand-section {
+      display: none !important;
+    }
+
+    .account-danger-zone {
       display: none !important;
     }
   }

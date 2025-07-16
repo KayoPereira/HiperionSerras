@@ -7,6 +7,7 @@ export default class extends Controller {
     console.log("Auth controller conectado")
     this.addFormValidation()
     this.addPasswordStrengthIndicator()
+    this.addAvatarPreview()
   }
 
   addFormValidation() {
@@ -21,7 +22,7 @@ export default class extends Controller {
     if (this.hasSubmitButtonTarget) {
       this.submitButtonTarget.disabled = true
       this.submitButtonTarget.textContent = "Processando..."
-      
+
       // Re-habilita o botão após 3 segundos para evitar travamento
       setTimeout(() => {
         if (this.hasSubmitButtonTarget) {
@@ -47,13 +48,13 @@ export default class extends Controller {
 
   calculatePasswordStrength(password) {
     let score = 0
-    
+
     if (password.length >= 8) score += 1
     if (password.match(/[a-z]/)) score += 1
     if (password.match(/[A-Z]/)) score += 1
     if (password.match(/[0-9]/)) score += 1
     if (password.match(/[^a-zA-Z0-9]/)) score += 1
-    
+
     return score
   }
 
@@ -104,7 +105,7 @@ export default class extends Controller {
     }
 
     indicator.style.background = `linear-gradient(to right, ${color} ${width}, #e1e5e9 ${width})`
-    
+
     const textElement = document.createElement('small')
     textElement.textContent = text
     textElement.style.cssText = `
@@ -124,7 +125,7 @@ export default class extends Controller {
     if (this.hasPasswordFieldTarget && this.hasConfirmPasswordFieldTarget) {
       const password = this.passwordFieldTarget.value
       const confirmation = this.confirmPasswordFieldTarget.value
-      
+
       if (confirmation.length > 0) {
         if (password === confirmation) {
           this.confirmPasswordFieldTarget.style.borderColor = '#66bb6a'
@@ -142,7 +143,7 @@ export default class extends Controller {
 
   showPasswordMatchIndicator(isMatch) {
     this.removePasswordMatchIndicator()
-    
+
     const indicator = document.createElement('small')
     indicator.className = 'password-match-indicator'
     indicator.style.cssText = `
@@ -151,7 +152,7 @@ export default class extends Controller {
       margin-top: 4px;
       display: block;
     `
-    
+
     if (isMatch) {
       indicator.textContent = '✓ As senhas coincidem'
       indicator.style.color = '#66bb6a'
@@ -159,7 +160,7 @@ export default class extends Controller {
       indicator.textContent = '✗ As senhas não coincidem'
       indicator.style.color = '#ff6b6b'
     }
-    
+
     this.confirmPasswordFieldTarget.parentNode.appendChild(indicator)
   }
 
@@ -190,5 +191,87 @@ export default class extends Controller {
     if (this.submitButtonTarget.textContent) {
       this.submitButtonTarget.dataset.originalText = this.submitButtonTarget.textContent
     }
+  }
+
+  // Preview do avatar
+  addAvatarPreview() {
+    const avatarInput = document.getElementById('user_avatar_input')
+    if (avatarInput) {
+      avatarInput.addEventListener('change', (event) => {
+        this.handleAvatarPreview(event)
+      })
+    }
+  }
+
+  handleAvatarPreview(event) {
+    const file = event.target.files[0]
+    if (file) {
+      // Validação básica
+      if (!file.type.startsWith('image/')) {
+        alert('Por favor, selecione apenas arquivos de imagem.')
+        event.target.value = ''
+        return
+      }
+
+      if (file.size > 5 * 1024 * 1024) { // 5MB
+        alert('A imagem deve ter menos de 5MB.')
+        event.target.value = ''
+        return
+      }
+
+      // Criar preview
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        this.showAvatarPreview(e.target.result, file.name)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  showAvatarPreview(imageSrc, fileName) {
+    // Remove preview anterior se existir
+    const existingPreview = document.querySelector('.avatar-preview')
+    if (existingPreview) {
+      existingPreview.remove()
+    }
+
+    // Cria novo preview
+    const previewContainer = document.createElement('div')
+    previewContainer.className = 'avatar-preview'
+    previewContainer.style.cssText = `
+      text-align: center;
+      margin: 15px 0;
+      padding: 15px;
+      border: 2px dashed #F7C21A;
+      border-radius: 12px;
+      background-color: rgba(247, 194, 26, 0.05);
+    `
+
+    const previewImage = document.createElement('img')
+    previewImage.src = imageSrc
+    previewImage.style.cssText = `
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #F7C21A;
+      margin-bottom: 8px;
+    `
+
+    const previewText = document.createElement('p')
+    previewText.textContent = `Nova imagem: ${fileName}`
+    previewText.style.cssText = `
+      font-size: 12px;
+      color: #666;
+      margin: 0;
+      font-family: 'Work Sans', sans-serif;
+    `
+
+    previewContainer.appendChild(previewImage)
+    previewContainer.appendChild(previewText)
+
+    // Insere o preview após o input
+    const avatarInput = document.getElementById('user_avatar_input')
+    avatarInput.parentNode.insertBefore(previewContainer, avatarInput.nextSibling)
   }
 }
