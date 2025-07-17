@@ -28,44 +28,47 @@
     </div>
 
 
-  <div class="d-none d-md-flex justify-content-between p-3 mx-5" style="max-width: 100%; margin-bottom: 250px; margin-top: 50px">
+  <div class="d-none d-md-flex justify-content-between mx-auto gap-2" style="width: 100%; margin-bottom: 50px; margin-top: 50px; margin: 0px 40px;">
+    <!-- Bloco das imagens -->
+    <div style="display: flex; height: 100%; justify-content: center; align-items: center; flex: 1">
+      <div class="position-relative" style="width: 850px; height: 600px;">
+        <%= image_tag "imagem1.png", class: "img-fluid rounded", style: "position: absolute; top: 0; left: 0; width: 70%;" %>
 
-  <!-- Bloco das imagens -->
-    <div class="position-relative" style="width: 50%%;">
-      <%= image_tag "imagem1.png", class: "img-fluid rounded" %>
-
-      <%= image_tag "imagem2.png", style: "
-        width: 95%;
-        height: auto;
-        position: absolute;
-        top: 230px;
-        left: 320px;
-        border-radius: 8px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-      " %>
+        <%= image_tag "imagem2.png", style: "
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 65%;
+          border-radius: 8px;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        " %>
+      </div>
     </div>
 
     <!-- Bloco do texto -->
-    <div style="width: 50%; margin-left: 200px;">
-      <span style="display: block; font-size: 24px; font-weight: bold; font-family: 'Plus Jakarta Sans'; margin-bottom: 16px;">
-        Sobre a Hiperion Serras
-      </span>
-      <span class="d-block fs-5 lh-base fw-normal text-start mb-3" style="font-family: 'Plus Jakarta Sans'; color: #333;">
-        A Hiperion Serras é uma empresa brasileira especializada no fornecimento de soluções industriais para corte de metais.
-      </span>
-      <span class="d-block fs-5 lh-base fw-normal text-start mb-3" style="font-family: 'Plus Jakarta Sans'; color: #333;">
-        Oferecemos serras circulares, serras de fita e serviços de afiação, com foco em atender empresas que buscam
-        <span style="color: #F7C21A">eficiência operacional</span> e <span style="color: #F7C21A">custo-benefício</span>. Com sede em Mogi Guaçu e Poá (SP), a Hiperion Serras atende a todo o território nacional, destacando-se pela agilidade e suporte técnico especializado.
-      </span>
-      <span class="d-block fs-5 lh-base fw-normal text-start mb-3" style="font-family: 'Plus Jakarta Sans'; color: #333;">
-        Cultura da Hiperion Serras centrada na simplicidade e objetividade.
-      </span>
-      <span class="d-block fs-5 lh-base fw-normal text-start" style="font-family: 'Plus Jakarta Sans'; color: #333;">
-        A Hiperion busca <span style="color: #F7C21A">descomplicar processos</span> para seus clientes, oferecendo soluções práticas e eficientes. A equipe técnica é altamente capacitada, com vasta experiência no segmento,
-        e está comprometida em acompanhar cada processo e implementar os produtos em linha, visando sempre o sucesso do cliente.
-      </span>
+    <div style="flex: 1;">
+      <div style="padding: 0px 40px; width: 100%; padding-right: 150px">
+        <span style="display: block; font-size: 24px; font-weight: bold; font-family: 'Plus Jakarta Sans'; margin-bottom: 16px;">
+          Sobre a Hiperion Serras
+        </span>
+        <span class="d-block fs-5 lh-base fw-normal text-start mb-3" style="font-family: 'Plus Jakarta Sans'; color: #333;">
+          A Hiperion Serras é uma empresa brasileira especializada no fornecimento de soluções industriais para corte de metais.
+        </span>
+        <span class="d-block fs-5 lh-base fw-normal text-start mb-3" style="font-family: 'Plus Jakarta Sans'; color: #333;">
+          Oferecemos serras circulares, serras de fita e serviços de afiação, com foco em atender empresas que buscam
+          <span style="color: #F7C21A">eficiência operacional</span> e <span style="color: #F7C21A">custo-benefício</span>. Com sede em Mogi Guaçu e Poá (SP), a Hiperion Serras atende a todo o território nacional, destacando-se pela agilidade e suporte técnico especializado.
+        </span>
+        <span class="d-block fs-5 lh-base fw-normal text-start mb-3" style="font-family: 'Plus Jakarta Sans'; color: #333;">
+          Cultura da Hiperion Serras centrada na simplicidade e objetividade.
+        </span>
+        <span class="d-block fs-5 lh-base fw-normal text-start" style="font-family: 'Plus Jakarta Sans'; color: #333;">
+          A Hiperion busca <span style="color: #F7C21A">descomplicar processos</span> para seus clientes, oferecendo soluções práticas e eficientes. A equipe técnica é altamente capacitada, com vasta experiência no segmento,
+          e está comprometida em acompanhar cada processo e implementar os produtos em linha, visando sempre o sucesso do cliente.
+        </span>
+      </div>
     </div>
   </div>
+
 
 
   <!-- Bloco visível apenas no MOBILE -->
