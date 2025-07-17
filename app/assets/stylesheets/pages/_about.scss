@@ -1,0 +1,21 @@
+.perso-width {
+  @media (min-width: 768px) {
+    width: 100% !important;
+    height: 50% !important;
+  }
+
+  @media (min-width: 992px) {
+    width: 100% !important;
+    height: 80% !important;
+  }
+
+  @media (min-width: 1200px) {
+    width: 100% !important;
+    height: 70% !important;
+  }
+
+  @media (min-width: 1920px) {
+    width: 70% !important;
+    height: 100% !important;
+  }
+}
