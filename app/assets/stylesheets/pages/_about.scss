@@ -10,8 +10,13 @@
   }
 
   @media (min-width: 1200px) {
-    width: 100% !important;
+    width: 80% !important;
     height: 70% !important;
+  }
+
+  @media (min-width: 1500px) {
+    width: 80% !important;
+    height: 100% !important;
   }
 
   @media (min-width: 1920px) {
