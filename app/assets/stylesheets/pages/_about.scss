@@ -1,3 +1,8 @@
+.icon-img {
+  width: 75px !important;
+  object-fit: contain;
+}
+
 .perso-width {
   @media (min-width: 768px) {
     width: 100% !important;

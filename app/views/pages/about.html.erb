@@ -76,13 +76,13 @@
     <div class="d-flex flex-column align-items-center justify-content-center text-center gap-5 py-5 px-3">
       <% infos = [
         { icon: "confiavel-icon.png", title: "Confiável", text: "Equipe técnica especializada para atender as demandas de sua empresa." },
-        { icon: "confiavel-icon.png", title: "Qualidade", text: "Oferecemos produtos e serviços de alta qualidade utilizando tecnologia de última geração." },
-        { icon: "confiavel-icon.png", title: "Entrega", text: "Entregamos para todo o Brasil." }
+        { icon: "medal.png", title: "Qualidade", text: "Oferecemos produtos e serviços de alta qualidade utilizando tecnologia de última geração." },
+        { icon: "delivery.png", title: "Entrega", text: "Entregamos para todo o Brasil." }
       ] %>
 
       <% infos.each do |info| %>
         <div style="max-width: 300px;">
-          <%= image_tag info[:icon] %>
+          <%= image_tag info[:icon], class: "icon-img" %>
           <span style="display: block; font-size: 27px; font-weight: bold; margin-top: 16px;"><%= info[:title] %></span>
           <span style="font-size: 16px; color: #132738;"><%= info[:text] %></span>
         </div>
@@ -95,7 +95,7 @@
     <div class="d-flex flex-column flex-md-row align-items-stretch justify-content-center text-center gap-5 py-5 px-3 flex-wrap">
       <% infos.each do |info| %>
         <div class="d-flex flex-column align-items-center justify-content-start text-center h-100" style="max-width: 300px;">
-          <%= image_tag info[:icon] %>
+          <%= image_tag info[:icon], class: "icon-img" %>
           <span class="d-block fw-bold mt-3" style="font-size: 27px;"><%= info[:title] %></span>
           <span class="mt-2" style="font-size: 16px; color: #132738; font-family: 'Montserrat';">
             <%= info[:text] %>
@@ -149,7 +149,7 @@
           "Serras desenvolvidas especialmente para seu processo!"
         ].each do |text| %>
           <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
-            <%= image_tag 'check.png', class: 'img-fluid', style: 'width: 80px; height: 80px; object-fit: contain;' %>
+            <%= image_tag 'check.png', class: 'img-fluid', style: 'width: 60px; height: 60px; object-fit: contain;' %>
             <div style="width: 460px;">
               <span class="fs-5" style="font-family: 'Montserrat'; color: #132738;">
                 <%= text %>
@@ -166,7 +166,7 @@
           "Excelentes comentários e muitos clientes fidelizados."
         ].each do |text| %>
           <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
-            <%= image_tag 'check.png', class: 'img-fluid', style: 'width: 80px; height: 80px; object-fit: contain;' %>
+            <%= image_tag 'check.png', class: 'img-fluid', style: 'width: 60px; height: 60px; object-fit: contain;' %>
             <div style="width: 460px;">
               <span class="fs-5" style="font-family: 'Montserrat'; color: #132738;">
                 <%= text %>
