@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_subcategory
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :remove_photo, :remove_detail_image]
 
   # GET /categories/:category_id/subcategories/:subcategory_id/products
   def index
@@ -34,7 +34,20 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /categories/:category_id/subcategories/:subcategory_id/products/1
   def update
-    if @product.update(product_params)
+    # Preservar anexos existentes se novos não foram enviados
+    update_params = product_params.dup
+
+    # Se photos não foi enviado ou está vazio, remover do hash de parâmetros
+    if update_params[:photos].blank? || (update_params[:photos].is_a?(Array) && update_params[:photos].all?(&:blank?))
+      update_params.delete(:photos)
+    end
+
+    # Se details_images não foi enviado ou está vazio, remover do hash de parâmetros
+    if update_params[:details_images].blank? || (update_params[:details_images].is_a?(Array) && update_params[:details_images].all?(&:blank?))
+      update_params.delete(:details_images)
+    end
+
+    if @product.update(update_params)
       redirect_to [@subcategory.category, @subcategory, @product], notice: 'Produto atualizado com sucesso.'
     else
       render :edit, status: :unprocessable_entity
@@ -44,8 +57,24 @@ class ProductsController < ApplicationController
   # DELETE /categories/:category_id/subcategories/:subcategory_id/products/1
   def destroy
     @product.destroy
-    redirect_to category_subcategory_products_url(@subcategory.category, @subcategory), 
+    redirect_to category_subcategory_products_url(@subcategory.category, @subcategory),
                 notice: 'Produto excluído com sucesso.'
+  end
+
+  # DELETE /categories/:category_id/subcategories/:subcategory_id/products/1/remove_photo
+  def remove_photo
+    photo = @product.photos.find(params[:photo_id])
+    photo.purge
+    redirect_to edit_category_subcategory_product_path(@subcategory.category, @subcategory, @product),
+                notice: 'Foto removida com sucesso.'
+  end
+
+  # DELETE /categories/:category_id/subcategories/:subcategory_id/products/1/remove_detail_image
+  def remove_detail_image
+    image = @product.details_images.find(params[:image_id])
+    image.purge
+    redirect_to edit_category_subcategory_product_path(@subcategory.category, @subcategory, @product),
+                notice: 'Imagem de detalhe removida com sucesso.'
   end
 
   private
@@ -60,8 +89,8 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:title, :line, :characteristics, :applications, 
-                                   :types_of_coatings, :details, 
+    params.require(:product).permit(:title, :line, :characteristics, :applications,
+                                   :types_of_coatings, :details,
                                    photos: [], details_images: [])
   end
 end
