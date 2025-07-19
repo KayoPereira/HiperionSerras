@@ -1,35 +1,163 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="auth-container">
+  <div class="auth-card">
+    <!-- Seção do Formulário -->
+    <div class="auth-form-section">
+      <h1 class="auth-title">Editar Perfil</h1>
+      <p class="auth-subtitle">Atualize suas informações pessoais</p>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "auth-form", multipart: true, data: { controller: "auth", auth_form_target: "form" } }) do |f| %>
+        <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+        <div class="form-group form-row">
+          <%= f.input :first_name,
+                      required: true,
+                      input_html: {
+                        autocomplete: "given-name",
+                        class: "form-control",
+                        placeholder: "Nome"
+                      },
+                      label: false,
+                      wrapper: false %>
+          <%= f.input :last_name,
+                      required: true,
+                      input_html: {
+                        autocomplete: "family-name",
+                        class: "form-control",
+                        placeholder: "Sobrenome"
+                      },
+                      label: false,
+                      wrapper: false %>
+        </div>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+        <div class="form-group">
+          <%= f.input :email,
+                      required: true,
+                      disabled: true,
+                      input_html: {
+                        autocomplete: "email",
+                        class: "form-control",
+                        placeholder: "Digite seu email"
+                      },
+                      label: false,
+                      wrapper: false %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <small class="text-warning" style="font-family: 'Work Sans', sans-serif; font-size: 12px; margin-top: 4px; display: block;">
+              <i class="fa-solid fa-clock" style="margin-right: 4px;"></i>
+              Aguardando confirmação para: <%= resource.unconfirmed_email %>
+            </small>
+          <% end %>
+        </div>
 
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+        <div class="form-group">
+          <label class="form-label" style="color: #666; font-family: 'Work Sans', sans-serif; font-size: 14px; margin-bottom: 8px; display: block;">
+            <i class="fa-solid fa-user-circle" style="margin-right: 8px; color: #F7C21A;"></i>
+            Foto do perfil (opcional)
+          </label>
+
+          <% if resource.persisted? && resource.avatar.attached? %>
+            <div class="current-avatar mb-3" style="text-align: center;">
+              <% begin %>
+                <%= image_tag resource.avatar,
+                              style: "width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 3px solid #F7C21A;",
+                              alt: "Avatar atual" %>
+              <% rescue => e %>
+                <%= image_tag "sem-imagem-avatar.png",
+                              style: "width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 3px solid #F7C21A;",
+                              alt: "Avatar padrão" %>
+              <% end %>
+              <p style="font-size: 12px; color: #666; margin-top: 8px; font-family: 'Work Sans', sans-serif;">
+                Imagem atual
+              </p>
+            </div>
+          <% end %>
+
+          <%= f.file_field :avatar,
+                           class: "form-control",
+                           accept: "image/*",
+                           id: "user_avatar_input" %>
+
+          <small style="color: #666; font-size: 11px; font-family: 'Work Sans', sans-serif; margin-top: 4px; display: block;">
+            Formatos aceitos: JPEG, PNG, GIF (máx. 5MB)
+          </small>
+        </div>
+
+        <div class="form-group form-row">
+          <%= f.input :password,
+                      required: false,
+                      input_html: {
+                        autocomplete: "new-password",
+                        class: "form-control",
+                        placeholder: "Nova senha (deixe em branco para manter)",
+                        data: { auth_password_field_target: "passwordField" }
+                      },
+                      label: false,
+                      wrapper: false %>
+          <%= f.input :password_confirmation,
+                      required: false,
+                      input_html: {
+                        autocomplete: "new-password",
+                        class: "form-control",
+                        placeholder: "Confirme a nova senha",
+                        data: { auth_confirm_password_field_target: "confirmPasswordField" }
+                      },
+                      label: false,
+                      wrapper: false %>
+        </div>
+
+        <div class="form-group">
+          <%= f.input :current_password,
+                      required: true,
+                      input_html: {
+                        autocomplete: "current-password",
+                        class: "form-control",
+                        placeholder: "Senha atual (obrigatória para confirmar alterações)"
+                      },
+                      label: false,
+                      wrapper: false %>
+        </div>
+
+        <%= f.button :submit, "Atualizar Perfil", class: "auth-btn", data: { auth_submit_button_target: "submitButton" } %>
+
+        <div class="auth-links">
+          <%= link_to "Voltar", :back %>
+        </div>
+      <% end %>
+
+      <!-- Seção de Cancelamento de Conta
+      <div class="account-danger-zone" style="margin-top: 40px; padding: 20px; border: 2px solid #ff6b6b; border-radius: 12px; background-color: rgba(255, 107, 107, 0.05);">
+        <h3 style="color: #ff6b6b; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 10px;">
+          <i class="fa-solid fa-triangle-exclamation" style="margin-right: 8px;"></i>
+          Zona de Perigo
+        </h3>
+        <p style="color: #666; font-family: 'Work Sans', sans-serif; font-size: 14px; margin-bottom: 15px;">
+          Esta ação é irreversível. Todos os seus dados serão permanentemente removidos.
+        </p>
+        <%= button_to "Cancelar minha conta",
+                      registration_path(resource_name),
+                      data: {
+                        confirm: "Tem certeza? Esta ação não pode ser desfeita!",
+                        turbo_confirm: "Tem certeza? Esta ação não pode ser desfeita!"
+                      },
+                      method: :delete,
+                      class: "btn",
+                      style: "background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%); border: none; border-radius: 8px; padding: 12px 20px; color: white; font-family: 'Work Sans', sans-serif; font-weight: 500; cursor: pointer; transition: all 0.3s ease;" %>
+      </div>
+      -->
+    </div>
+
+    <!-- Seção de Branding -->
+    <div class="auth-brand-section">
+      <div class="brand-content">
+        <div class="auth-logo mb-4">
+          <%= link_to home_path do %>
+            <%= image_tag "logo.png", alt: "Hiperion Serras" %>
+          <% end %>
+        </div>
+        <p class="brand-description">
+          Mantenha suas informações sempre atualizadas para uma melhor
+          experiência em nossa plataforma.
+        </p>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>

@@ -1,18 +1,54 @@
-<h2>Forgot your password?</h2>
+<div class="auth-container">
+  <div class="auth-card">
+    <!-- Seção do Formulário -->
+    <div class="auth-form-section">
+      <div class="auth-logo">
+        <%= link_to home_path do %>
+          <%= image_tag "logo.png", alt: "Hiperion Serras" %>
+        <% end %>
+      </div>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
+      <h1 class="auth-title">Esqueceu sua senha?</h1>
+      <p class="auth-subtitle">Digite seu email para receber as instruções de recuperação</p>
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
+      <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "auth-form", data: { controller: "auth", auth_form_target: "form" } }) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-group">
+          <%= f.input :email,
+                      required: true,
+                      autofocus: true,
+                      input_html: {
+                        autocomplete: "email",
+                        class: "form-control",
+                        placeholder: "Digite seu email"
+                      },
+                      label: false,
+                      wrapper: false %>
+        </div>
+
+        <%= f.button :submit, "Enviar instruções", class: "auth-btn", data: { auth_submit_button_target: "submitButton" } %>
+
+        <div class="auth-links">
+          <%= link_to "Voltar para login", new_session_path(resource_name) %>
+          <span class="auth-link-separator">•</span>
+          <%= link_to "Criar conta", new_registration_path(resource_name) %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Seção de Branding -->
+    <div class="auth-brand-section">
+      <div class="brand-content">
+        <div class="brand-icon">
+          <i class="fa-solid fa-key"></i>
+        </div>
+        <h2 class="brand-title">Recuperação Segura</h2>
+        <p class="brand-description">
+          Não se preocupe! Enviaremos um link seguro para seu email
+          para que você possa redefinir sua senha.
+        </p>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

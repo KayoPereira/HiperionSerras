@@ -22,7 +22,9 @@ class User < ApplicationRecord
   end
 
   def avatar_url(size: :medium)
-    if avatar.attached?
+    return "sem-imagem-avatar.png" unless persisted? && avatar.attached?
+
+    begin
       case size
       when :small
         avatar.variant(resize_to_limit: [50, 50])
@@ -31,11 +33,22 @@ class User < ApplicationRecord
       when :large
         avatar.variant(resize_to_limit: [300, 300])
       else
-        avatar
+        avatar.variant(resize_to_limit: [150, 150]) # Default para medium em vez do original
       end
-    else
-      # URL para avatar padrão se não houver imagem
+    rescue => e
+      Rails.logger.error "Erro ao gerar variant do avatar: #{e.message}"
       "sem-imagem-avatar.png"
+    end
+  end
+
+  def avatar_path(size: :medium)
+    return ActionController::Base.helpers.asset_path("sem-imagem-avatar.png") unless persisted? && avatar.attached?
+
+    begin
+      Rails.application.routes.url_helpers.url_for(avatar_url(size))
+    rescue => e
+      Rails.logger.error "Erro ao gerar path do avatar: #{e.message}"
+      ActionController::Base.helpers.asset_path("sem-imagem-avatar.png")
     end
   end
 
@@ -43,6 +56,9 @@ class User < ApplicationRecord
 
   def avatar_format
     return unless avatar.attached?
+
+    # Só valida se o arquivo foi realmente anexado (não apenas selecionado)
+    return unless avatar.blob.present?
 
     unless avatar.content_type.in?(%w[image/jpeg image/jpg image/png image/gif])
       errors.add(:avatar, 'deve ser uma imagem (JPEG, PNG ou GIF)')

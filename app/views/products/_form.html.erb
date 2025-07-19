@@ -1,0 +1,294 @@
+<style>
+  /* Estilos para os botões do Rich Text Editor */
+  .trix-button-group {
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .trix-button {
+    background: #f8f9fa !important;
+    border: 1px solid #dee2e6 !important;
+    color: #495057 !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    transition: all 0.2s ease !important;
+    margin: 0 !important;
+  }
+
+  .trix-button:hover {
+    background: #e9ecef !important;
+    border-color: #adb5bd !important;
+    color: #212529 !important;
+  }
+
+  .trix-button.trix-active {
+    background: #007bff !important;
+    border-color: #007bff !important;
+    color: white !important;
+  }
+
+  .trix-button.trix-active:hover {
+    background: #0056b3 !important;
+    border-color: #0056b3 !important;
+  }
+
+  /* Estilo para a toolbar */
+  .trix-button-row {
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px 8px 0 0;
+    padding: 8px;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  /* Estilo para o editor */
+  .trix-content {
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 12px;
+    min-height: 120px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .trix-content:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+  }
+
+  /* Ícones dos botões */
+  .trix-button--icon-bold::before { content: "B"; font-weight: bold; }
+  .trix-button--icon-italic::before { content: "I"; font-style: italic; }
+  .trix-button--icon-link::before { content: "🔗"; }
+  .trix-button--icon-bullet-list::before { content: "•"; }
+  .trix-button--icon-number-list::before { content: "1."; }
+  .trix-button--icon-quote::before { content: """; font-size: 18px; }
+  .trix-button--icon-code::before { content: "<>"; }
+  .trix-button--icon-undo::before { content: "↶"; }
+  .trix-button--icon-redo::before { content: "↷"; }
+
+  /* Wrapper para rich text */
+  .rich-text-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 8px;
+  }
+
+  /* Estilo para labels dos rich text */
+  .form-label.fw-bold {
+    color: #495057;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  /* Estilo para form-text com ícones */
+  .form-text {
+    color: #6c757d;
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
+  .form-text i {
+    color: #007bff;
+  }
+
+  /* Animação suave para focus */
+  .rich-text-wrapper:focus-within {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: all 0.2s ease;
+  }
+
+  /* Estilo para placeholder do trix */
+  .trix-content::before {
+    color: #6c757d;
+    font-style: italic;
+  }
+
+  trix-toolbar .trix-button-row,
+  trix-toolbar .trix-button-group,
+  trix-toolbar {
+    white-space: normal !important;
+  }
+
+  /* Força o white-space normal em todos os elementos da toolbar */
+  .trix-button-row {
+    white-space: normal !important;
+    flex-wrap: wrap !important;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Força o white-space normal após o Trix carregar
+    function applyTrixStyles() {
+      const toolbars = document.querySelectorAll('trix-toolbar, .trix-button-row, .trix-button-group');
+      toolbars.forEach(toolbar => {
+        toolbar.style.setProperty('white-space', 'normal', 'important');
+        toolbar.style.setProperty('flex-wrap', 'wrap', 'important');
+      });
+    }
+
+    // Aplica imediatamente
+    applyTrixStyles();
+
+    // Aplica novamente após um pequeno delay para garantir que o Trix carregou
+    setTimeout(applyTrixStyles, 100);
+    setTimeout(applyTrixStyles, 500);
+  });
+</script>
+
+<%= simple_form_for([@category, @subcategory, @product], html: { multipart: true, data: { controller: "image-preview" } }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-md-8">
+        <%= f.input :title,
+                    required: true,
+                    autofocus: true,
+                    input_html: { class: "form-control" },
+                    label: "Título do Produto" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :line,
+                    required: true,
+                    input_html: { class: "form-control" },
+                    label: "Linha do Produto" %>
+      </div>
+    </div>
+
+    <!-- Fotos principais do produto -->
+    <div class="mb-3">
+      <%= f.label :photos, "Fotos do Produto", class: "form-label" %>
+      <%= f.file_field :photos,
+                       multiple: true,
+                       class: "form-control",
+                       accept: "image/*",
+                       data: {
+                         max_size: 5.megabytes
+                       } %>
+      <div class="form-text">
+        Formatos aceitos: JPEG, JPG, PNG, GIF, WebP. Tamanho máximo: 5MB cada. Você pode selecionar múltiplas imagens.
+      </div>
+
+      <% if @product.persisted? && @product.photos.attached? %>
+        <div class="mt-3">
+          <h6>Fotos atuais:</h6>
+          <div class="row">
+            <% @product.photos.each do |photo| %>
+              <div class="col-md-3 mb-2">
+                <%= image_tag rails_blob_path(photo, only_path: true),
+                              class: "img-thumbnail",
+                              style: "width: 100%; height: 150px; object-fit: cover;" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Rich text fields -->
+    <div class="mb-4">
+      <%= f.label :characteristics, "Características", class: "form-label fw-bold" %>
+      <div class="rich-text-wrapper">
+        <%= f.rich_text_area :characteristics,
+                              class: "form-control rich-text-field",
+                              data: {
+                                placeholder: "Descreva as principais características do produto..."
+                              } %>
+      </div>
+      <div class="form-text">
+        <i class="fa-solid fa-info-circle me-1"></i>
+        Use formatação para destacar informações importantes como especificações técnicas.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :applications, "Aplicações", class: "form-label fw-bold" %>
+      <div class="rich-text-wrapper">
+        <%= f.rich_text_area :applications,
+                              class: "form-control rich-text-field",
+                              data: {
+                                placeholder: "Onde e como este produto pode ser utilizado..."
+                              } %>
+      </div>
+      <div class="form-text">
+        <i class="fa-solid fa-wrench me-1"></i>
+        Descreva os principais usos e aplicações do produto.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :types_of_coatings, "Tipos de Revestimentos", class: "form-label fw-bold" %>
+      <div class="rich-text-wrapper">
+        <%= f.rich_text_area :types_of_coatings,
+                              class: "form-control rich-text-field",
+                              data: {
+                                placeholder: "Informações sobre revestimentos disponíveis..."
+                              } %>
+      </div>
+      <div class="form-text">
+        <i class="fa-solid fa-palette me-1"></i>
+        Liste os tipos de revestimentos e suas características.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :details, "Detalhes", class: "form-label fw-bold" %>
+      <div class="rich-text-wrapper">
+        <%= f.rich_text_area :details,
+                              class: "form-control rich-text-field",
+                              data: {
+                                placeholder: "Informações técnicas detalhadas..."
+                              } %>
+      </div>
+      <div class="form-text">
+        <i class="fa-solid fa-cog me-1"></i>
+        Adicione informações técnicas detalhadas e especificações.
+      </div>
+    </div>
+
+    <!-- Imagens de detalhes -->
+    <div class="mb-3">
+      <%= f.label :details_images, "Imagens de Detalhes", class: "form-label" %>
+      <%= f.file_field :details_images,
+                       multiple: true,
+                       class: "form-control",
+                       accept: "image/*",
+                       data: {
+                         max_size: 5.megabytes
+                       } %>
+      <div class="form-text">
+        Imagens técnicas, diagramas ou detalhes específicos do produto. Formatos aceitos: JPEG, JPG, PNG, GIF, WebP.
+      </div>
+
+      <% if @product.persisted? && @product.details_images.attached? %>
+        <div class="mt-3">
+          <h6>Imagens de detalhes atuais:</h6>
+          <div class="row">
+            <% @product.details_images.each do |image| %>
+              <div class="col-md-3 mb-2">
+                <%= image_tag rails_blob_path(image, only_path: true),
+                              class: "img-thumbnail",
+                              style: "width: 100%; height: 150px; object-fit: cover;" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Salvar", class: "btn btn-warning" %>
+    <%= link_to "Cancelar", category_subcategory_products_path(@category, @subcategory),
+                class: "btn btn-secondary ms-2" %>
+  </div>
+<% end %>

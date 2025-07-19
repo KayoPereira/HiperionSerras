@@ -1,19 +1,19 @@
 <nav class="mobile-navbar w-100 d-md-none">
-  <ul class="d-flex justify-content-evenly m-0 py-4 ps-0 w-100" data-controller="active">
-    <li class="navbar-item active" data-action="click->active#activate" data-active-target="link">
-      <%= link_to "/" do %>
+  <ul class="d-flex justify-content-evenly m-0 ps-0 w-100" data-controller="active" style="padding-top: 0.3rem; padding-bottom: 0.3rem;">
+    <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
+      <%= link_to home_path do %>
         <i class="fa-solid fa-house"></i>
         <span>Início</span>
       <% end %>
     </li>
     <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
-      <%= link_to "/" do %>
+      <%= link_to categories_path do %>
         <i class="fa-solid fa-list"></i>
         <span>Produtos</span>
       <% end %>
     </li>
     <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
-      <%= link_to "/" do %>
+      <%= link_to (@services_category ? category_path(@services_category) : "#") do %>
         <i class="fa-solid fa-wrench"></i>
         <span>Serviços</span>
       <% end %>
@@ -25,27 +25,48 @@
       <% end %>
     </li>
     <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
-      <%= link_to "/" do %>
-        <% if user_signed_in? && current_user.avatar.attached? %>
-          <%= image_tag rails_blob_path(current_user.avatar, only_path: true),
-                        class: "avatar-mobile",
-                        alt: "Avatar de #{current_user.display_name}",
-                        style: "border-radius: 50%; width: 24px; height: 24px; object-fit: cover; margin-bottom: 2px;" %>
-        <% else %>
+      <% if user_signed_in? %>
+        <div class="avatar-dropdown" data-controller="dropdown">
+          <div data-action="click->dropdown#toggle">
+            <% if current_user.avatar.attached? %>
+              <%= image_tag current_user.avatar,
+                            class: "avatar-mobile",
+                            alt: "Avatar de #{current_user.display_name}",
+                            style: "border-radius: 50%; width: 24px; height: 24px; object-fit: cover; margin-bottom: 2px;" %>
+            <% else %>
+              <i class="fa-regular fa-user"></i>
+            <% end %>
+            <span>Perfil</span>
+          </div>
+          <div class="dropdown-menu" data-dropdown-target="menu">
+            <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+              <i class="fa-solid fa-user-gear"></i>
+              Editar Perfil
+            <% end %>
+            <button class="dropdown-item logout-item" data-action="click->dropdown#logout">
+              <i class="fa-solid fa-sign-out-alt"></i>
+              Sair
+            </button>
+          </div>
+        </div>
+      <% else %>
+        <%= link_to new_user_session_path do %>
           <i class="fa-regular fa-user"></i>
+          <span>Login</span>
         <% end %>
-        <span><%= user_signed_in? ? "Perfil" : "Login" %></span>
       <% end %>
     </li>
   </ul>
 </nav>
 
 <nav class="navbar w-100 d-none d-md-flex align-items-between" style="<% if current_page?(root_path) %>position: absolute; background-color: transparent; <% else %>background-color: #000000; <% end %>">
-  <%= image_tag "logo.png", class: "logo-nav ms-5" %>
+  <%= link_to home_path do %>
+    <%= image_tag "logo.png", class: "logo-nav ms-5" %>
+  <% end %>
   <div class="d-flex justify-content-center align-items-center">
     <ul class="btn-circles list-unstyled me-5">
-      <%= link_to "Produtos", "/", class: "link-nav" %>
-      <%= link_to "Serviços", "/", class: "link-nav mx-4" %>
+      <%= link_to "Produtos", categories_path, class: "link-nav" %>
+      <%= link_to "Serviços", (@services_category ? category_path(@services_category) : "#"), class: "link-nav mx-4" %>
       <%= link_to "Sobre", "/", class: "link-nav" %>
       <%= link_to "/", class: "btn-nav ms-5 me-2" do %>
         <li class="btn-circle-item">
@@ -58,16 +79,43 @@
         </li>
       <% end %>
     </ul>
-    <% if user_signed_in? && current_user.avatar.attached? %>
-      <%= image_tag rails_blob_path(current_user.avatar, only_path: true),
-                    class: "avatar-nav me-5",
-                    alt: "Avatar de #{current_user.display_name}",
-                    style: "border-radius: 50%; width: 40px; height: 40px; object-fit: cover;" %>
+    <% if user_signed_in? %>
+      <div class="avatar-dropdown me-5" data-controller="dropdown">
+        <div data-action="click->dropdown#toggle">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar,
+                          class: "avatar-nav",
+                          alt: "Avatar de #{current_user.display_name}",
+                          style: "border-radius: 50%; width: 40px; height: 40px; object-fit: cover;" %>
+          <% else %>
+            <%= image_tag "sem-imagem-avatar.png",
+                          class: "avatar-nav",
+                          alt: "Avatar padrão",
+                          style: "border-radius: 50%; width: 40px; height: 40px;" %>
+          <% end %>
+        </div>
+        <div class="dropdown-menu" data-dropdown-target="menu">
+          <div class="dropdown-item" style="border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; margin-bottom: 8px;">
+            <strong><%= current_user.display_name %></strong><br>
+            <small class="text-muted"><%= current_user.email %></small>
+          </div>
+          <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+            <i class="fa-solid fa-user-gear"></i>
+            Editar Perfil
+          <% end %>
+          <button class="dropdown-item logout-item" data-action="click->dropdown#logout">
+            <i class="fa-solid fa-sign-out-alt"></i>
+            Sair
+          </button>
+        </div>
+      </div>
     <% else %>
-      <%= image_tag "sem-imagem-avatar.png",
-                    class: "avatar-nav me-5",
-                    alt: "Avatar padrão",
-                    style: "border-radius: 50%; width: 40px; height: 40px;" %>
+      <%= link_to new_user_session_path, class: "me-5" do %>
+        <%= image_tag "sem-imagem-avatar.png",
+                      class: "avatar-nav",
+                      alt: "Avatar padrão",
+                      style: "border-radius: 50%; width: 40px; height: 40px;" %>
+      <% end %>
     <% end %>
   </div>
 </nav>

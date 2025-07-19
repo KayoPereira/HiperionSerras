@@ -1,0 +1,149 @@
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+
+      <!-- Informações da Subcategoria (apenas para usuários logados) -->
+      <% if user_signed_in? %>
+        <div class="card mb-4">
+          <div class="d-flex justify-content-center align-items-center">
+            <% if @subcategory.photo.attached? %>
+              <%= image_tag rails_blob_path(@subcategory.photo, only_path: true),
+                            class: "card-img-top",
+                            alt: @subcategory.title %>
+            <% else %>
+              <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 400px;">
+                <i class="fa-solid fa-image text-muted" style="font-size: 6rem;"></i>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="card-body">
+            <h1 class="card-title h3"><%= @subcategory.title %></h1>
+            <p class="text-muted">
+              <i class="fa-solid fa-folder me-1"></i>
+              Categoria: <%= link_to @category.title, category_path(@category), class: "text-decoration-none" %>
+            </p>
+
+            <div class="mt-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="text-muted mb-1">Produtos</h6>
+                  <p class="mb-0">
+                    <i class="fa-solid fa-box me-1"></i>
+                    <%= pluralize(@subcategory.products.count, 'produto') %>
+                  </p>
+                </div>
+                <%= link_to "Gerenciar Produtos", category_subcategory_products_path(@category, @subcategory),
+                            class: "btn btn-outline-secondary btn-sm" %>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-sm-6">
+                <small class="text-muted">Criado em:</small>
+                <p><%= @subcategory.created_at.strftime("%d/%m/%Y às %H:%M") %></p>
+              </div>
+              <div class="col-sm-6">
+                <small class="text-muted">Última atualização:</small>
+                <p><%= @subcategory.updated_at.strftime("%d/%m/%Y às %H:%M") %></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer bg-transparent">
+            <div class="btn-group w-100" role="group">
+              <%= link_to "Voltar", category_subcategories_path(@category), class: "btn btn-outline-secondary" %>
+              <%= link_to "Editar", edit_category_subcategory_path(@category, @subcategory), class: "btn btn-primary" %>
+              <%= link_to "Excluir", [@category, @subcategory],
+                          method: :delete,
+                          class: "btn btn-danger",
+                          data: {
+                            confirm: "Tem certeza que deseja excluir esta subcategoria?",
+                            turbo_method: :delete
+                          } %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <!-- Título simples para usuários não logados -->
+        <div class="mb-4">
+          <h1 class="text-center"><%= @subcategory.title %></h1>
+          <p class="text-center text-muted">
+            <i class="fa-solid fa-folder me-1"></i>
+            <%= link_to @category.title, category_path(@category), class: "text-decoration-none" %>
+          </p>
+        </div>
+      <% end %>
+
+      <!-- Produtos (visível para todos) -->
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">Produtos</h3>
+            <% if user_signed_in? %>
+              <%= link_to "Novo Produto", new_category_subcategory_product_path(@category, @subcategory),
+                          class: "btn btn-warning btn-sm" %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <% if @subcategory.products.any? %>
+            <div class="row">
+              <% @subcategory.products.order(:title).each do |product| %>
+                <div class="col-md-6 col-lg-4 mb-3">
+                  <div class="card h-100" style="border-color: #F7C21A;">
+                    <% if product.photos.attached? && product.photos.first.present? %>
+                      <%= image_tag rails_blob_path(product.photos.first, only_path: true),
+                                    class: "card-img-top",
+                                    alt: product.title %>
+                    <% else %>
+                      <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 150px;">
+                        <i class="fa-solid fa-image text-muted" style="font-size: 2rem;"></i>
+                      </div>
+                    <% end %>
+
+                    <div class="card-body d-flex flex-column">
+                      <h6 class="card-title"><%= product.title %></h6>
+                      <p class="card-text text-muted small mb-2">
+                        <i class="fa-solid fa-tag me-1"></i>
+                        <%= product.line %>
+                      </p>
+
+                      <div class="mt-auto">
+                        <% if user_signed_in? %>
+                          <div class="btn-group w-100" role="group">
+                            <%= link_to "Ver", [@category, @subcategory, product], class: "btn btn-outline-warning btn-sm" %>
+                            <%= link_to "Editar", edit_category_subcategory_product_path(@category, @subcategory, product), class: "btn btn-outline-secondary btn-sm" %>
+                          </div>
+                        <% else %>
+                          <%= link_to "Ver Detalhes", [@category, @subcategory, product], class: "btn btn-outline-warning btn-sm w-100" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="text-center py-4">
+              <i class="fa-solid fa-box-open text-muted mb-3" style="font-size: 3rem;"></i>
+              <h5 class="text-muted">Nenhum produto encontrado</h5>
+              <p class="text-muted">Esta subcategoria ainda não possui produtos.</p>
+              <% if user_signed_in? %>
+                <%= link_to "Criar Primeiro Produto", new_category_subcategory_product_path(@category, @subcategory),
+                            class: "btn btn-primary" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <% unless user_signed_in? %>
+          <div class="card-footer bg-transparent text-center">
+            <%= link_to "Voltar", category_path(@category), class: "btn btn-outline-secondary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

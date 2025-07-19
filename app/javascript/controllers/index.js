@@ -2,3 +2,7 @@
 import { application } from "controllers/application"
 import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 eagerLoadControllersFrom("controllers", application)
+
+// Import and register the dropdown controller
+import DropdownController from "./dropdown_controller"
+application.register("dropdown", DropdownController)
