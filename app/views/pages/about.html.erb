@@ -131,27 +131,27 @@
     </div>
   </div>
 
-<div class="d-none d-md-block position-relative" style="height: 400px;">
+<div class="d-none d-md-block" style="height: 400px;">
   <div class="d-flex flex-column h-100">
-    <div class="d-flex position-relative h-100" style="max-width: 1920px; padding-right: 300px;">
+    <div class="d-flex perso-text position-relative h-100" style="max-width: 1920px;">
 
       <!-- Título centralizado -->
       <div class="position-absolute top-0 start-0 w-100 text-center z-2 pt-3">
-        <span class="fs-1 fw-bold" style="font-family: 'Plus Jakarta Sans';">
+        <span class="fw-bold" style="font-family: 'Plus Jakarta Sans';">
           Por que nos escolher?
         </span>
       </div>
 
       <!-- Coluna da esquerda -->
-      <div class="d-flex flex-column justify-content-center mt-5 flex-fill">
+      <div class="d-flex flex-column justify-content-center mt-5 mb-2 flex-fill" style="width: 33%;">
         <% [
           "Oferecemos produtos e serviços de alta qualidade utilizando tecnologia de última geração.",
           "Serras desenvolvidas especialmente para seu processo!"
         ].each do |text| %>
           <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
-            <%= image_tag 'check.png', class: 'img-fluid', style: 'width: 60px; height: 60px; object-fit: contain;' %>
+            <%= image_tag 'check.png', class: 'img-fluid', style: 'width: 80px; height: 80px; object-fit: contain;' %>
             <div style="width: 460px;">
-              <span class="fs-5" style="font-family: 'Montserrat'; color: #132738;">
+              <span style="font-family: 'Montserrat'; color: #132738;">
                 <%= text %>
               </span>
             </div>
@@ -160,15 +160,15 @@
       </div>
 
       <!-- Coluna da direita -->
-      <div class="d-flex flex-column justify-content-center mt-5 flex-fill gap-5">
+      <div class="d-flex flex-column justify-content-center mt-5 flex-fill gap-5" style="width: 33%;">
         <% [
           "O melhor custo e benefício do mercado.",
           "Excelentes comentários e muitos clientes fidelizados."
         ].each do |text| %>
           <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
-            <%= image_tag 'check.png', class: 'img-fluid', style: 'width: 60px; height: 60px; object-fit: contain;' %>
+            <%= image_tag 'check.png', class: 'img-fluid', style: 'width: 80px; height: 80px; object-fit: contain;' %>
             <div style="width: 460px;">
-              <span class="fs-5" style="font-family: 'Montserrat'; color: #132738;">
+              <span style="font-family: 'Montserrat'; color: #132738;">
                 <%= text %>
               </span>
             </div>
@@ -177,7 +177,7 @@
       </div>
 
       <!-- Imagem lateral -->
-      <div class="position-absolute top-0 end-0 h-100">
+      <div class="h-100">
         <%= image_tag "meia-serra.png", alt: "Serra Hiperion", class: "h-100", style: "object-fit: contain;" %>
       </div>
     </div>

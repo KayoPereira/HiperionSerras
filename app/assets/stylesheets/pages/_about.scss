@@ -4,9 +4,19 @@
 }
 
 .perso-width {
-  @media (min-width: 768px) {
+  @media (min-width: 550px) {
     width: 100% !important;
     height: 50% !important;
+  }
+
+  @media (min-width: 768px) {
+    width: 100% !important;
+    height: 55% !important;
+  }
+
+  @media (min-width: 892px) {
+    width: 100% !important;
+    height: 70% !important;
   }
 
   @media (min-width: 992px) {
@@ -18,14 +28,44 @@
     width: 80% !important;
     height: 70% !important;
   }
+  @media (min-width: 1400px) {
+    width: 80% !important;
+    height: 80% !important;
+  }
 
   @media (min-width: 1500px) {
     width: 80% !important;
-    height: 100% !important;
+    height: 90% !important;
   }
 
   @media (min-width: 1920px) {
     width: 70% !important;
     height: 100% !important;
+  }
+}
+
+.perso-text {
+  @media (min-width: 550px) {
+    font-size: 1.2rem !important;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.3rem !important;
+  }
+
+  @media (min-width: 892px) {
+    font-size: 1.3rem !important;
+  }
+
+  @media (min-width: 992px) {
+    font-size: 1.4rem !important;
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 1.5rem !important;
+  }
+
+  @media (min-width: 1400px) {
+    font-size: 1.6rem !important;
   }
 }
