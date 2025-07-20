@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
   # root "pages#home"
   root "pages#construction"
+
+  get "about" => "pages#about", as: :about
   get 'home', to: 'pages#home'
 
   resources :categories do
