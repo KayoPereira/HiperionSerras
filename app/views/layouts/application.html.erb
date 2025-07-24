@@ -7,30 +7,38 @@
     <meta name="mobile-web-app-capable" content="yes">
 
     <!-- Meta tags para SEO -->
-    <meta name="description" content="Hiperion Serras - Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão para sua empresa.">
-    <meta name="keywords" content="serra circular, afiação, lâminas, hiperion serras, mogi guaçu">
+    <meta name="description" content="Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão que a sua empresa precisa.">
+    <meta name="keywords" content="serra circular, afiação, lâminas, hiperion serras, mogi guaçu, recondicionamento, consultoria de corte">
     <meta name="author" content="Hiperion Serras">
     <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
 
     <!-- Meta tag para imagem principal do site -->
-    <meta name="image" content="<%= asset_url('logo.png') %>">
-    <link rel="image_src" href="<%= asset_url('logo.png') %>">
+    <meta name="image" content="https://www.hiperionserras.com.br/icon.png">
+    <link rel="image_src" href="https://www.hiperionserras.com.br/icon.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.hiperionserras.com.br<%= request.path %>">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.hiperionserras.com.br">
+    <meta property="og:url" content="https://www.hiperionserras.com.br<%= request.path %>">
     <meta property="og:title" content="Hiperion Serras - Lâminas de Alta Tecnologia e Precisão">
-    <meta property="og:description" content="Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão para sua empresa.">
-    <meta property="og:image" content="<%= asset_url('logo.png') %>">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:description" content="Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão que a sua empresa precisa.">
+    <meta property="og:image" content="https://www.hiperionserras.com.br/icon.png">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="600">
+    <meta property="og:image:alt" content="Logo Hiperion Serras">
+    <meta property="og:site_name" content="Hiperion Serras">
+    <meta property="og:locale" content="pt_BR">
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.hiperionserras.com.br">
-    <meta property="twitter:title" content="Hiperion Serras - Lâminas de Alta Tecnologia e Precisão">
-    <meta property="twitter:description" content="Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão para sua empresa.">
-    <meta property="twitter:image" content="<%= asset_url('logo.png') %>">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.hiperionserras.com.br<%= request.path %>">
+    <meta name="twitter:title" content="Hiperion Serras - Lâminas de Alta Tecnologia e Precisão">
+    <meta name="twitter:description" content="Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão que a sua empresa precisa.">
+    <meta name="twitter:image" content="https://www.hiperionserras.com.br/icon.png">
+    <meta name="twitter:image:alt" content="Logo Hiperion Serras">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -52,8 +60,15 @@
     <link rel="manifest" href="/manifest.json">
 
     <!-- Link direto para o logo (para Google) -->
-    <link rel="logo" href="<%= asset_url('logo.png') %>" type="image/png">
-    <link rel="alternate" type="application/rss+xml" title="Hiperion Serras" href="/logo.png">
+    <link rel="logo" href="https://www.hiperionserras.com.br/icon.png" type="image/png">
+
+    <!-- Meta tags adicionais para Google -->
+    <meta name="theme-color" content="#F7C21A">
+    <meta name="msapplication-TileColor" content="#F7C21A">
+    <meta name="msapplication-TileImage" content="https://www.hiperionserras.com.br/icon.png">
+
+    <!-- Verificação do Google (adicionar quando tiver o código) -->
+    <!-- <meta name="google-site-verification" content="SEU_CODIGO_AQUI"> -->
 
     <!-- Dados estruturados para SEO -->
     <script type="application/ld+json">
@@ -61,10 +76,14 @@
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Hiperion Serras",
-      "description": "Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão para sua empresa.",
+      "alternateName": "Hiperion Serras - Centro de Afiação",
+      "description": "Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão que a sua empresa precisa.",
       "url": "https://www.hiperionserras.com.br",
-      "logo": "<%= asset_url('logo.png') %>",
-      "image": "<%= asset_url('logo.png') %>",
+      "logo": "https://www.hiperionserras.com.br/icon.png",
+      "image": "https://www.hiperionserras.com.br/icon.png",
+      "sameAs": [
+        "https://www.hiperionserras.com.br"
+      ],
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Rua Eli Paulo Colombo, 1470",
@@ -75,7 +94,16 @@
       },
       "telephone": "+55-19-99740-2223",
       "priceRange": "$$",
-      "openingHours": "Mo-Fr 08:00-18:00"
+      "openingHours": "Mo-Fr 08:00-18:00",
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": -22.3706,
+          "longitude": -46.9444
+        },
+        "geoRadius": "50000"
+      }
     }
     </script>
 
