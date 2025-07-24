@@ -86,7 +86,10 @@
       </h2>
       <h4 class="services-subtitle text-white text-center">
         A <span class="brand-highlight" style="color: #F7C21A;">Hiperion Serras</span>
-        oferece os serviços de consultoria de corte<br> e recondicionamento de lâminas de serras.
+        oferece os serviços de:
+        <p class="m-0">Afiação de Serras</p>
+        <p class="m-0">Treinamento in Company</p>
+        <p class="m-0">Consultoria de Processos de Corte</p>
       </h4>
       <% servicos_category = Category.find_by(title: "Serviços") %>
       <%= link_to (servicos_category ? category_path(servicos_category) : "#"),
@@ -118,10 +121,11 @@
       contato conosco e leve a tecnologia Hiperion<br>
       para a sua empresa.
     </h4>
-    <a href="https://api.whatsapp.com/send?phone=19997402223" class="contact-btn" style="background-color: #211A0A; padding: 10px 20px; border-radius: 25px; border: none; max-width: 200px;">
+    <a href="https://api.whatsapp.com/send?phone=19997402223" class="contact-btn" style="background-color: #211A0A; padding: 10px 20px; border-radius: 25px; border: none; max-width: 250px;">
       <span style="color: #F7C21A; font-weight: bold; font-size: 18px; font-family: 'Plus Jakarta Sans', sans-serif; text-decoration: none;">
         FALE CONOSCO
       </span>
+      <i class="fa-brands fa-whatsapp" style="font-size: 24px; color: #F7C21A; margin-left: 8px;"></i>
     </a>
   </div>
 </section>
