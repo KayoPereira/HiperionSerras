@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= "Hiperion Serras" %></title>
+    <title><%= "Hiperion Serras - Lâminas de Alta Tecnologia e Precisão" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Hiperion Serras - Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão para sua empresa.">
+    <meta name="keywords" content="serra circular, afiação, lâminas, hiperion serras, mogi guaçu">
+    <meta name="author" content="Hiperion Serras">
+    <meta name="robots" content="index, follow">
+
+    <!-- Meta tag para imagem principal do site -->
+    <meta name="image" content="<%= asset_url('logo.png') %>">
+    <link rel="image_src" href="<%= asset_url('logo.png') %>">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hiperionserras.com.br">
+    <meta property="og:title" content="Hiperion Serras - Lâminas de Alta Tecnologia e Precisão">
+    <meta property="og:description" content="Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão para sua empresa.">
+    <meta property="og:image" content="<%= asset_url('logo.png') %>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.hiperionserras.com.br">
+    <meta property="twitter:title" content="Hiperion Serras - Lâminas de Alta Tecnologia e Precisão">
+    <meta property="twitter:description" content="Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão para sua empresa.">
+    <meta property="twitter:image" content="<%= asset_url('logo.png') %>">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -14,8 +41,43 @@
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
 
-    <%= favicon_link_tag 'favicon.png' %>
-    <link rel="apple-touch-icon" href="/icon.png">
+    <!-- Favicon e ícones -->
+    <%= favicon_link_tag 'favicon.png', type: 'image/png' %>
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= asset_path('favicon.png') %>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= asset_path('favicon.png') %>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= asset_path('favicon.png') %>">
+    <link rel="shortcut icon" href="<%= asset_path('favicon.png') %>" type="image/png">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Link direto para o logo (para Google) -->
+    <link rel="logo" href="<%= asset_url('logo.png') %>" type="image/png">
+    <link rel="alternate" type="application/rss+xml" title="Hiperion Serras" href="/logo.png">
+
+    <!-- Dados estruturados para SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Hiperion Serras",
+      "description": "Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão para sua empresa.",
+      "url": "https://www.hiperionserras.com.br",
+      "logo": "<%= asset_url('logo.png') %>",
+      "image": "<%= asset_url('logo.png') %>",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Eli Paulo Colombo, 1470",
+        "addressLocality": "Jardim Sakaida",
+        "addressRegion": "Mogi Guaçu",
+        "addressCountry": "BR",
+        "postalCode": "13849-702"
+      },
+      "telephone": "+55-19-99740-2223",
+      "priceRange": "$$",
+      "openingHours": "Mo-Fr 08:00-18:00"
+    }
+    </script>
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload", media: "all" %>

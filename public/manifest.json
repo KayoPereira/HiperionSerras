@@ -1,0 +1,21 @@
+{
+  "name": "Hiperion Serras - Lâminas de Alta Tecnologia e Precisão",
+  "short_name": "Hiperion Serras",
+  "description": "Centro de afiação e distribuição de serra circular. Lâminas de alta tecnologia e precisão para sua empresa.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#F7C21A",
+  "icons": [
+    {
+      "src": "/assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
