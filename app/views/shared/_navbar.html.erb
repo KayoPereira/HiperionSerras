@@ -12,12 +12,14 @@
         <span>Produtos</span>
       <% end %>
     </li>
+    <!--
     <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
       <%= link_to (@services_category ? category_path(@services_category) : "#") do %>
         <i class="fa-solid fa-wrench"></i>
         <span>Serviços</span>
       <% end %>
     </li>
+    -->
     <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
       <%= link_to about_path do %>
         <i class="fa-solid fa-circle-info"></i>
@@ -66,7 +68,7 @@
   <div class="d-flex justify-content-center align-items-center">
     <ul class="btn-circles list-unstyled me-5">
       <%= link_to "Produtos", categories_path, class: "link-nav" %>
-      <%= link_to "Serviços", (@services_category ? category_path(@services_category) : "#"), class: "link-nav mx-4" %>
+      <!-- <%= link_to "Serviços", (@services_category ? category_path(@services_category) : "#"), class: "link-nav mx-4" %>-->
       <%= link_to "Sobre", about_path, class: "link-nav" %>
       <%= link_to "/", class: "btn-nav ms-5 me-2" do %>
         <li class="btn-circle-item">
