@@ -28,77 +28,87 @@
     </div>
 
 
-  <div class="d-none d-md-flex justify-content-between mx-auto gap-2" style="width: 100%; margin-bottom: 50px; margin-top: 50px; margin: 0px 40px;">
-    <!-- Bloco das imagens -->
-    <div style="display: flex; height: 100%; justify-content: center; align-items: center; width: 50%; height: 500px;">
-      <div class="position-relative perso-width ">
-        <%= image_tag "imagem1.png", class: "img-fluid rounded", style: "position: absolute; top: 0; left: 0; width: 60%;" %>
+  <div class="container my-5">
+    <div class="row g-4 align-items-center">
+      <!-- Bloco das imagens -->
+      <div class="col-12 col-lg-6 order-2 order-lg-1">
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 500px;">
+          <div class="position-relative" style="width: 100%; max-width: 600px; height: 450px;">
+            <%= image_tag "imagem1.png",
+                class: "img-fluid rounded shadow",
+                style: "position: absolute; top: 0; left: 0; width: 60%; z-index: 1; box-shadow: 0 6px 20px rgba(0,0,0,0.2);" %>
 
-        <%= image_tag "imagem2.png", style: "
-          position: absolute;
-          bottom: 0;
-          right: 0;
-          width: 60%;
-          border-radius: 8px;
-          box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        " %>
+            <%= image_tag "imagem2.png",
+                class: "img-fluid rounded shadow",
+                style: "position: absolute; bottom: 0; right: 0; width: 60%; z-index: 2; box-shadow: 0 6px 20px rgba(0,0,0,0.2);" %>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- Bloco do texto -->
-    <div style="width: 50%">
-      <div style="padding: 0px 40px; width: 100%; padding-right: 30px">
-        <span style="display: block; font-size: 24px; font-weight: bold; font-family: 'Plus Jakarta Sans'; margin-bottom: 16px;">
-          O que é a Hiperion Serras?
-        </span>
-        <span class="d-block fs-5 lh-base fw-normal text-start mb-3" style="font-family: 'Plus Jakarta Sans'; color: #333;">
-          A Hiperion Serras é uma empresa brasileira especialista em desenvolvimento e fornecimento de serras circulares, lâminas de serra fita e serviços para o
-          mercado de AÇO e MADEIRA do Brasil. Nosso foco é atender empresas que buscam <span style="color: #F7C21A">eficiência operacional</span> e
-          <span style="color: #F7C21A">custo-benefício</span>. Com sede em Mogi Guaçu e Poá (SP), a Hiperion Serras atende a todo o território nacional,
-          destacando-se pela agilidade e suporte técnico especializado.
-        </span>
-        <span style="display: block; font-size: 24px; font-weight: bold; font-family: 'Plus Jakarta Sans'; margin-bottom: 16px;">
-          Cultura da Hiperion Serras
-        </span>
-        <span class="d-block fs-5 lh-base fw-normal text-start mb-3" style="font-family: 'Plus Jakarta Sans'; color: #333;">
-          Centrada na simplicidade e objetividade. A empresa busca <span style="color: #F7C21A">descomplicar processos</span> para seus clientes,
-          oferecendo soluções práticas e eficientes. A equipe técnica é altamente capacitada, com vasta experiência no segmento,
-          e está comprometida em acompanhar cada processo e implementar os produtos em linha, visando sempre o sucesso do cliente.
-        </span>
+      <!-- Bloco do texto -->
+      <div class="col-12 col-lg-6 order-1 order-lg-2">
+        <div class="px-3 px-md-4 py-3">
+          <h2 class="mb-4" style="font-size: calc(1.4rem + 0.5vw); font-weight: bold; font-family: 'Plus Jakarta Sans'; color: #211A0A;">
+            O que é a Hiperion Serras?
+          </h2>
+          <p class="mb-4" style="font-family: 'Plus Jakarta Sans'; color: #333; font-size: calc(0.95rem + 0.2vw); line-height: 1.6; text-align: justify;">
+            A Hiperion Serras é uma empresa brasileira especialista em desenvolvimento e fornecimento de serras circulares, lâminas de serra fita e serviços para o
+            mercado de <strong>AÇO e MADEIRA</strong> do Brasil. Nosso foco é atender empresas que buscam <span style="color: #F7C21A; font-weight: 600;">eficiência operacional</span> e
+            <span style="color: #F7C21A; font-weight: 600;">custo-benefício</span>. Com sede em Mogi Guaçu e Poá (SP), a Hiperion Serras atende a todo o território nacional,
+            destacando-se pela agilidade e suporte técnico especializado.
+          </p>
+
+          <h2 class="mb-4" style="font-size: calc(1.4rem + 0.5vw); font-weight: bold; font-family: 'Plus Jakarta Sans'; color: #211A0A;">
+            Cultura da Hiperion Serras
+          </h2>
+          <p class="mb-0" style="font-family: 'Plus Jakarta Sans'; color: #333; font-size: calc(0.95rem + 0.2vw); line-height: 1.6; text-align: justify;">
+            Centrada na <strong>simplicidade e objetividade</strong>. A empresa busca <span style="color: #F7C21A; font-weight: 600;">descomplicar processos</span> para seus clientes,
+            oferecendo soluções práticas e eficientes. A equipe técnica é altamente capacitada, com vasta experiência no segmento,
+            e está comprometida em acompanhar cada processo e implementar os produtos em linha, visando sempre o <strong>sucesso do cliente</strong>.
+          </p>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="d-flex justify-content-center mt-5 flex-wrap">
-    <div class="me-2" style="max-width: 30%;">
-      <span style="display: block; font-size: 24px; font-weight: bold; font-family: 'Plus Jakarta Sans'; margin-bottom: 16px;">
-        Valores
-      </span>
-      <span class="d-block fs-5 lh-base fw-normal text-start" style="font-family: 'Plus Jakarta Sans'; color: #333;">
-        <p>Compromisso com a qualidade: Utilização de tecnologia de última geração para oferecer produtos e serviços de alta qualidade.</p>
-        <p>Atendimento dedicado: Equipe técnica especializada pronta para atender às demandas de cada cliente.</p>
-        <p>Eficiência operacional: Processos ágeis que visam otimizar o tempo e os recursos dos clientes.</p>
-      </span>
-    </div>
-    <div class="mx-2" style="max-width: 30%;">
-      <span style="display: block; font-size: 24px; font-weight: bold; font-family: 'Plus Jakarta Sans'; margin-bottom: 16px;">
-        Crenças
-      </span>
-      <span class="d-block fs-5 lh-base fw-normal text-start" style="font-family: 'Plus Jakarta Sans'; color: #333;">
-        <p>Foco no cliente: O sucesso do cliente é o combustível da empresa.</p>
-        <p>Inovação contínua: Investimento constante em tecnologia e capacitação para oferecer soluções atualizadas e eficazes.</p>
-        <p>Transparência e ética: Relacionamentos baseados na confiança mútua e na honestidade.</p>
-      </span>
-    </div>
-    <div class="ms-2" style="max-width: 30%;">
-      <span style="display: block; font-size: 24px; font-weight: bold; font-family: 'Plus Jakarta Sans'; margin-bottom: 16px;">
-        Princípios
-      </span>
-      <span class="d-block fs-5 lh-base fw-normal text-start" style="font-family: 'Plus Jakarta Sans'; color: #333;">
-        <p>Simplicidade: Descomplicar processos e oferecer soluções práticas.</p>
-        <p>Objetividade: Focar no que realmente importa para o cliente, sem rodeios.</p>
-        <p>Responsabilidade: Assumir compromissos e entregá-los com excelência.</p>
-      </span>
+  <div class="container mt-5">
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="h-100 p-3">
+          <h3 class="mb-3" style="font-size: calc(1.2rem + 0.3vw); font-weight: bold; font-family: 'Plus Jakarta Sans'; color: #211A0A;">
+            Valores
+          </h3>
+          <div class="text-start" style="font-family: 'Plus Jakarta Sans'; color: #333; font-size: calc(0.9rem + 0.2vw); line-height: 1.6;">
+            <p class="mb-3"><strong>Compromisso com a qualidade:</strong> Utilização de tecnologia de última geração para oferecer produtos e serviços de alta qualidade.</p>
+            <p class="mb-3"><strong>Atendimento dedicado:</strong> Equipe técnica especializada pronta para atender às demandas de cada cliente.</p>
+            <p class="mb-0"><strong>Eficiência operacional:</strong> Processos ágeis que visam otimizar o tempo e os recursos dos clientes.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="h-100 p-3">
+          <h3 class="mb-3" style="font-size: calc(1.2rem + 0.3vw); font-weight: bold; font-family: 'Plus Jakarta Sans'; color: #211A0A;">
+            Crenças
+          </h3>
+          <div class="text-start" style="font-family: 'Plus Jakarta Sans'; color: #333; font-size: calc(0.9rem + 0.2vw); line-height: 1.6;">
+            <p class="mb-3"><strong>Foco no cliente:</strong> O sucesso do cliente é o combustível da empresa.</p>
+            <p class="mb-3"><strong>Inovação contínua:</strong> Investimento constante em tecnologia e capacitação para oferecer soluções atualizadas e eficazes.</p>
+            <p class="mb-0"><strong>Transparência e ética:</strong> Relacionamentos baseados na confiança mútua e na honestidade.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="h-100 p-3">
+          <h3 class="mb-3" style="font-size: calc(1.2rem + 0.3vw); font-weight: bold; font-family: 'Plus Jakarta Sans'; color: #211A0A;">
+            Princípios
+          </h3>
+          <div class="text-start" style="font-family: 'Plus Jakarta Sans'; color: #333; font-size: calc(0.9rem + 0.2vw); line-height: 1.6;">
+            <p class="mb-3"><strong>Simplicidade:</strong> Descomplicar processos e oferecer soluções práticas.</p>
+            <p class="mb-3"><strong>Objetividade:</strong> Focar no que realmente importa para o cliente, sem rodeios.</p>
+            <p class="mb-0"><strong>Responsabilidade:</strong> Assumir compromissos e entregá-los com excelência.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
