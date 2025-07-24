@@ -25,17 +25,23 @@
               <h5 class="card-title"><%= category.title %></h5>
 
               <div class="mt-auto">
-                <div class="btn-group w-100" role="group">
-                  <%= link_to "Ver", category_path(category), class: "btn btn-outline-warning btn-sm" %>
-                  <%= link_to "Editar", edit_category_path(category), class: "btn btn-outline-secondary btn-sm" %>
-                  <%= link_to "Excluir", category_path(category),
-                              method: :delete,
-                              class: "btn btn-outline-danger btn-sm",
-                              data: {
-                                confirm: "Tem certeza que deseja excluir esta categoria?",
-                                turbo_method: :delete
-                              } %>
-                </div>
+                <% if user_signed_in? %>
+                  <div class="btn-group w-100" role="group">
+                    <%= link_to "Ver", category_path(category), class: "btn btn-outline-warning btn-sm" %>
+                    <%= link_to "Editar", edit_category_path(category), class: "btn btn-outline-secondary btn-sm" %>
+                    <%= link_to "Excluir", category_path(category),
+                                method: :delete,
+                                class: "btn btn-outline-danger btn-sm",
+                                data: {
+                                  confirm: "Tem certeza que deseja excluir esta categoria?",
+                                  turbo_method: :delete
+                                } %>
+                  </div>
+                <% else %>
+                  <div class="d-grid">
+                    <%= link_to "Ver", category_path(category), class: "btn btn-outline-warning btn-sm" %>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>
@@ -46,8 +52,12 @@
     <div class="text-center py-5">
       <i class="fa-solid fa-folder-open text-muted mb-3" style="font-size: 4rem;"></i>
       <h3 class="text-muted">Nenhuma categoria encontrada</h3>
-      <p class="text-muted">Comece criando sua primeira categoria.</p>
-      <%= link_to "Criar Primeira Categoria", new_category_path, class: "btn btn-primary" %>
+      <% if user_signed_in? %>
+        <p class="text-muted">Comece criando sua primeira categoria.</p>
+        <%= link_to "Criar Primeira Categoria", new_category_path, class: "btn btn-primary" %>
+      <% else %>
+        <p class="text-muted">Não há categorias disponíveis no momento.</p>
+      <% end %>
     </div>
   <% end %>
 </div>
