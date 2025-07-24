@@ -110,12 +110,7 @@
         </div>
       </div>
     <% else %>
-      <%= link_to new_user_session_path, class: "me-5" do %>
-        <%= image_tag "sem-imagem-avatar.png",
-                      class: "avatar-nav",
-                      alt: "Avatar padrão",
-                      style: "border-radius: 50%; width: 40px; height: 40px;" %>
-      <% end %>
+      <%= link_to "Login", new_user_session_path, class: "me-5 link-nav", style: "font-size: 16px; color: #F7C21A; text-decoration: none; font-family: 'Plus Jakarta Sans'; font-weight: 500;" %>
     <% end %>
   </div>
 </nav>
