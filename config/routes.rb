@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   devise_for :users
-  # root "pages#home"
-  root "pages#construction"
-  get 'home', to: 'pages#home'
+  root "pages#home"
+  # root "pages#construction"
+  # get 'home', to: 'pages#home'
 
   resources :categories do
     resources :subcategories do
