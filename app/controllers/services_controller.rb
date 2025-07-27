@@ -86,8 +86,7 @@ class ServicesController < ApplicationController
   end
 
   def service_params
-    params.require(:product).permit(:title, :line, :characteristics, :applications,
-                                   :types_of_coatings, :details,
+    params.require(:product).permit(:title, :line, :details,
                                    photos: [], details_images: [])
   end
 end

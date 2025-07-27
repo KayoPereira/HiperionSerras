@@ -209,64 +209,19 @@
       <% end %>
     </div>
 
-    <!-- Rich text fields -->
-    <div class="mb-4">
-      <%= f.label :characteristics, "Características", class: "form-label fw-bold" %>
-      <div class="rich-text-wrapper">
-        <%= f.rich_text_area :characteristics,
-                              class: "form-control rich-text-field",
-                              data: {
-                                placeholder: "Descreva as principais características do serviço..."
-                              } %>
-      </div>
-      <div class="form-text">
-        <i class="fa-solid fa-info-circle me-1"></i>
-        Use formatação para destacar informações importantes sobre o serviço.
-      </div>
-    </div>
-
-    <div class="mb-4">
-      <%= f.label :applications, "Aplicações", class: "form-label fw-bold" %>
-      <div class="rich-text-wrapper">
-        <%= f.rich_text_area :applications,
-                              class: "form-control rich-text-field",
-                              data: {
-                                placeholder: "Onde e como este serviço pode ser utilizado..."
-                              } %>
-      </div>
-      <div class="form-text">
-        <i class="fa-solid fa-wrench me-1"></i>
-        Descreva os principais usos e aplicações do serviço.
-      </div>
-    </div>
-
-    <div class="mb-4">
-      <%= f.label :types_of_coatings, "Tipos de Revestimentos", class: "form-label fw-bold" %>
-      <div class="rich-text-wrapper">
-        <%= f.rich_text_area :types_of_coatings,
-                              class: "form-control rich-text-field",
-                              data: {
-                                placeholder: "Informações sobre revestimentos disponíveis..."
-                              } %>
-      </div>
-      <div class="form-text">
-        <i class="fa-solid fa-palette me-1"></i>
-        Liste os tipos de revestimentos e suas características.
-      </div>
-    </div>
-
+    <!-- Campo de detalhes (único campo rich text para serviços) -->
     <div class="mb-4">
       <%= f.label :details, "Detalhes", class: "form-label fw-bold" %>
       <div class="rich-text-wrapper">
         <%= f.rich_text_area :details,
                               class: "form-control rich-text-field",
                               data: {
-                                placeholder: "Informações técnicas detalhadas..."
+                                placeholder: "Informações detalhadas sobre o serviço..."
                               } %>
       </div>
       <div class="form-text">
         <i class="fa-solid fa-cog me-1"></i>
-        Adicione informações técnicas detalhadas e especificações.
+        Adicione informações detalhadas e especificações do serviço.
       </div>
     </div>
 

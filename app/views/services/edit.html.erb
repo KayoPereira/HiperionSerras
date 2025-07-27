@@ -15,7 +15,7 @@
                 <%= link_to "Serviços", services_path, class: "text-decoration-none" %>
               </li>
               <li class="breadcrumb-item">
-                <%= link_to @service.title, @service, class: "text-decoration-none" %>
+                <%= link_to @service.title, service_path(@service), class: "text-decoration-none" %>
               </li>
               <li class="breadcrumb-item active" aria-current="page">Editar</li>
             </ol>

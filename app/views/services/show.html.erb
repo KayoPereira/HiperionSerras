@@ -80,60 +80,21 @@
         </div>
       </div>
 
-      <!-- Conteúdo rich text -->
-      <div class="row">
-        <% if @service.characteristics.present? %>
-          <div class="col-md-6 mb-4">
-            <div class="card h-100" style="border-color: #F7C21A;">
+      <!-- Conteúdo de detalhes -->
+      <% if @service.details.present? %>
+        <div class="row">
+          <div class="col-12 mb-4">
+            <div class="card" style="border-color: #F7C21A;">
               <div class="card-header" style="border-color: #F7C21A;">
-                <h5 class="mb-0"><i class="fa-solid fa-list-check me-2"></i>Características</h5>
-              </div>
-              <div class="card-body">
-                <%= @service.characteristics %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-
-        <% if @service.applications.present? %>
-          <div class="col-md-6 mb-4">
-            <div class="card h-100" style="border-color: #F7C21A;">
-              <div class="card-header" style="border-color: #F7C21A;">
-                <h5 class="mb-0"><i class="fa-solid fa-wrench me-2"></i>Aplicações</h5>
-              </div>
-              <div class="card-body">
-                <%= @service.applications %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-
-        <% if @service.types_of_coatings.present? %>
-          <div class="col-md-6 mb-4">
-            <div class="card h-100" style="border-color: #F7C21A;">
-              <div class="card-header" style="border-color: #F7C21A;">
-                <h5 class="mb-0"><i class="fa-solid fa-palette me-2"></i>Tipos de Revestimentos</h5>
-              </div>
-              <div class="card-body">
-                <%= @service.types_of_coatings %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-
-        <% if @service.details.present? %>
-          <div class="col-md-6 mb-4">
-            <div class="card h-100" style="border-color: #F7C21A;">
-              <div class="card-header" style="border-color: #F7C21A;">
-                <h5 class="mb-0"><i class="fa-solid fa-info-circle me-2"></i>Detalhes</h5>
+                <h5 class="mb-0"><i class="fa-solid fa-info-circle me-2"></i>Detalhes do Serviço</h5>
               </div>
               <div class="card-body">
                 <%= @service.details %>
               </div>
             </div>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
 
       <!-- Imagens de detalhes -->
       <% if @service.details_images.attached? %>
