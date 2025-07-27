@@ -5,50 +5,41 @@
       <!-- Breadcrumb -->
       <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-          <% if @product.is_service? %>
-            <li class="breadcrumb-item">
-              <%= link_to "Serviços", root_path, class: "text-decoration-none" %>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page"><%= @product.title %></li>
-          <% else %>
-            <li class="breadcrumb-item">
-              <%= link_to @category.title, category_path(@category), class: "text-decoration-none" %>
-            </li>
-            <li class="breadcrumb-item">
-              <%= link_to @subcategory.title, [@category, @subcategory], class: "text-decoration-none" %>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page"><%= @product.title %></li>
-          <% end %>
+          <li class="breadcrumb-item">
+            <%= link_to "Início", root_path, class: "text-decoration-none" %>
+          </li>
+          <li class="breadcrumb-item">
+            <%= link_to "Serviços", services_path, class: "text-decoration-none" %>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page"><%= @service.title %></li>
         </ol>
       </nav>
 
-      <!-- Informações principais do produto -->
+      <!-- Informações principais do serviço -->
       <div class="card mb-4" style="border-color: #F7C21A;">
         <div class="card-body">
           <div class="row">
             <div class="col-md-8">
               <h1 class="card-title h2">
-                <%= @product.title %>
-                <% if @product.is_service? %>
-                  <span class="badge bg-info ms-2">
-                    <i class="fa-solid fa-handshake me-1"></i>Serviço
-                  </span>
-                <% end %>
+                <%= @service.title %>
+                <span class="badge bg-info ms-2">
+                  <i class="fa-solid fa-handshake me-1"></i>Serviço
+                </span>
               </h1>
               <p class="text-muted mb-3">
                 <i class="fa-solid fa-tag me-1"></i>
-                <strong><%= @product.line %></strong>
+                <strong><%= @service.line %></strong>
               </p>
 
               <% if user_signed_in? %>
                 <div class="row">
                   <div class="col-sm-6">
                     <small class="text-muted">Criado em:</small>
-                    <p><%= @product.created_at.strftime("%d/%m/%Y às %H:%M") %></p>
+                    <p><%= @service.created_at.strftime("%d/%m/%Y às %H:%M") %></p>
                   </div>
                   <div class="col-sm-6">
                     <small class="text-muted">Última atualização:</small>
-                    <p><%= @product.updated_at.strftime("%d/%m/%Y às %H:%M") %></p>
+                    <p><%= @service.updated_at.strftime("%d/%m/%Y às %H:%M") %></p>
                   </div>
                 </div>
               <% end %>
@@ -56,24 +47,24 @@
 
             <!-- Galeria de fotos -->
             <div class="col-md-4">
-              <% if @product.photos.attached? %>
-                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+              <% if @service.photos.attached? %>
+                <div id="serviceCarousel" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
-                    <% @product.photos.each_with_index do |photo, index| %>
+                    <% @service.photos.each_with_index do |photo, index| %>
                       <div class="carousel-item <%= 'active' if index == 0 %>">
                         <%= image_tag rails_blob_path(photo, only_path: true),
                                       class: "d-block w-100",
                                       style: "border-radius: 8px;",
-                                      alt: @product.title %>
+                                      alt: @service.title %>
                       </div>
                     <% end %>
                   </div>
-                  <% if @product.photos.count > 1 %>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                  <% if @service.photos.count > 1 %>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#serviceCarousel" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Anterior</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#serviceCarousel" data-bs-slide="next">
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Próximo</span>
                     </button>
@@ -81,7 +72,7 @@
                 </div>
               <% else %>
                 <div class="bg-light border rounded d-flex align-items-center justify-content-center" style="height: 250px;">
-                  <i class="fa-solid fa-image text-muted" style="font-size: 4rem;"></i>
+                  <i class="fa-solid fa-handshake text-muted" style="font-size: 4rem;"></i>
                 </div>
               <% end %>
             </div>
@@ -91,53 +82,53 @@
 
       <!-- Conteúdo rich text -->
       <div class="row">
-        <% if @product.characteristics.present? %>
+        <% if @service.characteristics.present? %>
           <div class="col-md-6 mb-4">
             <div class="card h-100" style="border-color: #F7C21A;">
               <div class="card-header" style="border-color: #F7C21A;">
                 <h5 class="mb-0"><i class="fa-solid fa-list-check me-2"></i>Características</h5>
               </div>
               <div class="card-body">
-                <%= @product.characteristics %>
+                <%= @service.characteristics %>
               </div>
             </div>
           </div>
         <% end %>
 
-        <% if @product.applications.present? %>
+        <% if @service.applications.present? %>
           <div class="col-md-6 mb-4">
             <div class="card h-100" style="border-color: #F7C21A;">
               <div class="card-header" style="border-color: #F7C21A;">
                 <h5 class="mb-0"><i class="fa-solid fa-wrench me-2"></i>Aplicações</h5>
               </div>
               <div class="card-body">
-                <%= @product.applications %>
+                <%= @service.applications %>
               </div>
             </div>
           </div>
         <% end %>
 
-        <% if @product.types_of_coatings.present? %>
+        <% if @service.types_of_coatings.present? %>
           <div class="col-md-6 mb-4">
             <div class="card h-100" style="border-color: #F7C21A;">
               <div class="card-header" style="border-color: #F7C21A;">
                 <h5 class="mb-0"><i class="fa-solid fa-palette me-2"></i>Tipos de Revestimentos</h5>
               </div>
               <div class="card-body">
-                <%= @product.types_of_coatings %>
+                <%= @service.types_of_coatings %>
               </div>
             </div>
           </div>
         <% end %>
 
-        <% if @product.details.present? %>
+        <% if @service.details.present? %>
           <div class="col-md-6 mb-4">
             <div class="card h-100" style="border-color: #F7C21A;">
               <div class="card-header" style="border-color: #F7C21A;">
                 <h5 class="mb-0"><i class="fa-solid fa-info-circle me-2"></i>Detalhes</h5>
               </div>
               <div class="card-body">
-                <%= @product.details %>
+                <%= @service.details %>
               </div>
             </div>
           </div>
@@ -145,20 +136,20 @@
       </div>
 
       <!-- Imagens de detalhes -->
-      <% if @product.details_images.attached? %>
+      <% if @service.details_images.attached? %>
         <div class="card mb-4" style="border-color: #F7C21A;">
           <div class="card-header" style="border-color: #F7C21A;">
             <h5 class="mb-0"><i class="fa-solid fa-images me-2"></i>Imagens de Detalhes</h5>
           </div>
           <div class="card-body">
             <div class="row">
-              <% @product.details_images.each do |image| %>
+              <% @service.details_images.each do |image| %>
                 <div class="col-md-3 mb-3">
                   <%= image_tag rails_blob_path(image, only_path: true),
                                 class: "img-fluid rounded",
                                 style: "width: 100% !important; height: 200px; object-fit: cover; cursor: pointer;",
                                 data: { bs_toggle: "modal", bs_target: "#imageModal#{image.id}" },
-                                alt: "Detalhe do produto" %>
+                                alt: "Detalhe do serviço" %>
 
                   <!-- Modal para visualizar imagem em tamanho maior -->
                   <div class="modal fade" id="imageModal<%= image.id %>" tabindex="-1">
@@ -167,7 +158,7 @@
                         <div class="modal-body p-0">
                           <%= image_tag rails_blob_path(image, only_path: true),
                                         class: "img-fluid w-100",
-                                        alt: "Detalhe do produto" %>
+                                        alt: "Detalhe do serviço" %>
                         </div>
                       </div>
                     </div>
@@ -184,21 +175,21 @@
         <div class="card-footer bg-transparent">
           <% if user_signed_in? %>
             <div class="btn-group w-100" role="group">
-              <%= link_to "Voltar", category_subcategory_products_path(@category, @subcategory),
+              <%= link_to "Voltar", services_path,
                           class: "btn btn-outline-secondary" %>
-              <%= link_to "Editar", edit_category_subcategory_product_path(@category, @subcategory, @product),
+              <%= link_to "Editar", edit_service_path(@service),
                           class: "btn btn-primary" %>
-              <%= link_to "Excluir", [@category, @subcategory, @product],
+              <%= link_to "Excluir", service_path(@service),
                           method: :delete,
                           class: "btn btn-danger",
                           data: {
-                            confirm: "Tem certeza que deseja excluir este produto?",
+                            confirm: "Tem certeza que deseja excluir este serviço?",
                             turbo_method: :delete
                           } %>
             </div>
           <% else %>
             <div class="text-center">
-              <%= link_to "Voltar", [@category, @subcategory],
+              <%= link_to "Voltar", services_path,
                           class: "btn btn-outline-secondary" %>
             </div>
           <% end %>

@@ -50,7 +50,7 @@
     <div class="row g-3 g-md-4 justify-content-center">
       <% @categories.each_with_index do |category, index| %>
         <div class="col-6 col-md-4 col-lg-3" data-scroll-animations-target="animateElement" data-animation="fadeInUp" data-delay="<%= index * 100 + 400 %>">
-          <%= link_to category_path(category), class: "text-decoration-none" do %>
+          <%= link_to (category.title == "Serviços" ? services_path : category_path(category)), class: "text-decoration-none" do %>
             <div class="card-category h-100">
               <div class="card-category-image">
                 <% if category.photo.attached? %>
@@ -61,7 +61,11 @@
                 <% else %>
                   <div class="placeholder-image d-flex align-items-center justify-content-center"
                        style="height: 150px; background-color: #f8f9fa;">
-                    <i class="fa-solid fa-image text-muted" style="font-size: 2rem;"></i>
+                    <% if category.title == "Serviços" %>
+                      <i class="fa-solid fa-handshake text-muted" style="font-size: 2rem;"></i>
+                    <% else %>
+                      <i class="fa-solid fa-image text-muted" style="font-size: 2rem;"></i>
+                    <% end %>
                   </div>
                 <% end %>
               </div>
@@ -91,8 +95,7 @@
         <p class="m-0">Treinamento in Company</p>
         <p class="m-0">Consultoria de Processos de Corte</p>
       </h4>
-      <% servicos_category = Category.find_by(title: "Serviços") %>
-      <%= link_to (servicos_category ? category_path(servicos_category) : "#"),
+      <%= link_to services_path,
                   class: "services-btn text-decoration-none",
                   data: {
                     turbo: true,

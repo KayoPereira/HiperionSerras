@@ -1,13 +1,13 @@
 class Product < ApplicationRecord
-  belongs_to :subcategory
+  belongs_to :subcategory, optional: true
   has_one :category, through: :subcategory
-  
+
   # Rich text fields
   has_rich_text :characteristics
   has_rich_text :applications
   has_rich_text :types_of_coatings
   has_rich_text :details
-  
+
   # Anexos de imagens
   has_many_attached :photos
   has_many_attached :details_images
@@ -15,8 +15,10 @@ class Product < ApplicationRecord
   # Validações
   validates :title, presence: true, length: { minimum: 2, maximum: 200 }
   validates :line, presence: true, length: { minimum: 2, maximum: 100 }
+  validates :is_service, inclusion: { in: [true, false] }
   validate :photos_format
   validate :details_images_format
+  validate :subcategory_service_validation
 
   # Método para URL da primeira foto com diferentes tamanhos
   def main_photo_url(size: :medium)
@@ -76,6 +78,20 @@ class Product < ApplicationRecord
       if image.blob.byte_size > 5.megabytes
         errors.add(:details_images, 'devem ter menos de 5MB cada')
         break
+      end
+    end
+  end
+
+  def subcategory_service_validation
+    if is_service?
+      # Se é serviço, subcategory_id deve ser null
+      if subcategory_id.present?
+        errors.add(:subcategory_id, 'deve ser vazio quando o produto é um serviço')
+      end
+    else
+      # Se não é serviço, subcategory_id é obrigatório
+      if subcategory_id.blank?
+        errors.add(:subcategory_id, 'é obrigatório quando o produto não é um serviço')
       end
     end
   end

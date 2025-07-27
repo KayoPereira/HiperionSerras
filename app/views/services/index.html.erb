@@ -1,0 +1,90 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1>
+        <i class="fa-solid fa-handshake me-2"></i>Serviços
+      </h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <%= link_to "Início", root_path, class: "text-decoration-none" %>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Serviços</li>
+        </ol>
+      </nav>
+    </div>
+    <div>
+      <% if user_signed_in? %>
+        <%= link_to "Novo Serviço", new_service_path,
+                    class: "btn btn-warning" %>
+      <% end %>
+      <%= link_to "Voltar", root_path,
+                  class: "btn btn-outline-secondary ms-2" %>
+    </div>
+  </div>
+
+  <% if @services.any? %>
+    <div class="row">
+      <% @services.each do |service| %>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card h-100">
+            <% if service.photos.attached? && service.photos.first.present? %>
+              <%= image_tag rails_blob_path(service.photos.first, only_path: true),
+                            class: "card-img-top",
+                            alt: service.title,
+                            style: "height: 200px; object-fit: cover;" %>
+            <% else %>
+              <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                <i class="fa-solid fa-handshake text-muted" style="font-size: 3rem;"></i>
+              </div>
+            <% end %>
+
+            <div class="card-body d-flex flex-column">
+              <h6 class="card-title">
+                <%= service.title %>
+                <span class="badge bg-info ms-1">
+                  <i class="fa-solid fa-handshake me-1"></i>Serviço
+                </span>
+              </h6>
+              <p class="card-text text-muted small mb-2">
+                <i class="fa-solid fa-tag me-1"></i>
+                Linha: <%= service.line %>
+              </p>
+
+              <div class="mt-auto">
+                <% if user_signed_in? %>
+                  <div class="btn-group w-100" role="group">
+                    <%= link_to "Ver", service_path(service),
+                                class: "btn btn-outline-warning btn-sm" %>
+                    <%= link_to "Excluir", service_path(service),
+                                method: :delete,
+                                class: "btn btn-outline-danger btn-sm",
+                                data: {
+                                  confirm: "Tem certeza que deseja excluir este serviço?",
+                                  turbo_method: :delete
+                                } %>
+                    <%= link_to "Editar", edit_service_path(service),
+                                class: "btn btn-outline-secondary btn-sm" %>
+                  </div>
+                <% else %>
+                  <%= link_to "Ver Detalhes", service_path(service),
+                              class: "btn btn-outline-warning btn-sm w-100" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-5">
+      <i class="fa-solid fa-handshake text-muted mb-3" style="font-size: 4rem;"></i>
+      <h3 class="text-muted">Nenhum serviço encontrado</h3>
+      <p class="text-muted">Ainda não há serviços cadastrados.</p>
+      <% if user_signed_in? %>
+        <%= link_to "Criar Primeiro Serviço", new_service_path,
+                    class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

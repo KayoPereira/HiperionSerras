@@ -143,7 +143,7 @@
   });
 </script>
 
-<%= simple_form_for([@category, @subcategory, @product], html: { multipart: true, data: { controller: "image-preview" } }) do |f| %>
+<%= simple_form_for(@service, url: (@service.persisted? ? service_path(@service) : services_path), html: { multipart: true, data: { controller: "image-preview" } }) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -154,31 +154,19 @@
                     required: true,
                     autofocus: true,
                     input_html: { class: "form-control" },
-                    label: "Título do Produto" %>
+                    label: "Título do Serviço" %>
       </div>
       <div class="col-md-4">
         <%= f.input :line,
                     required: true,
                     input_html: { class: "form-control" },
-                    label: "Linha do Produto" %>
+                    label: "Linha do Serviço" %>
       </div>
     </div>
 
-    <!-- Campo is_service -->
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <%= f.input :is_service,
-                    as: :boolean,
-                    input_html: { class: "form-check-input" },
-                    wrapper_html: { class: "form-check" },
-                    label: "Este produto é um serviço?",
-                    hint: "Marque esta opção se este item representa um serviço ao invés de um produto físico." %>
-      </div>
-    </div>
-
-    <!-- Fotos principais do produto -->
+    <!-- Fotos principais do serviço -->
     <div class="mb-3">
-      <%= f.label :photos, "Fotos do Produto", class: "form-label" %>
+      <%= f.label :photos, "Fotos do Serviço", class: "form-label" %>
       <%= f.file_field :photos,
                        multiple: true,
                        class: "form-control",
@@ -192,17 +180,17 @@
         <strong>Selecionar novas imagens irá ADICIONAR às existentes, não substituir.</strong>
       </div>
 
-      <% if @product.persisted? && @product.photos.attached? %>
+      <% if @service.persisted? && @service.photos.attached? %>
         <div class="mt-3">
-          <h6>Fotos atuais (<%= @product.photos.count %>):</h6>
+          <h6>Fotos atuais (<%= @service.photos.count %>):</h6>
           <div class="row">
-            <% @product.photos.each_with_index do |photo, index| %>
+            <% @service.photos.each_with_index do |photo, index| %>
               <div class="col-md-3 mb-2">
                 <div class="position-relative">
                   <%= image_tag rails_blob_path(photo, only_path: true),
                                 class: "img-thumbnail w-100",
                                 style: "height: 150px; object-fit: cover;" %>
-                  <%= link_to remove_photo_category_subcategory_product_path(@category, @subcategory, @product, photo_id: photo.id),
+                  <%= link_to remove_photo_service_path(@service, photo_id: photo.id),
                               method: :delete,
                               class: "btn btn-danger btn-sm position-absolute top-0 end-0 m-1",
                               style: "z-index: 10;",
@@ -228,12 +216,12 @@
         <%= f.rich_text_area :characteristics,
                               class: "form-control rich-text-field",
                               data: {
-                                placeholder: "Descreva as principais características do produto..."
+                                placeholder: "Descreva as principais características do serviço..."
                               } %>
       </div>
       <div class="form-text">
         <i class="fa-solid fa-info-circle me-1"></i>
-        Use formatação para destacar informações importantes como especificações técnicas.
+        Use formatação para destacar informações importantes sobre o serviço.
       </div>
     </div>
 
@@ -243,12 +231,12 @@
         <%= f.rich_text_area :applications,
                               class: "form-control rich-text-field",
                               data: {
-                                placeholder: "Onde e como este produto pode ser utilizado..."
+                                placeholder: "Onde e como este serviço pode ser utilizado..."
                               } %>
       </div>
       <div class="form-text">
         <i class="fa-solid fa-wrench me-1"></i>
-        Descreva os principais usos e aplicações do produto.
+        Descreva os principais usos e aplicações do serviço.
       </div>
     </div>
 
@@ -294,21 +282,21 @@
                        } %>
       <div class="form-text">
         <i class="fa-solid fa-info-circle me-1"></i>
-        Imagens técnicas, diagramas ou detalhes específicos do produto. Formatos aceitos: JPEG, JPG, PNG, GIF, WebP.
+        Imagens técnicas, diagramas ou detalhes específicos do serviço. Formatos aceitos: JPEG, JPG, PNG, GIF, WebP.
         <strong>Selecionar novas imagens irá ADICIONAR às existentes, não substituir.</strong>
       </div>
 
-      <% if @product.persisted? && @product.details_images.attached? %>
+      <% if @service.persisted? && @service.details_images.attached? %>
         <div class="mt-3">
-          <h6>Imagens de detalhes atuais (<%= @product.details_images.count %>):</h6>
+          <h6>Imagens de detalhes atuais (<%= @service.details_images.count %>):</h6>
           <div class="row">
-            <% @product.details_images.each_with_index do |image, index| %>
+            <% @service.details_images.each_with_index do |image, index| %>
               <div class="col-md-3 mb-2">
                 <div class="position-relative">
                   <%= image_tag rails_blob_path(image, only_path: true),
                                 class: "img-thumbnail w-100",
                                 style: "height: 150px; object-fit: cover;" %>
-                  <%= link_to remove_detail_image_category_subcategory_product_path(@category, @subcategory, @product, image_id: image.id),
+                  <%= link_to remove_detail_image_service_path(@service, image_id: image.id),
                               method: :delete,
                               class: "btn btn-danger btn-sm position-absolute top-0 end-0 m-1",
                               style: "z-index: 10;",
@@ -328,9 +316,11 @@
     </div>
   </div>
 
-  <div class="form-actions">
+  </div>
+
+  <div class="form-actions p-3">
     <%= f.button :submit, "Salvar", class: "btn btn-warning" %>
-    <%= link_to "Cancelar", category_subcategory_products_path(@category, @subcategory),
+    <%= link_to "Cancelar", services_path,
                 class: "btn btn-secondary ms-2" %>
   </div>
 <% end %>
