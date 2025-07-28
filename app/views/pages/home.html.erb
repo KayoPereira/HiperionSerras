@@ -1,13 +1,19 @@
 <!-- Banner responsivo -->
 
 <section class="banner-section">
-  <% banners = ["banner.png"] %> <!-- ou variável vinda do controller, como @banners -->
-  <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+  <% banners = ["home.mp4", "banner.png"] %> <!-- ou variável vinda do controller, como @banners -->
+  <div id="bannerCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="21000">
     <div class="carousel-inner">
       <% banners.each_with_index do |banner, index| %>
-        <div class="carousel-item <%= 'active' if index == 0 %>">
-          <%= image_tag banner, class: "d-block w-100 img-fluid", alt: "Banner Hiperion Serras #{index + 1}" %>
-        </div>
+        <% if banner == "home.mp4" %>
+          <div class="carousel-item <%= 'active' if index == 0 %>">
+            <%= video_tag "home.mp4", autoplay: true, loop: true, muted: true, class: "d-block w-100 img-fluid", alt: "Video Hiperion Serras" %>
+          </div>
+        <% else %>
+          <div class="carousel-item <%= 'active' if index == 0 %>">
+            <%= image_tag banner, class: "d-block w-100 img-fluid", alt: "Banner Hiperion Serras #{index + 1}" %>
+          </div>
+        <% end %>
       <% end %>
     </div>
 
@@ -108,7 +114,7 @@
     </div>
   </div>
   <div class="services-image d-none d-md-block" style="position: absolute; right: 0; top: 0;" data-scroll-animations-target="animateElement" data-animation="fadeInRight" data-delay="400">
-    <%= image_tag "meia-serra.png", alt: "Serra Hiperion", id: 'saw-image' %>
+    <%= image_tag "meia-serra2.png", alt: "Serra Hiperion", id: 'saw-image' %>
   </div>
 </section>
 
