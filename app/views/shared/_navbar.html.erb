@@ -19,12 +19,18 @@
       <% end %>
     </li>
     <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
+      <%= link_to news_index_path do %>
+        <i class="fa-solid fa-newspaper"></i>
+        <span>Novidades</span>
+      <% end %>
+    </li>
+    <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
       <%= link_to about_path do %>
         <i class="fa-solid fa-circle-info"></i>
         <span>Sobre</span>
       <% end %>
     </li>
-    <li class="navbar-item" data-action="click->active#activate" data-active-target="link">
+    <li class="navbar-item d-flex justify-content-center align-items-center" data-action="click->active#activate" data-active-target="link">
       <% if user_signed_in? %>
         <div class="avatar-dropdown" data-controller="dropdown">
           <div data-action="click->dropdown#toggle">
@@ -64,20 +70,22 @@
     <%= image_tag "logo.png", class: "logo-nav ms-5" %>
   <% end %>
   <div class="d-flex justify-content-center align-items-center">
-    <ul class="btn-circles list-unstyled me-5">
+    <ul class="btn-circles list-unstyled me-3">
       <%= link_to "Produtos", categories_path, class: "link-nav" %>
       <%= link_to "Serviços", services_path, class: "link-nav mx-4" %>
       <%= link_to "Sobre", about_path, class: "link-nav" %>
-      <%= link_to "/", class: "btn-nav ms-5 mx-2" do %>
+      <%= link_to news_index_path, class: "btn-nav ms-3 mx-1", style: "position: relative;" do %>
         <li class="btn-circle-item">
-          <i class="fa-solid fa-bell"></i>
+          <i class="fa-solid fa-newspaper"></i>
         </li>
       <% end %>
+      <!--
       <%= link_to "/", class: "btn-nav" do %>
         <li class="btn-circle-item">
           <i class="fa-solid fa-gear"></i>
         </li>
       <% end %>
+      -->
     </ul>
     <% if user_signed_in? %>
       <div class="avatar-dropdown me-5" data-controller="dropdown">

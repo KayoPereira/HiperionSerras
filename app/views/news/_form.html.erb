@@ -1,0 +1,218 @@
+<style>
+  /* Estilos para os botões do Rich Text Editor */
+  .trix-button-group {
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .trix-button {
+    background: #f8f9fa !important;
+    border: 1px solid #dee2e6 !important;
+    color: #495057 !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    transition: all 0.2s ease !important;
+    margin: 0 !important;
+  }
+
+  .trix-button:hover {
+    background: #e9ecef !important;
+    border-color: #adb5bd !important;
+    color: #212529 !important;
+  }
+
+  .trix-button.trix-active {
+    background: #007bff !important;
+    border-color: #007bff !important;
+    color: white !important;
+  }
+
+  .trix-button.trix-active:hover {
+    background: #0056b3 !important;
+    border-color: #0056b3 !important;
+  }
+
+  /* Estilo para a toolbar */
+  .trix-button-row {
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px 8px 0 0;
+    padding: 8px;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  /* Estilo para o editor */
+  .trix-content {
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 12px;
+    min-height: 200px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .trix-content:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+  }
+
+  /* Ícones dos botões */
+  .trix-button--icon-bold::before { content: "B"; font-weight: bold; }
+  .trix-button--icon-italic::before { content: "I"; font-style: italic; }
+  .trix-button--icon-link::before { content: "🔗"; }
+  .trix-button--icon-bullet-list::before { content: "•"; }
+  .trix-button--icon-number-list::before { content: "1."; }
+  .trix-button--icon-quote::before { content: """; font-size: 18px; }
+  .trix-button--icon-code::before { content: "<>"; }
+  .trix-button--icon-undo::before { content: "↶"; }
+  .trix-button--icon-redo::before { content: "↷"; }
+
+  /* Wrapper para rich text */
+  .rich-text-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 8px;
+  }
+
+  /* Estilo para labels dos rich text */
+  .form-label.fw-bold {
+    color: #495057;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  /* Estilo para form-text com ícones */
+  .form-text {
+    color: #6c757d;
+    font-size: 13px;
+    margin-top: 6px;
+  }
+
+  .form-text i {
+    color: #007bff;
+  }
+
+  /* Animação suave para focus */
+  .rich-text-wrapper:focus-within {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: all 0.2s ease;
+  }
+
+  /* Estilo para placeholder do trix */
+  .trix-content::before {
+    color: #6c757d;
+    font-style: italic;
+  }
+
+  trix-toolbar .trix-button-row,
+  trix-toolbar .trix-button-group,
+  trix-toolbar {
+    white-space: normal !important;
+  }
+
+  /* Força o white-space normal em todos os elementos da toolbar */
+  .trix-button-row {
+    white-space: normal !important;
+    flex-wrap: wrap !important;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Força o white-space normal após o Trix carregar
+    function applyTrixStyles() {
+      const toolbars = document.querySelectorAll('trix-toolbar, .trix-button-row, .trix-button-group');
+      toolbars.forEach(toolbar => {
+        toolbar.style.setProperty('white-space', 'normal', 'important');
+        toolbar.style.setProperty('flex-wrap', 'wrap', 'important');
+      });
+    }
+
+    // Aplica imediatamente
+    applyTrixStyles();
+
+    // Aplica novamente após um pequeno delay para garantir que o Trix carregou
+    setTimeout(applyTrixStyles, 100);
+    setTimeout(applyTrixStyles, 500);
+  });
+</script>
+
+<%= simple_form_for(news, html: { multipart: true }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <!-- Título da notícia -->
+    <div class="mb-3">
+      <%= f.input :title,
+                  required: true,
+                  autofocus: true,
+                  input_html: { class: "form-control" },
+                  label: "Título da Notícia",
+                  hint: "Digite um título atrativo para a notícia" %>
+    </div>
+
+    <!-- Poster da notícia -->
+    <div class="mb-3">
+      <%= f.label :poster, "Imagem de Capa (Poster)", class: "form-label" %>
+      <%= f.file_field :poster,
+                       class: "form-control",
+                       accept: "image/*",
+                       data: {
+                         max_size: 5.megabytes
+                       } %>
+      <div class="form-text">
+        <i class="fa-solid fa-info-circle me-1"></i>
+        Formatos aceitos: JPEG, JPG, PNG, GIF, WebP. Tamanho máximo: 5MB.
+      </div>
+
+      <% if news.persisted? && news.poster.attached? %>
+        <div class="mt-3">
+          <h6>Imagem atual:</h6>
+          <div class="position-relative d-inline-block">
+            <%= image_tag rails_blob_path(news.poster, only_path: true),
+                          class: "img-thumbnail",
+                          style: "max-width: 300px; height: auto;" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Status de publicação -->
+    <div class="mb-3">
+      <%= f.input :published,
+                  as: :boolean,
+                  input_html: { class: "form-check-input" },
+                  wrapper_html: { class: "form-check" },
+                  label: "Publicar notícia?",
+                  hint: "Marque esta opção para tornar a notícia visível ao público." %>
+    </div>
+
+    <!-- Conteúdo da notícia (Rich Text) -->
+    <div class="mb-4">
+      <%= f.label :content, "Conteúdo da Notícia", class: "form-label fw-bold" %>
+      <div class="rich-text-wrapper">
+        <%= f.rich_text_area :content,
+                              class: "form-control rich-text-field",
+                              data: {
+                                placeholder: "Escreva o conteúdo completo da notícia..."
+                              } %>
+      </div>
+      <div class="form-text">
+        <i class="fa-solid fa-pen me-1"></i>
+        Use a formatação para destacar informações importantes, adicionar links e organizar o conteúdo.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Salvar Notícia", class: "btn btn-warning" %>
+    <%= link_to "Cancelar", news_index_path, class: "btn btn-secondary ms-2" %>
+  </div>
+<% end %>

@@ -1,0 +1,166 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <!-- Cabeçalho da notícia -->
+      <div class="mb-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <div>
+            <%= link_to news_index_path, class: "btn btn-outline-secondary btn-sm mb-3" do %>
+              <i class="fa-solid fa-arrow-left me-2"></i>
+              Voltar às notícias
+            <% end %>
+          </div>
+          <% if user_signed_in? %>
+            <div class="btn-group" role="group">
+              <%= link_to edit_news_path(@news), class: "btn btn-outline-warning btn-sm" do %>
+                <i class="fa-solid fa-edit me-2"></i>
+                Editar
+              <% end %>
+              <%= link_to @news, method: :delete,
+                          class: "btn btn-outline-danger btn-sm",
+                          data: {
+                            confirm: "Tem certeza que deseja excluir esta notícia?",
+                            turbo_method: :delete
+                          } do %>
+                <i class="fa-solid fa-trash me-2"></i>
+                Excluir
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Status da notícia -->
+        <% unless @news.published? %>
+          <div class="alert alert-warning" role="alert">
+            <i class="fa-solid fa-eye-slash me-2"></i>
+            <strong>Rascunho:</strong> Esta notícia não está publicada e só é visível para usuários logados.
+          </div>
+        <% end %>
+
+        <!-- Título -->
+        <h1 class="display-5 fw-bold text-dark mb-3"><%= @news.title %></h1>
+
+        <!-- Metadados -->
+        <div class="text-muted mb-4">
+          <i class="fa-solid fa-calendar me-2"></i>
+          <% if @news.published? %>
+            Publicado em <%= @news.formatted_published_date %>
+          <% else %>
+            Criado em <%= @news.created_at.strftime("%d/%m/%Y às %H:%M") %>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Imagem de capa -->
+      <% if @news.poster.attached? %>
+        <div class="mb-4">
+          <%= image_tag rails_blob_path(@news.poster, only_path: true),
+                        class: "img-fluid rounded shadow",
+                        style: "width: 100%; height: 400px; object-fit: cover;" %>
+        </div>
+      <% end %>
+
+      <!-- Conteúdo da notícia -->
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="news-content">
+            <%= @news.content %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rodapé com ações -->
+      <div class="mt-4 pt-4 border-top">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="mb-3">
+            <%= link_to news_index_path, class: "btn btn-outline-secondary" do %>
+              <i class="fa-solid fa-arrow-left me-2"></i>
+              Voltar às notícias
+            <% end %>
+          </div>
+          <% if user_signed_in? %>
+            <div class="btn-group" role="group">
+              <%= link_to edit_news_path(@news), class: "btn btn-warning" do %>
+                <i class="fa-solid fa-edit me-2"></i>
+                Editar Notícia
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Estilos para o conteúdo da notícia */
+  .news-content {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #333;
+  }
+
+  .news-content h1, .news-content h2, .news-content h3 {
+    color: #2c3e50;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .news-content p {
+    margin-bottom: 1.2rem;
+    text-align: justify;
+  }
+
+  .news-content ul, .news-content ol {
+    margin-bottom: 1.2rem;
+    padding-left: 2rem;
+  }
+
+  .news-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .news-content blockquote {
+    border-left: 4px solid #ffc107;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0 0.375rem 0.375rem 0;
+  }
+
+  .news-content a {
+    color: #ffc107;
+    text-decoration: none;
+  }
+
+  .news-content a:hover {
+    color: #e0a800;
+    text-decoration: underline;
+  }
+
+  .news-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.375rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 1rem 0;
+  }
+
+  .news-content code {
+    background-color: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+    color: #e83e8c;
+  }
+
+  .news-content pre {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+</style>

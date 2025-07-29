@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   # root "pages#construction"
   # get 'home', to: 'pages#home'
 
+  # Rotas para news
+  resources :news
+
   resources :categories do
     resources :subcategories do
       resources :products do

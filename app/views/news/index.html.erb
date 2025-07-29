@@ -1,0 +1,145 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-dark">
+          <i class="fa-solid fa-newspaper me-2"></i>
+          Notícias
+        </h2>
+        <% if user_signed_in? %>
+          <%= link_to new_news_path, class: "btn btn-warning" do %>
+            <i class="fa-solid fa-plus me-2"></i>
+            Nova Notícia
+          <% end %>
+        <% end %>
+      </div>
+
+      <!-- Notícias Publicadas -->
+      <% if @published_news.any? %>
+        <div class="row">
+          <% @published_news.each do |news| %>
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100 shadow-sm">
+                <% if news.poster.attached? %>
+                  <%= image_tag rails_blob_path(news.poster, only_path: true),
+                                class: "card-img-top",
+                                style: "height: 200px; object-fit: cover;" %>
+                <% else %>
+                  <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                    <i class="fa-solid fa-image fa-3x text-muted"></i>
+                  </div>
+                <% end %>
+
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title"><%= news.title %></h5>
+                  <div class="card-text flex-grow-1">
+                    <%= truncate(strip_tags(news.content.to_s), length: 150) %>
+                  </div>
+                  <div class="mt-auto">
+                    <small class="text-muted">
+                      <i class="fa-solid fa-calendar me-1"></i>
+                      <%= news.formatted_published_date %>
+                    </small>
+                  </div>
+                </div>
+
+                <div class="card-footer bg-transparent">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <%= link_to "Ler mais", news, class: "btn btn-outline-warning btn-sm" %>
+                    <% if user_signed_in? %>
+                      <div class="btn-group" role="group">
+                        <%= link_to edit_news_path(news), class: "btn btn-outline-secondary btn-sm", title: "Editar" do %>
+                          <i class="fa-solid fa-edit"></i>
+                        <% end %>
+                        <%= link_to news, method: :delete,
+                                    class: "btn btn-outline-danger btn-sm",
+                                    title: "Excluir",
+                                    data: {
+                                      confirm: "Tem certeza que deseja excluir esta notícia?",
+                                      turbo_method: :delete
+                                    } do %>
+                          <i class="fa-solid fa-trash"></i>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="text-center py-5">
+          <i class="fa-solid fa-newspaper fa-4x text-muted mb-3"></i>
+          <h4 class="text-muted">Nenhuma notícia publicada</h4>
+          <p class="text-muted">Não há notícias publicadas no momento.</p>
+          <% if user_signed_in? %>
+            <%= link_to "Criar primeira notícia", new_news_path, class: "btn btn-warning" %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <!-- Notícias Não Publicadas (apenas para usuários logados) -->
+      <% if user_signed_in? && @unpublished_news.any? %>
+        <hr class="my-5">
+        <h3 class="text-muted mb-4">
+          <i class="fa-solid fa-eye-slash me-2"></i>
+          Rascunhos (Não Publicadas)
+        </h3>
+        <div class="row">
+          <% @unpublished_news.each do |news| %>
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100 shadow-sm border-warning">
+                <% if news.poster.attached? %>
+                  <%= image_tag rails_blob_path(news.poster, only_path: true),
+                                class: "card-img-top",
+                                style: "height: 200px; object-fit: cover; opacity: 0.7;" %>
+                <% else %>
+                  <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px; opacity: 0.7;">
+                    <i class="fa-solid fa-image fa-3x text-muted"></i>
+                  </div>
+                <% end %>
+
+                <div class="card-body d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title"><%= news.title %></h5>
+                    <span class="badge bg-warning text-dark">Rascunho</span>
+                  </div>
+                  <div class="card-text flex-grow-1">
+                    <%= truncate(strip_tags(news.content.to_s), length: 150) %>
+                  </div>
+                  <div class="mt-auto">
+                    <small class="text-muted">
+                      <i class="fa-solid fa-calendar me-1"></i>
+                      Criado em <%= news.created_at.strftime("%d/%m/%Y às %H:%M") %>
+                    </small>
+                  </div>
+                </div>
+
+                <div class="card-footer bg-transparent">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <%= link_to "Visualizar", news, class: "btn btn-outline-warning btn-sm" %>
+                    <div class="btn-group" role="group">
+                      <%= link_to edit_news_path(news), class: "btn btn-outline-secondary btn-sm", title: "Editar" do %>
+                        <i class="fa-solid fa-edit"></i>
+                      <% end %>
+                      <%= link_to news, method: :delete,
+                                  class: "btn btn-outline-danger btn-sm",
+                                  title: "Excluir",
+                                  data: {
+                                    confirm: "Tem certeza que deseja excluir esta notícia?",
+                                    turbo_method: :delete
+                                  } do %>
+                        <i class="fa-solid fa-trash"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

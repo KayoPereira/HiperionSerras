@@ -143,4 +143,74 @@
     <%= image_tag "partners/eberle.png", class: "partner-logo img-fluid mx-5", alt: "Eberle Partner", style: "max-width: 220px;", "data-scroll-animations-target": "animateElement", "data-animation": "zoomIn", "data-delay": "400" %>
     <%= image_tag "partners/bahco.png", class: "partner-logo img-fluid mx-5", alt: "Snap-on Partner", style: "max-width: 150px;", "data-scroll-animations-target": "animateElement", "data-animation": "zoomIn", "data-delay": "200" %>
   </section>
+
+  <!-- Seção de Notícias -->
+<% if @latest_news %>
+  <section class="news-section py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 text-center mb-4" data-scroll-animations-target="animateElement" data-animation="fadeInUp" data-delay="200">
+          <h2 class="news-section-title">
+            <i class="fa-solid fa-newspaper me-3" style="color: #F7C21A;"></i>
+            Últimas Notícias
+          </h2>
+          <p class="news-section-subtitle text-muted">
+            Fique por dentro das novidades da Hiperion Serras
+          </p>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="news-card" data-scroll-animations-target="animateElement" data-animation="fadeInUp" data-delay="400">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-5">
+                <div class="news-image-container">
+                  <% if @latest_news.poster.attached? %>
+                    <%= image_tag rails_blob_path(@latest_news.poster, only_path: true),
+                                  class: "news-image",
+                                  alt: @latest_news.title %>
+                  <% else %>
+                    <div class="news-placeholder-image">
+                      <i class="fa-solid fa-newspaper"></i>
+                    </div>
+                  <% end %>
+                  <div class="news-badge">
+                    <i class="fa-solid fa-star me-1"></i>
+                    Destaque
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="news-content">
+                  <div class="news-meta">
+                    <span class="news-date">
+                      <i class="fa-solid fa-calendar me-2"></i>
+                      <%= @latest_news.formatted_published_date %>
+                    </span>
+                  </div>
+                  <h3 class="news-title">
+                    <%= @latest_news.title %>
+                  </h3>
+                  <p class="news-excerpt">
+                    <%= truncate(strip_tags(@latest_news.content.to_s), length: 180) %>
+                  </p>
+                  <div class="news-actions">
+                    <%= link_to @latest_news, class: "news-read-more-btn" do %>
+                      Ler matéria completa
+                      <i class="fa-solid fa-arrow-right ms-2"></i>
+                    <% end %>
+                    <%= link_to news_index_path, class: "news-all-btn ms-3" do %>
+                      Ver todas as notícias
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
 </div> <!-- Fechamento do container de animações -->
