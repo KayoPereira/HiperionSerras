@@ -29,7 +29,7 @@ export default class extends Controller {
       const navbarItems = document.querySelectorAll('.navbar-item')
       let foundMatch = false
 
-      navbarItems.forEach((item, index) => {
+      navbarItems.forEach((item) => {
         const link = item.querySelector('a')
         if (link && link.href) {
           const linkPath = new URL(link.href).pathname
@@ -44,12 +44,18 @@ export default class extends Controller {
       if (!foundMatch) {
         activeItem = document.querySelector('.navbar-item:nth-child(2)')
       }
+    } else if (currentPath.includes('services') || currentPath.includes('servicos')) {
+      // Página de serviços
+      activeItem = document.querySelector('.navbar-item:nth-child(3)')
+    } else if (currentPath.includes('news') || currentPath.includes('novidades')) {
+      // Página de novidades
+      activeItem = document.querySelector('.navbar-item:nth-child(4)')
     } else if (currentPath.includes('sobre') || currentPath.includes('about')) {
       // Página sobre
-      activeItem = document.querySelector('.navbar-item:nth-child(4)')
+      activeItem = document.querySelector('.navbar-item:nth-child(5)')
     } else if (currentPath.includes('user') || currentPath.includes('profile') || currentPath.includes('login')) {
       // Página de perfil/login
-      activeItem = document.querySelector('.navbar-item:nth-child(5)')
+      activeItem = document.querySelector('.navbar-item:nth-child(6)')
     }
 
     // Se não encontrou correspondência, mantém o home ativo
