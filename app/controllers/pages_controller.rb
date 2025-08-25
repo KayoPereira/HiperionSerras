@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @categories = Category.limit(3).order(:title)
+    @categories = Category.show_in_homepage.order(:title)
     @latest_news = News.published.recent.first
 
     respond_to do |format|

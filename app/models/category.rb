@@ -3,11 +3,11 @@ class Category < ApplicationRecord
   has_many :products, through: :subcategories
   has_one_attached :photo
 
-  # Validações
+  scope :show_in_homepage, -> { where(show_in_homepage: true) }
+
   validates :title, presence: true, length: { minimum: 2, maximum: 100 }
   validate :photo_format
 
-  # Método para URL da foto com diferentes tamanhos
   def photo_url(size: :medium)
     if photo.attached?
       case size
@@ -21,7 +21,6 @@ class Category < ApplicationRecord
         photo
       end
     else
-      # URL para imagem padrão se não houver foto
       "sem-imagem-categoria.png"
     end
   end
@@ -31,7 +30,6 @@ class Category < ApplicationRecord
   def photo_format
     return unless photo.attached?
 
-    # Verificar se o blob foi criado
     return unless photo.blob.present?
 
     unless photo.blob.content_type.in?(%w[image/jpeg image/png image/gif image/webp])

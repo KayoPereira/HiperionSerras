@@ -53,6 +53,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:title, :photo)
+    params.require(:category).permit(:title, :photo, :show_in_homepage)
   end
 end
