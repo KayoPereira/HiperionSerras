@@ -39,7 +39,7 @@
               <div class="mt-auto">
                 <% if user_signed_in? %>
                   <div class="btn-group w-100" role="group">
-                  <%= link_to "Ver", (category.title == "Serviços" ? services_path : category_path(category)), class: "btn btn-outline-warning btn-sm" %>
+                  <%= link_to "Ver detalhe", (category.title == "Serviços" ? services_path : category_path(category)), class: "btn btn-outline-dark btn-sm" %>
                   <%= link_to "Editar", edit_category_path(category), class: "btn btn-outline-secondary btn-sm" %>
                   <%= link_to "Excluir", category_path(category),
                               method: :delete,
@@ -51,7 +51,7 @@
                 </div>
                 <% else %>
                   <div class="d-grid">
-                    <%= link_to "Ver", category_path(category), class: "btn btn-outline-warning btn-sm" %>
+                    <%= link_to "Ver detalhe", category_path(category), class: "btn btn-outline-dark btn-sm" %>
                   </div>
                 <% end %>
               </div>

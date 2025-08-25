@@ -56,14 +56,14 @@
               <div class="mt-auto">
                 <% if user_signed_in? %>
                   <div class="btn-group w-100" role="group">
-                    <%= link_to "Ver", [@category, @subcategory, product],
-                                class: "btn btn-outline-warning btn-sm" %>
+                    <%= link_to "Ver detalhe", [@category, @subcategory, product],
+                                class: "btn btn-outline-dark btn-sm" %>
                     <%= link_to "Editar", edit_category_subcategory_product_path(@category, @subcategory, product),
                                 class: "btn btn-outline-secondary btn-sm" %>
                   </div>
                 <% else %>
                   <%= link_to "Ver Detalhes", [@category, @subcategory, product],
-                              class: "btn btn-outline-warning btn-sm w-100" %>
+                              class: "btn btn-outline-dark btn-sm w-100" %>
                 <% end %>
               </div>
             </div>

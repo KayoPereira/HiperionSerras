@@ -45,7 +45,7 @@
 
                 <div class="card-footer bg-transparent">
                   <div class="d-flex justify-content-between align-items-center">
-                    <%= link_to "Ler mais", news, class: "btn btn-outline-warning btn-sm" %>
+                    <%= link_to "Ler mais", news, class: "btn btn-outline-dark btn-sm" %>
                     <% if user_signed_in? %>
                       <div class="btn-group" role="group">
                         <%= link_to edit_news_path(news), class: "btn btn-outline-secondary btn-sm", title: "Editar" do %>
@@ -118,7 +118,7 @@
 
                 <div class="card-footer bg-transparent">
                   <div class="d-flex justify-content-between align-items-center">
-                    <%= link_to "Visualizar", news, class: "btn btn-outline-warning btn-sm" %>
+                    <%= link_to "Visualizar", news, class: "btn btn-outline-dark btn-sm" %>
                     <div class="btn-group" role="group">
                       <%= link_to edit_news_path(news), class: "btn btn-outline-secondary btn-sm", title: "Editar" do %>
                         <i class="fa-solid fa-edit"></i>
