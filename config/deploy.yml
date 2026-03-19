@@ -13,7 +13,7 @@ servers:
     cmd: bundle exec rails solid_queue:start
 
 proxy:
-  ssl: false
+  ssl: true
   hosts:
     - hiperionserras.com.br
     - www.hiperionserras.com.br
@@ -62,7 +62,7 @@ accessories:
     image: postgres:16
     host: 91.99.51.134
     port: 5432
-    env: 
+    env:
       clear:
         POSTGRES_USER: postgres
         POSTGRES_DB: hiperion_serras_production
